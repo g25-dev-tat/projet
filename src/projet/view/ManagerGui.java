@@ -17,7 +17,7 @@ public class ManagerGui extends ManagerGuiAbstract {
 	// Champs
 	
 	@Inject
-	private IContext		context;
+	private IContext context;
 	
 	
 	// Initialisation
@@ -38,12 +38,12 @@ public class ManagerGui extends ManagerGuiAbstract {
 		showView( EnumView.Connexion);
 		
 		// Configure le stage
-		stage.setTitle( "Gestion de contacts" );
+		stage.setTitle( "Application de gestion des participants et des bénévoles" );
 		stage.setWidth(600);
 		stage.setHeight(440);
 		stage.setMinWidth(400);
 		stage.setMinHeight(300);
-		stage.getIcons().add(new Image(getClass().getResource("icone.png").toExternalForm()));
+		stage.getIcons().add(new Image(getClass().getResource("05.png").toExternalForm()));
 		
 		// Configuration par défaut pour les boîtes de dialogue
 		typeConfigDialogDefault = ConfigDialog.class;
