@@ -2,101 +2,37 @@ SET search_path TO projet;
 
 
 -- Supprimer toutes les données
-DELETE FROM service;
-DELETE FROM concerner;
-DELETE FROM memo;
-DELETE FROM telephone;
-DELETE FROM personne;
-DELETE FROM categorie;
-DELETE FROM role;
-DELETE FROM compte;
+DELETE FROM AdminAppli;
+DELETE FROM AdminSysteme;
+DELETE FROM Benevole;
+DELETE FROM Participant;
+DELETE FROM Equipe;
+DELETE FROM Poste;
+DELETE FROM Tache;
+DELETE FROM Competition;
+DELETE FROM Organiser;
+DELETE FROM Participer;
+DELETE FROM Contenir;
+DELETE FROM Se_proposer;
+DELETE FROM Effectuer;
+DELETE FROM Etre_affecter;
 
 
--- Compte
+-- AdminAppli
 
-INSERT INTO compte (idcompte, pseudo, motdepasse, email ) VALUES 
-  (1, 'geek', 'geek', 'geek@3il.fr' ),
-  (2, 'chef', 'chef', 'chef@3il.fr' ),
-  (3, 'job', 'job', 'job@3il.fr' );
-
-ALTER TABLE compte ALTER COLUMN idcompte RESTART WITH 4;
-
-
--- Role
-
-INSERT INTO role (idcompte, role) VALUES 
-  ( 1, 'ADMINISTRATEUR' ),
-  ( 1, 'UTILISATEUR' ),
-  ( 2, 'UTILISATEUR' ),
-  ( 3, 'UTILISATEUR' );
-
-
--- Categorie
-  
-INSERT INTO categorie (idcategorie, libelle ) VALUES 
-  (1, 'Employés' ),
-  (2, 'Partenaires' ),
-  (3, 'Clients' ),
-  (4, 'Fournisseurs' ),
-  (5, 'Dirigeants' );
-
-ALTER TABLE categorie ALTER COLUMN idcategorie RESTART WITH 6;
-
-
--- Personne
-
-INSERT INTO personne (idpersonne, idcategorie, nom, prenom) VALUES 
-  ( 1, 1, 'GRASSET', 'Jérôme' ),
-  ( 2, 1, 'BOUBY', 'Claude' ),
-  ( 3, 1, 'AMBLARD', 'Emmanuel' );
-
-ALTER TABLE personne ALTER COLUMN idpersonne RESTART WITH 4;
-
-
--- Telephone
-
-INSERT INTO telephone (idtelephone, idpersonne, libelle, numero ) VALUES 
-  ( 11, 1, 'Portable', '06 11 11 11 11' ),
-  ( 12, 1, 'Fax', '05 55 99 11 11' ),
-  ( 13, 1, 'Bureau', '05 55 11 11 11' ),
-  ( 21, 2, 'Portable', '06 22 22 22 22' ),
-  ( 22, 2, 'Fax', '05 55 99 22 22' ),
-  ( 23, 2, 'Bureau', '05 55 22 22 22' ),
-  ( 31, 3, 'Portable', '06 33 33 33 33' ),
-  ( 32, 3, 'Fax', '05 55 99 33 33' ),
-  ( 33, 3, 'Bureau', '05 55 33 33 33' );
-
-ALTER TABLE telephone ALTER COLUMN idtelephone RESTART WITH 100;
-
-
--- Memo
-
-INSERT INTO memo (idmemo, titre, description, flagurgent, statut, effectif, budget, echeance, idcategorie ) VALUES 
-  ( 1, 'Mémo n°1', 'Texte du mémo n°1', TRUE,  2,   2,   1234.56,   {d  '2020-02-25' }, 1 ),
-  ( 2, 'Mémo n°2', 'Texte du mémo n°2', FALSE, 1,   4,   5000.00,   {d  '2020-05-18' }, 2 ),
-  ( 3, 'Mémo n°3', NULL, TRUE, 0, NULL, NULL, NULL, NULL );
-
-ALTER TABLE memo ALTER COLUMN idmemo RESTART WITH 4;
-
-
--- Concerner
-
-INSERT INTO concerner (idmemo, idPersonne) VALUES 
-  ( 1, 1 ),
-  ( 1, 2 ),
-  ( 1, 3 ),
-  ( 2, 1 ),
-  ( 2, 2 );
-
-
--- Service
-
-INSERT INTO service ( idservice, nom, anneecreation, flagsiege ) VALUES 
-  ( 1, 'Direction', 2007, TRUE ),
-  ( 2, 'Comptabilité', NULL, TRUE ),
-  ( 3, 'Agence Limoges', 2008, FALSE ),
-  ( 4, 'Agence Brive', 2014, FALSE );
-
-
-ALTER TABLE service ALTER COLUMN idservice RESTART WITH 5;
-
+INSERT INTO "adminappli" (Id, Nom, Prenom, Telephone, email, adresse, login, pass) 
+VALUES (1,'Omar','Harper Mason',0643053491,'Duis.ac.arcu@tempordiamdictum.com','Ap #276-9815 Felis Avenue','Whitley','Rogan54321'),
+(2,'Timon','Erich Stevenson',0733962250,'sed@enim.ca','P.O. Box 574, 4978 Odio Av.','Rivers','Reed654321'),
+(3,'Zahir','Yolanda Charles',0619396697,'nunc@volutpat.co.uk','Ap #275-9232 A, Avenue','Herman','Yen7654321'),
+(4,'Mason','Abel Joyner',0921174350,'vitae@natoquepenatibuset.co.uk','6707 Sem, Av.','Bartlett','Serina4321'),
+(5,'Clark','Bruce Kim',0589019366,'fermentum@ametfaucibusut.net','Ap #536-354 Adipiscing Rd.','Nash','Teagan4321');
+--INSERT INTO "AdminAppli" (Nom,Prenom,Telephone,email,adresse,login,pass) VALUES ('Amery','Fuller Z. Hays','09 33 89 76 12','pede@non.org','9623 Nisi. Rd.','Chang','Ulysses'),('Mallory','Adria B. Buckner','08 40 29 96 24','convallis.in.cursus@ametrisus.edu','666-8596 Mauris Street','Holland','Jacob'),('Ralph','Yvette Michael','03 32 73 13 37','fermentum.metus.Aenean@Phasellus.org','P.O. Box 835, 2101 Quis, St.','Henson','Cullen'),('Rajah','Kimberley I. Glenn','03 33 93 66 51','quis@quamCurabitur.net','Ap #243-5446 Mattis Street','Compton','Kevin'),('Yolanda','Yardley Meadows','08 63 05 95 14','neque.pellentesque@elitfermentumrisus.org','3913 Erat. Ave','Mejia','Steel'),('Vernon','Noble S. Morrison','02 05 21 22 85','tortor.dictum@eulacusQuisque.ca','P.O. Box 244, 6177 Maecenas St.','Charles','Eve'),('Thane','Buckminster Atkins','07 04 54 95 56','ut.sem.Nulla@magnisdis.edu','194-8735 Integer Ave','Marshall','Ulysses'),('Jonah','Dorian Baldwin','02 40 07 87 34','ac@luctuslobortisClass.net','Ap #476-4544 Euismod Avenue','Conrad','Andrew'),('Chadwick','Haley Jefferson','09 10 75 26 66','in.cursus@perinceptoshymenaeos.co.uk','7139 Est St.','Cote','Leo'),('Callum','Drake O. Kidd','04 32 53 57 35','ultricies.dignissim.lacus@consequatlectussit.ca','3693 Eget, Ave','Hunt','Samantha');
+--INSERT INTO "AdminAppli" (Nom,Prenom,Telephone,email,adresse,login,pass) VALUES ('Eleanor','Jillian N. Gross','02 97 73 27 64','Curae.Phasellus.ornare@Sedcongue.co.uk','3536 Tortor. Rd.','Heath','Alice'),('Quentin','Ezekiel Ford','07 27 04 88 22','eget@augueSed.com','178-1806 Dui Avenue','Cantrell','Kyle'),('Levi','Robert Andrews','03 91 08 48 36','elit.Aliquam.auctor@odiovelest.org','3692 Accumsan Av.','Hewitt','Karyn'),('Joshua','Conan Carney','08 27 99 53 14','sagittis.Duis.gravida@Donecdignissimmagna.ca','Ap #235-1029 Quam. Ave','Cole','Elton'),('Stephen','Jael Pierce','09 68 94 92 00','dictum@dui.net','8083 Semper Road','Carter','Jackson'),('Andrew','Coby Wyatt','05 98 96 44 89','lectus.pede@mipedenonummy.co.uk','8037 Odio. Road','Monroe','Herrod'),('Lillian','Ayanna R. Buckner','09 88 30 63 52','quam.Curabitur.vel@velvulputateeu.co.uk','755-850 Nec Rd.','Marshall','Drew'),('Constance','Dante G. Bell','01 01 45 29 61','fringilla.mi@ut.co.uk','236 Elit. Road','Sheppard','Macey'),('Aidan','Quinlan Robles','04 49 67 09 45','Sed@a.co.uk','642-3688 Et St.','Holder','Lev'),('Molly','Nathaniel Marshall','04 58 21 81 10','sagittis.semper.Nam@pretiumnequeMorbi.org','P.O. Box 792, 7368 At, Road','Buck','Alisa');
+--INSERT INTO "AdminAppli" (Nom,Prenom,Telephone,email,adresse,login,pass) VALUES ('MacKenzie','Brady F. Schroeder','07 11 90 86 55','mi.enim@dictummagna.ca','691-4056 Morbi Rd.','Delaney','Jesse'),('Josiah','Savannah B. Mcintyre','09 94 64 93 29','risus@aliquet.co.uk','P.O. Box 215, 472 Sed Rd.','Gentry','Alfreda'),('Susan','Jade Wagner','06 54 13 54 22','aliquet.metus@Maecenasiaculisaliquet.ca','1776 Etiam Avenue','Giles','Neville'),('Chaim','Aimee Kline','06 48 55 31 42','sem.consequat.nec@faucibusMorbivehicula.net','4153 Cursus Road','Melton','Byron'),('Nell','Aimee E. Matthews','01 37 58 05 42','molestie.pharetra.nibh@commodoipsumSuspendisse.edu','P.O. Box 484, 2609 Vitae Av.','Gallegos','Dominic'),('Octavius','Herman Kramer','04 42 89 06 24','In.ornare@rutrumjustoPraesent.net','P.O. Box 624, 914 Sit Street','Carr','Hoyt'),('Louis','Emery V. Snyder','03 80 96 51 82','a.dui.Cras@Vivamusnon.com','9979 Fermentum Avenue','Rasmussen','Calvin'),('Gillian','Lysandra L. Anthony','01 57 53 81 11','magna.Sed.eu@Donec.ca','426 Lobortis Street','Robles','Kane'),('Lionel','Rae Y. Petersen','03 61 12 54 20','purus.ac.tellus@dui.co.uk','956-5470 Velit St.','Eaton','Oliver'),('Reed','Madison H. Dickerson','06 23 65 61 15','felis.ullamcorper@Inmipede.co.uk','P.O. Box 405, 1284 Ut Av.','Farmer','Ryder');
+--INSERT INTO "AdminAppli" (Nom,Prenom,Telephone,email,adresse,login,pass) VALUES ('Olga','Adele X. Burnett','05 74 29 34 21','non.vestibulum.nec@in.org','180-7188 Placerat, St.','Vega','Darryl'),('Hamilton','Naomi Crawford','02 01 50 58 07','Phasellus.dapibus@commodo.net','813-466 Quisque Rd.','Jefferson','Uriel'),('Nerea','Xanthus I. Clements','04 35 28 36 22','tincidunt.vehicula.risus@Ut.com','P.O. Box 904, 378 Accumsan Street','Forbes','Noble'),('Katelyn','Nelle Fields','07 84 45 57 12','Aliquam@etnetuset.ca','1751 Dapibus Rd.','Dean','Vivian'),('Adena','Sigourney T. Pitts','07 60 36 40 88','arcu@atpedeCras.ca','228-3759 Pharetra Street','Trujillo','Cameron'),('Basia','Elliott English','09 76 37 72 01','quis@dapibusrutrum.edu','Ap #777-1037 Mauris, Av.','Bradshaw','Florence'),('Destiny','Driscoll B. Dudley','02 95 11 71 45','fringilla@cursusNunc.ca','P.O. Box 430, 2398 Fringilla, Road','Morales','Quemby'),('Herman','Travis Spencer','09 73 91 74 93','eget.metus.In@euismodindolor.org','3333 Aliquam Rd.','Hodges','Cadman'),('Lacey','Lyle B. Navarro','07 97 73 29 91','Sed.dictum.Proin@idantedictum.edu','Ap #984-5939 Sapien. Rd.','Simpson','Hadley'),('Steven','Kelsie Dillard','03 73 90 05 11','euismod.urna@orciadipiscingnon.co.uk','302-6462 Elementum, Rd.','Rojas','Sonya');
+--INSERT INTO "AdminAppli" (Nom,Prenom,Telephone,email,adresse,login,pass) VALUES ('Deacon','Conan Parsons','01 19 72 85 47','Integer@ornarelectusjusto.org','Ap #726-4910 Vivamus Rd.','Chang','Claudia'),('Nolan','Illana R. Matthews','07 19 27 68 22','consequat.lectus.sit@inaliquetlobortis.com','Ap #703-2642 Faucibus Av.','Ewing','Tate'),('Noel','Sybil Daniels','07 54 42 11 06','arcu@semperdui.co.uk','Ap #778-2069 Nibh. Rd.','Knox','Natalie'),('Angelica','Echo Alford','09 82 50 64 69','cursus@Sedid.co.uk','506-6366 Tristique Street','Downs','Jamalia'),('Abigail','Hanna Sparks','02 54 83 39 45','orci@sempereratin.net','9962 Vestibulum Road','Clemons','Ayanna'),('Francis','Hunter G. Nash','05 48 26 37 98','Nulla.tincidunt@semvitaealiquam.net','7409 Malesuada St.','Mcgee','Bruno'),('Indira','Ria Dickson','02 54 88 40 05','tristique.aliquet.Phasellus@atvelit.com','6486 Sed Road','Sutton','Chanda'),('Abra','Alvin Hurst','08 14 24 22 64','molestie@blanditat.edu','Ap #941-479 Ligula. Rd.','Molina','Hayden'),('Elaine','Adam Mccarty','03 50 76 81 87','ac@pharetra.co.uk','2067 Vehicula. Road','Mills','Ann'),('Reagan','Tashya U. Hurley','03 28 77 83 64','nec.ante.Maecenas@Intincidunt.net','6793 Sit Avenue','Mccray','Demetria');
+--INSERT INTO "AdminAppli" (Nom,Prenom,Telephone,email,adresse,login,pass) VALUES ('Veronica','Barclay Anderson','06 97 27 15 48','purus.Maecenas@ligula.com','4394 In Avenue','Munoz','Myra'),('Graiden','Martin P. Pena','02 13 62 06 13','interdum@facilisiseget.com','377-5311 Tincidunt St.','Mccarthy','Lacey'),('Sawyer','Ainsley Casey','01 38 93 30 40','amet.massa.Quisque@lorem.co.uk','5709 Elit St.','Bradshaw','Caesar'),('Boris','Bo Fischer','05 99 79 83 66','ridiculus.mus@a.net','Ap #329-9596 Donec Avenue','Sparks','Robin'),('Carl','Stewart N. Morris','02 21 54 52 61','libero@etlaciniavitae.com','636-7898 Nonummy Rd.','Rivers','Hyacinth'),('Vielka','Madonna C. Marquez','03 01 46 96 87','et.ultrices.posuere@Donec.com','603-7550 Purus Ave','Dodson','Judah'),('Callum','Malik Joseph','03 46 47 51 62','risus.odio.auctor@blanditatnisi.edu','807-6524 Tellus Rd.','Frederick','Cedric'),('Tanner','Alden Guerra','03 43 11 33 34','lacus.pede.sagittis@Pellentesque.net','Ap #365-2785 Nunc St.','Estes','Colt'),('Hall','Uma Z. Pacheco','05 69 03 01 92','tincidunt@semmollis.net','2159 Nonummy Av.','Le','Acton'),('Louis','Selma X. Payne','06 85 52 09 82','quis@pretiumnequeMorbi.org','4778 Vivamus Road','Weaver','Simon');
+--INSERT INTO "AdminAppli" (Nom,Prenom,Telephone,email,adresse,login,pass) VALUES ('Louis','Candice Stevenson','06 53 23 68 11','et@consectetuereuismod.edu','599-6158 Tincidunt St.','Reynolds','Chiquita'),('Tanisha','Aaron S. Leach','06 45 48 51 57','augue.malesuada@infaucibusorci.org','9954 Adipiscing Street','Giles','Jorden'),('Rachel','Lev Bean','03 43 87 48 17','eu.placerat@justo.net','944-8637 Scelerisque Avenue','Avila','Oleg'),('Abra','Sharon Foster','02 09 53 90 02','Nunc@dictumcursusNunc.edu','Ap #471-6624 Ullamcorper, Rd.','Gentry','Theodore'),('Chadwick','Kiayada L. Gallagher','05 89 54 81 09','felis.purus@semegestasblandit.edu','289-703 Blandit St.','Jackson','Carolyn'),('Nero','Asher Love','02 64 48 11 35','natoque@porttitorerosnec.edu','P.O. Box 759, 8241 Lacus. Road','Sykes','Mollie'),('Cain','Lucian Cochran','05 31 22 43 00','a.felis.ullamcorper@montes.ca','1046 Orci, Ave','Tanner','Nash'),('Ian','Dylan W. Mcmahon','09 50 02 21 25','Suspendisse@turpis.net','917-2183 Non Avenue','Mercado','Armando'),('Abel','Carter Pate','07 94 62 98 62','turpis@etlibero.ca','6244 At Ave','Terry','Warren'),('Herman','Micah Riddle','07 72 97 15 70','lorem.Donec@ante.edu','P.O. Box 907, 7000 Dolor, Street','Higgins','Avye');
+--INSERT INTO "AdminAppli" (Nom,Prenom,Telephone,email,adresse,login,pass) VALUES ('Stone','Xyla Bowers','01 76 20 13 93','Phasellus@blandit.org','7580 Luctus Street','Oneill','Acton'),('Bianca','Kylee Anthony','04 69 51 05 79','Donec.tincidunt.Donec@cubiliaCurae.net','157-7216 Tellus Rd.','Davenport','Abel'),('Julian','Damon Williamson','09 04 81 15 75','augue@felisullamcorper.net','P.O. Box 954, 9402 Aliquam Ave','Moses','Charles'),('Astra','Ahmed Carey','03 13 89 06 45','ipsum@ut.co.uk','P.O. Box 585, 5209 In Street','Garner','Alisa'),('Chantale','Oleg Alford','02 99 12 54 50','lectus.quis.massa@Phasellusataugue.org','636-3559 Aliquet St.','Bender','Arden'),('Aphrodite','Deanna Lopez','03 38 33 77 11','arcu.Sed@purusactellus.net','316-3896 Ligula. Ave','Baldwin','Chelsea'),('Russell','Malik Rich','05 63 28 99 72','Suspendisse.dui@ornareliberoat.net','P.O. Box 189, 1013 Aliquam Av.','Knox','Nicholas'),('Emerald','Daryl S. Rowland','06 49 19 65 22','Sed@Aliquam.org','Ap #746-4461 Orci. Av.','Mcgowan','Remedios'),('Julie','Arden C. Leblanc','01 16 27 30 71','convallis@ligulaelitpretium.org','Ap #428-7927 Metus St.','Webster','Cynthia'),('Isaiah','Eric Clayton','04 94 94 02 13','dolor.dolor@tristique.co.uk','809-495 Lectus. Road','Andrews','Aretha');
+--INSERT INTO "AdminAppli" (Nom,Prenom,Telephone,email,adresse,login,pass) VALUES ('Inga','Dara L. Compton','09 60 22 74 76','iaculis@tristiquesenectus.org','3358 Nunc Av.','French','Stephen'),('Rudyard','Nevada M. Curtis','07 03 15 60 46','iaculis.quis@neccursus.org','P.O. Box 810, 4175 Nostra, Av.','Owens','Clarke'),('Nicole','Lila Frederick','01 13 79 95 66','leo.Morbi@Suspendissenon.org','2709 Et Road','Evans','Vance'),('Hu','Roanna Gallegos','09 24 81 91 43','ipsum@utnisia.net','Ap #944-5718 Fermentum Av.','Gonzalez','Darryl'),('Iona','Buffy Hogan','02 89 69 46 46','felis.Donec.tempor@atsem.edu','3099 Senectus Road','Stuart','Audrey'),('Donovan','Marvin Barton','08 75 49 71 59','Fusce.mollis@interdumligula.ca','Ap #874-837 Leo. St.','Simmons','Charde'),('Knox','Jackson Marsh','02 09 44 83 33','malesuada@interdumCurabitur.co.uk','6916 Ut Rd.','Carr','Nayda'),('Brooke','Britanni Hull','06 40 06 38 68','Integer@Sed.edu','Ap #298-913 Quam. Av.','Freeman','TaShya'),('Mannix','Yetta Wiggins','09 43 05 54 72','cursus.a.enim@eu.org','414-9865 Tincidunt Ave','Caldwell','Lesley'),('Felicia','Isaiah B. Hernandez','08 50 26 87 17','In.faucibus.Morbi@arcuvel.org','732-4323 Iaculis Avenue','Tyler','Ulla');
+--INSERT INTO "AdminAppli" (Nom,Prenom,Telephone,email,adresse,login,pass) VALUES('Channing','Madonna Y. Valdez','05 11 45 64 77','eros@Donecconsectetuer.ca','4416 Hendrerit Rd.','Pate','Calvin'),('Natalie','Chloe Moss','05 04 70 30 42','mattis@justofaucibuslectus.org','432-2280 Sed Rd.','Conner','Judah'),('Jena','Kelsey X. King','01 22 88 43 08','neque@diamlorem.edu','Ap #745-5004 Nibh. St.','Hancock','Walker'),('Savannah','Quynn Bell','07 94 12 43 72','fermentum@egettinciduntdui.ca','Ap #596-2906 In St.','Nichols','Macey'),('Avram','Aaron Potter','08 05 80 96 00','eu.erat.semper@maurisa.com','426-5068 Odio. Avenue','Clayton','Celeste');
