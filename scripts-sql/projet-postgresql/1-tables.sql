@@ -28,6 +28,17 @@ CREATE TABLE AdminAppli(
 	CONSTRAINT AdminAppli_PK PRIMARY KEY (Id)
 );
 
+------------------------------------------------------------
+-- Table: Role
+------------------------------------------------------------
+
+CREATE TABLE role (
+	idadmin				INT				NOT NULL,
+	role			VARCHAR(20)		NOT NULL,
+	CHECK(Role IN ('ADMINISTRATEUR','UTILISATEUR')),	
+	CONSTRAINT Role_PK PRIMARY KEY (idadmin, role),
+	CONSTRAINT Role_AdminAppli_FK FOREIGN KEY (idadmin) REFERENCES AdminAppli (id)
+);
 
 ------------------------------------------------------------
 -- Table: Benevole
@@ -41,6 +52,7 @@ CREATE TABLE Benevole(
 	adresse         VARCHAR (30) NOT NULL ,
 	Commentaire     VARCHAR (255) NOT NULL ,
 	dateNaiss       DATE  NOT NULL ,
+	PermisConduire 	BOOLEAN NOT NULL,
 	Id_AdminAppli   INT  NOT NULL  ,
 	CONSTRAINT Benevole_PK PRIMARY KEY (Id)
 
@@ -51,20 +63,20 @@ CREATE TABLE Benevole(
 ------------------------------------------------------------
 -- Table: AdminSysteme
 ------------------------------------------------------------
-CREATE TABLE AdminSysteme(
-	Id          INT  NOT NULL ,
-	droits      VARCHAR (25) NOT NULL ,
-	Nom         VARCHAR (20) NOT NULL ,
-	Prenom      VARCHAR (20) NOT NULL ,
-	Telephone   INT  NOT NULL ,
-	email       VARCHAR (20) NOT NULL ,
-	adresse     VARCHAR (30) NOT NULL ,
-	login       VARCHAR (20) NOT NULL ,
-	pass        CHAR (255)  NOT NULL  ,
-	CONSTRAINT AdminSysteme_PK PRIMARY KEY (Id)
+--CREATE TABLE AdminSysteme(
+--	Id          INT  NOT NULL ,
+--	droits      VARCHAR (25) NOT NULL ,
+--	Nom         VARCHAR (20) NOT NULL ,
+--	Prenom      VARCHAR (20) NOT NULL ,
+--	Telephone   INT  NOT NULL ,
+--	email       VARCHAR (20) NOT NULL ,
+--	adresse     VARCHAR (30) NOT NULL ,
+--	login       VARCHAR (20) NOT NULL ,
+--	pass        CHAR (255)  NOT NULL  ,
+--	CONSTRAINT AdminSysteme_PK PRIMARY KEY (Id)
 
-	,CONSTRAINT AdminSysteme_AdminAppli_FK FOREIGN KEY (Id) REFERENCES AdminAppli(Id)
-);
+--	,CONSTRAINT AdminSysteme_AdminAppli_FK FOREIGN KEY (Id) REFERENCES AdminAppli(Id)
+--);
 
 
 ------------------------------------------------------------
@@ -114,7 +126,6 @@ CREATE TABLE Equipe(
 	NomEq           VARCHAR (20) NOT NULL ,
 	Paye            BOOL  NOT NULL ,
 	Valide          BOOL  NOT NULL ,
-	justificatifs   VARCHAR (255) NOT NULL ,
 	Commentaire     VARCHAR (255) NOT NULL ,
 	NbreRepas       INT  NOT NULL ,
 	temps_mis       TIMETZ  NOT NULL ,
@@ -138,6 +149,7 @@ CREATE TABLE Participant(
 	justificatifs   VARCHAR (255) NOT NULL ,
 	Commentaire     VARCHAR (255) NOT NULL ,
 	dateNaiss       DATE  NOT NULL ,
+	club 			VARCHAR (50) NOT NULL,
 	Id_Equipe       INT  NOT NULL  ,
 	CONSTRAINT Participant_PK PRIMARY KEY (Id)
 
@@ -226,6 +238,12 @@ CREATE TABLE Se_proposer(
 CREATE TABLE Participer(
 	Id          INT  NOT NULL ,
 	Id_Competition   INT  NOT NULL  ,
+	raid VARCHAR (50) NOT NULL,
+	typeCompet VARCHAR (50) NOT NULL,
+	categ VARCHAR (50) NOT NULL,
+	CHECK(raid IN ('Bol Air','Bol Eau')),	
+	CHECK(typeCompet IN ('mini','grand')),	
+	CHECK(categ IN ('Hommes','Femmes','Mixte','VAE')),	
 	CONSTRAINT Participer_PK PRIMARY KEY (Id,Id_Competition)
 
 	,CONSTRAINT Participer_Competition_FK FOREIGN KEY (Id_Competition) REFERENCES Competition(Id)
