@@ -37,13 +37,17 @@ public class DaoCompte {
 
 		try {
 			cn = dataSource.getConnection();
-
+			
 			// Insère le compte
-			sql = "INSERT INTO compte ( pseudo, motdepasse, email ) VALUES ( ?, ?, ? )";
+			sql = "INSERT INTO adminappli (Id, Nom, Prenom, Telephone, email, adresse, login, pass) VALUES ( ?, ?, ?,?,?,?,? )";
 			stmt = cn.prepareStatement( sql, Statement.RETURN_GENERATED_KEYS ); 
-			stmt.setObject( 1, compte.getPseudo() );
-			stmt.setObject( 2, compte.getMotDePasse() );
-			stmt.setObject( 3, compte.getEmail() );
+			stmt.setObject( 1, compte.getNom() );
+			stmt.setObject( 2, compte.getPrenom() );
+			stmt.setObject( 3, compte.getTelephone() );
+			stmt.setObject( 4, compte.getEmail() );
+			stmt.setObject( 5, compte.getAdresse() );
+			stmt.setObject( 6, compte.getLogin() );
+			stmt.setObject( 7, compte.getPass() );
 			stmt.executeUpdate();
 
 			// Récupère l'identifiant généré par le SGBD
@@ -75,12 +79,16 @@ public class DaoCompte {
 			cn = dataSource.getConnection();
 
 			// Modifie le compte
-			sql = "UPDATE compte SET pseudo = ?, motdepasse = ?, email = ? WHERE idcompte =  ?";
+			sql = "UPDATE adminappli SET Nom = ?, Prenom = ?, Telephone = ?, email = ?, Adresse = ?, Login = ?, Pass = ? WHERE Id =  ?";
 			stmt = cn.prepareStatement( sql );
-			stmt.setObject( 1, compte.getPseudo() );
-			stmt.setObject( 2, compte.getMotDePasse() );
-			stmt.setObject( 3, compte.getEmail() );
-			stmt.setObject( 4, compte.getId() );
+			stmt.setObject( 1, compte.getNom() );
+			stmt.setObject( 2, compte.getPrenom() );
+			stmt.setObject( 3, compte.getTelephone() );
+			stmt.setObject( 4, compte.getEmail() );
+			stmt.setObject( 5, compte.getAdresse() );
+			stmt.setObject( 6, compte.getLogin() );
+			stmt.setObject( 7, compte.getPass() );
+			stmt.setObject( 8, compte.getId() );
 			stmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -109,7 +117,7 @@ public class DaoCompte {
 			cn = dataSource.getConnection();
 
 			// Supprime le compte
-			sql = "DELETE FROM compte WHERE idcompte = ? ";
+			sql = "DELETE FROM adminappli WHERE Id = ? ";
 			stmt = cn.prepareStatement( sql );
 			stmt.setObject( 1, idCompte );
 			stmt.executeUpdate();
@@ -132,7 +140,7 @@ public class DaoCompte {
 		try {
 			cn = dataSource.getConnection();
 
-			sql = "SELECT * FROM compte WHERE idcompte = ?";
+			sql = "SELECT * FROM adminappli WHERE Id = ?";
             stmt = cn.prepareStatement( sql );
             stmt.setObject( 1, idCompte );
             rs = stmt.executeQuery();
@@ -160,7 +168,7 @@ public class DaoCompte {
 		try {
 			cn = dataSource.getConnection();
 
-			sql = "SELECT * FROM compte ORDER BY pseudo";
+			sql = "SELECT * FROM adminappli ORDER BY Nom";
 			stmt = cn.prepareStatement( sql );
 			rs = stmt.executeQuery();
 
@@ -178,7 +186,7 @@ public class DaoCompte {
 	}
 
 
-	public Compte validerAuthentification( String pseudo, String motDePasse )  {
+	public Compte validerAuthentification( String login, String pass )  {
 		
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -188,10 +196,10 @@ public class DaoCompte {
 		try {
 			cn = dataSource.getConnection();
 
-			sql = "SELECT * FROM compte WHERE pseudo = ? AND motdepasse = ?";
+			sql = "SELECT * FROM adminappli WHERE Login = ? AND Pass = ?";
 			stmt = cn.prepareStatement( sql );
-			stmt.setObject( 1, pseudo );
-			stmt.setObject( 2, motDePasse );
+			stmt.setObject( 1, login );
+			stmt.setObject( 2, pass );
 			rs = stmt.executeQuery();
 
 			if ( rs.next() ) {
@@ -207,23 +215,23 @@ public class DaoCompte {
 	}
 
 
-	public boolean verifierUnicitePseudo( String pseudo, Integer idCompte )   {
+	public boolean verifierUniciteLogin( String login, Integer id )   {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
 		ResultSet 			rs 		= null;
 		String				sql;
 
-		if ( idCompte == null ) idCompte = 0;
+		if ( id == null ) id = 0;
 		
 		try {
 			cn = dataSource.getConnection();
 
 			sql = "SELECT COUNT(*) = 0 AS unicite"
-					+ " FROM compte WHERE pseudo = ? AND idcompte <> ?";
+					+ " FROM adminappli WHERE Login = ? AND Id <> ?";
 			stmt = cn.prepareStatement( sql );
-			stmt.setObject(	1, pseudo );
-			stmt.setObject(	2, idCompte );
+			stmt.setObject(	1, login );
+			stmt.setObject(	2, id );
 			rs = stmt.executeQuery();
 			
 			rs.next();
@@ -241,10 +249,14 @@ public class DaoCompte {
 	
 	private Compte construireCompte( ResultSet rs ) throws SQLException {
 		Compte compte = new Compte();
-		compte.setId( rs.getObject( "idcompte", Integer.class ) );
-		compte.setPseudo( rs.getObject( "pseudo", String.class ) );
-		compte.setMotDePasse( rs.getObject( "motdepasse", String.class ) );
+		compte.setId( rs.getObject( "Id", Integer.class ) );
+		compte.setPrenom( rs.getObject( "Prenom", String.class ) );
+		compte.setTelephone( rs.getObject( "Telephone", Integer.class ) );
 		compte.setEmail( rs.getObject( "email", String.class ) );
+		compte.setAdresse( rs.getObject( "adresse", String.class ) );
+		compte.setLogin( rs.getObject( "login", String.class ) );
+		compte.setPass( rs.getObject( "pass", String.class ) );
+		
 		compte.getRoles().setAll( daoRole.listerPourCompte( compte ) );
 		return compte;
 	}

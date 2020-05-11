@@ -52,8 +52,8 @@ public class ModelConnexion {
 	
 	@PostConstruct
 	public void init() {
-		courant.setPseudo( "geek" );
-		courant.setMotDePasse( "geek" );
+		courant.setLogin( "Whitley" );
+		courant.setPass( "Rogan54321" );
 	}
 	
 	
@@ -63,7 +63,7 @@ public class ModelConnexion {
 	public void ouvrirSessionUtilisateur() {
 
 		Compte compte = daoCompte.validerAuthentification(
-					courant.pseudoProperty().getValue(), courant.motDePasseProperty().getValue() );
+					courant.loginProperty().getValue(), courant.passProperty().getValue() );
 		
 		if( compte == null ) {
 			throw new ExceptionValidation( "Pseudo ou mot de passe invalide." );

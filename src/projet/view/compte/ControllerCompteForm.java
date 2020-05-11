@@ -60,8 +60,8 @@ public class ControllerCompteForm {
 		// Data binding
 		courant = modelCompte.getCourant();
 		textFieldId.textProperty().bindBidirectional( courant.idProperty(), new ConverterStringInteger());
-		textFieldPseudo.textProperty().bindBidirectional( courant.pseudoProperty() );
-		textFieldMotDePasse.textProperty().bindBidirectional( courant.motDePasseProperty() );
+		textFieldPseudo.textProperty().bindBidirectional( courant.loginProperty() );
+		textFieldMotDePasse.textProperty().bindBidirectional( courant.passProperty() );
 		textFieldEmail.textProperty().bindBidirectional( courant.emailProperty() );
 
 		

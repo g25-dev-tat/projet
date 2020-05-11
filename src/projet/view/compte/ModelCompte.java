@@ -65,21 +65,21 @@ public class ModelCompte {
 		
 		StringBuilder message = new StringBuilder();
 		
-		if( courant.getPseudo() == null || courant.getPseudo().isEmpty() ) {
+		if( courant.getLogin() == null || courant.getLogin().isEmpty() ) {
 			message.append( "\nLe pseudo ne doit pas être vide." );
-		} else 	if ( courant.getPseudo().length() < 3 ) {
+		} else 	if ( courant.getLogin().length() < 3 ) {
 			message.append( "\nLe pseudo est trop court : 3 mini." );
-		} else  if ( courant.getPseudo().length()> 25 ) {
+		} else  if ( courant.getLogin().length()> 25 ) {
 			message.append( "\nLe pseudo est trop long : 25 maxi." );
-		} else 	if ( ! daoCompte.verifierUnicitePseudo( courant.getPseudo(), courant.getId() ) ) {
-			message.append( "\nLe pseudo " + courant.getPseudo() + " est déjà utilisé." );
+		} else 	if ( ! daoCompte.verifierUnicitePseudo( courant.getLogin(), courant.getId() ) ) {
+			message.append( "\nLe pseudo " + courant.getLogin() + " est déjà utilisé." );
 		}
 		
-		if( courant.getMotDePasse() == null || courant.getMotDePasse().isEmpty() ) {
+		if( courant.getPass() == null || courant.getPass().isEmpty() ) {
 			message.append( "\nLe mot de passe ne doit pas être vide." );
-		} else  if ( courant.getMotDePasse().length()< 3 ) {
+		} else  if ( courant.getPass().length()< 3 ) {
 			message.append( "\nLe mot de passe est trop court : 3 mini." );
-		} else  if ( courant.getMotDePasse().length()> 25 ) {
+		} else  if ( courant.getPass().length()> 25 ) {
 			message.append( "\nLe mot de passe est trop long : 25 maxi." );
 		}
 		

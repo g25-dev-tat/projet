@@ -15,3 +15,7 @@
     -fx-font-size: 16;
 }
 
+.root{
+    -fx-background-image:url('04.jpg');
+    -fx-backgroung-size:cover;
+}

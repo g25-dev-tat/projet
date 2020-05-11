@@ -40,8 +40,8 @@ public class DaoCompte2 {
 			// Insère le compte
 			sql = "{ CALL compte_inserer( ?, ?, ?, ?, ? ) } ";
 			stmt = cn.prepareCall( sql ); 
-			stmt.setObject( 1, compte.getPseudo() );
-			stmt.setObject( 2, compte.getMotDePasse() );
+			stmt.setObject( 1, compte.getLogin() );
+			stmt.setObject( 2, compte.getPass() );
 			stmt.setObject( 3, compte.getEmail() );
 			stmt.registerOutParameter( 4, Types.INTEGER );
 			try {
@@ -77,8 +77,8 @@ public class DaoCompte2 {
 			// Modifie le compte
 			sql = "{ CALL compte_modifier( ?, ?, ?, ?, ? ) } ";
 			stmt = cn.prepareCall( sql );
-			stmt.setObject( 1, compte.getPseudo() );
-			stmt.setObject( 2, compte.getMotDePasse() );
+			stmt.setObject( 1, compte.getLogin() );
+			stmt.setObject( 2, compte.getPass() );
 			stmt.setObject( 3, compte.getEmail() );
 			stmt.setObject( 4, compte.getId() );
 			try {
@@ -236,10 +236,14 @@ public class DaoCompte2 {
 	
 	private Compte construireCompte( ResultSet rs ) throws SQLException {
 		Compte compte = new Compte();
-		compte.setId( rs.getObject( "idcompte", Integer.class ) );
-		compte.setPseudo( rs.getObject( "pseudo", String.class ) );
-		compte.setMotDePasse( rs.getObject( "motdepasse", String.class ) );
+		compte.setId( rs.getObject( "Id", Integer.class ) );
+		compte.setNom( rs.getObject( "Nom", String.class ) );
+		compte.setPrenom( rs.getObject( "Prenom", String.class ) );
+		compte.setTelephone( rs.getObject( "Telephone", Integer.class ) );
 		compte.setEmail( rs.getObject( "email", String.class ) );
+		compte.setAdresse( rs.getObject( "adresse", String.class ) );
+		compte.setLogin( rs.getObject( "loginn", String.class ) );
+		compte.setPass( rs.getObject( "passs", String.class ) );
 		try {
 			compte.getRoles().setAll( (String[]) rs.getArray( "roles" ).getArray() );
 		} catch ( SQLFeatureNotSupportedException e) {

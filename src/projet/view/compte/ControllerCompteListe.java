@@ -57,7 +57,7 @@ public class ControllerCompteListe  {
 		            if (item == null) {
 		                setText(null);
 		            } else {
-		                setText(item.pseudoProperty().getValue() );
+		                setText(item.loginProperty().getValue() );
 		            }
 		        }
 		    };
