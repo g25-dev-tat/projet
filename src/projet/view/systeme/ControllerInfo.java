@@ -29,8 +29,8 @@ public class ControllerInfo {
 	private void initialize() {
 		
 		// Data binding
-		labelTitre.textProperty().bind( modelInfo.titreProperty() );
-		labelMessage.textProperty().bind( modelInfo.messageProperty() );
+		//labelTitre.textProperty().bind( modelInfo.titreProperty() );
+		//labelMessage.textProperty().bind( modelInfo.messageProperty() );
 		
 	}
 	

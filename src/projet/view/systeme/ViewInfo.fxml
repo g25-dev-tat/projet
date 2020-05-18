@@ -1,16 +1,156 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="323.0" prefWidth="357.0" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.systeme.ControllerInfo">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../../fond/style1.css" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.systeme.ControllerInfo">
    <children>
-      <Label fx:id="labelTitre" alignment="CENTER" styleClass="titre-vue" text="Titre" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0" />
-      <VBox alignment="CENTER" layoutY="63.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+      <GridPane prefHeight="600.0" prefWidth="800.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
          <children>
-            <Label fx:id="labelMessage" styleClass="message-accueil" text="Message" />
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+               <children>
+                  <ImageView fitHeight="120.0" fitWidth="183.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../fond/Image1%20(2).png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets left="55.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Button mnemonicParsing="false" text="BENEVOLES">
+                     <VBox.margin>
+                        <Insets left="115.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <ImageView fitHeight="144.0" fitWidth="122.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../fond/Image3.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets left="80.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Button mnemonicParsing="false" text="PARTICIPANTS">
+                     <VBox.margin>
+                        <Insets left="89.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <children>
+                  <ImageView fitHeight="139.0" fitWidth="147.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../fond/Image2.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets left="65.0" top="10.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Button mnemonicParsing="false" text="COMPETITION">
+                     <VBox.margin>
+                        <Insets left="95.0" top="-10.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+               <children>
+                  <ImageView fitHeight="46.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../fond/Image6.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets top="40.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Button mnemonicParsing="false" text="Contacter l'administrateur ?">
+                     <HBox.margin>
+                        <Insets top="50.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <VBox GridPane.columnIndex="2">
+               <children>
+                  <ImageView fitHeight="118.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../fond/Image4.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets left="155.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="85.0" text="Mon profil">
+                     <VBox.margin>
+                        <Insets left="160.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <ImageView fitHeight="57.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
+               <image>
+                  <Image url="@../../fond/Image7.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="197.0" top="-25.0" />
+               </GridPane.margin>
+            </ImageView>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="38.0" prefWidth="177.0" text="RECHERCHER :" textFill="#f52307">
+                     <font>
+                        <Font name="Bell MT Bold" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField prefHeight="26.0" prefWidth="157.0">
+                     <HBox.margin>
+                        <Insets left="5.0" top="10.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <ImageView fitHeight="33.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../fond/Image5.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="5.0" top="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+            </HBox>
          </children>
-      </VBox>
+      </GridPane>
    </children>
 </AnchorPane>

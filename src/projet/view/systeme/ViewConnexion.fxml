@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -18,22 +18,21 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="493.0" maxWidth="500.0" minHeight="350.0" minWidth="300.0" prefHeight="493.0" prefWidth="465.0" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.systeme.ControllerConnexion">
+<AnchorPane id="root" maxHeight="600.0" maxWidth="800.0" minHeight="350.0" minWidth="800.0" prefHeight="554.0" prefWidth="788.0" stylesheets="@../../fond/style.css" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.systeme.ControllerConnexion">
    <children>
-      <Label alignment="CENTER" layoutX="61.0" layoutY="152.0" prefHeight="23.0" prefWidth="293.0" styleClass="titre-vue" text=" Canoë Kayak Club - Bol d'Air" AnchorPane.leftAnchor="61.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="152.0" />
-      <FlowPane alignment="CENTER" layoutY="224.0" prefHeight="278.0" prefWidth="338.0" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="224.0" />
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="130.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+      <Group layoutX="61.0" layoutY="152.0" AnchorPane.leftAnchor="61.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="152.0" />
+      <ImageView fitHeight="170.0" fitWidth="250.0" layoutX="314.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="344.0" AnchorPane.leftAnchor="321.0" AnchorPane.rightAnchor="358.9896926879883" AnchorPane.topAnchor="65.0">
          <image>
-            <Image url="@../../images/Logo.png" />
+            <Image url="@../../images/Image4.png" />
          </image>
       </ImageView>
-      <VBox alignment="CENTER" fillWidth="false" layoutX="50.0" layoutY="176.0" prefHeight="218.0" prefWidth="337.0" spacing="17.0">
+      <VBox id="root" alignment="CENTER" fillWidth="false" layoutX="164.0" layoutY="210.0" prefHeight="222.0" prefWidth="364.0" spacing="17.0" stylesheets="@../../fond/style1.css">
          <children>
             <HBox alignment="CENTER" prefHeight="21.0" prefWidth="337.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Connectez-vous pour entrer">
+                  <Text fill="WHITE" stroke="#0cb54a" strokeType="OUTSIDE" strokeWidth="0.0" text="Connectez-vous pour entrer" textAlignment="JUSTIFY">
                      <font>
-                        <Font name="Arial Narrow" size="16.0" />
+                        <Font size="24.0" />
                      </font>
                      <HBox.margin>
                         <Insets right="30.0" />
@@ -41,7 +40,7 @@
                   </Text>
                </children>
             </HBox>
-            <GridPane prefHeight="60.0" prefWidth="207.0">
+            <GridPane alignment="CENTER" prefHeight="74.0" prefWidth="250.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="86.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="114.0" minWidth="10.0" prefWidth="114.0" />
@@ -51,10 +50,17 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Login" />
-                  <TextField fx:id="fieldPseudo" prefHeight="25.0" prefWidth="117.0" GridPane.columnIndex="1" />
-                  <Label text="Mot de passe :" GridPane.rowIndex="1" />
+                  <Label text="Login : " textFill="#09dd09">
+                     <font>
+                        <Font name="Arial Narrow" size="20.0" />
+                     </font></Label>
+                  <TextField fx:id="fieldPseudo" prefHeight="26.0" prefWidth="133.0" GridPane.columnIndex="1" />
+                  <Label prefHeight="20.0" prefWidth="126.0" text="Mot de passe :" textFill="#36e20b" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="14.7" />
+                     </font></Label>
                   <PasswordField fx:id="fieldMotDePasse" prefHeight="25.0" prefWidth="117.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <FlowPane alignment="CENTER" opacity="0.38" prefHeight="289.0" prefWidth="384.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
             <HBox alignment="CENTER" prefHeight="28.0" prefWidth="337.0">
@@ -71,8 +77,4 @@
          </padding>
       </VBox>
    </children>
-   <stylesheets>
-      <URL value="@../application.css" />
-      <URL value="@../../fond/style.css" />
-   </stylesheets>
 </AnchorPane>

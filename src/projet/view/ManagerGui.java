@@ -1,8 +1,12 @@
 package projet.view;
 
+import java.io.IOException;
+
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -39,10 +43,11 @@ public class ManagerGui extends ManagerGuiAbstract {
 		
 		// Configure le stage
 		stage.setTitle( "Application de gestion des participants et des bénévoles" );
-		stage.setWidth(600);
-		stage.setHeight(440);
+		stage.setWidth(800);
+		stage.setHeight(600);
 		stage.setMinWidth(400);
 		stage.setMinHeight(300);
+		stage.setResizable(false);
 		stage.getIcons().add(new Image(getClass().getResource("05.png").toExternalForm()));
 		
 		// Configuration par défaut pour les boîtes de dialogue
@@ -54,8 +59,15 @@ public class ManagerGui extends ManagerGuiAbstract {
 	public Scene createScene( Parent root ) {
 		BorderPane paneMenu = new BorderPane( root );
 		paneMenu.setTop( context.getBeanNew( MenuBarAppli.class ) );
+		//try {
+		//	paneMenu=FXMLLoader.load(getClass().getResource("/view/systeme/ViewConnexion.fxml"));
+		//} catch (IOException e) {
+			// TODO Auto-generated catch block
+		//	e.printStackTrace();
+		//}
 		Scene scene = new Scene( paneMenu );
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		//scene.getStylesheets().add(getClass().getResource("/image/style.css").toExternalForm());
 		return scene;
 	}
 	
