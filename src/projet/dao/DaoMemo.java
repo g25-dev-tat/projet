@@ -13,8 +13,8 @@ import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import jfox.dao.jdbc.UtilJdbc;
-import projet.data.Memo;
-import projet.data.Personne;
+import projet.data.Competition;
+import projet.data.AdminAppli;
 
 
 public class DaoMemo {
@@ -32,7 +32,7 @@ public class DaoMemo {
 	
 	// Actions
 
-	public int inserer( Memo memo ) {
+	public int inserer( Competition memo ) {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -74,7 +74,7 @@ public class DaoMemo {
 	}
 
 
-	public void modifier( Memo memo ) {
+	public void modifier( Competition memo ) {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -133,7 +133,7 @@ public class DaoMemo {
 	}
 
 	
-	public Memo retrouver( int idMemo ) {
+	public Competition retrouver( int idMemo ) {
 
 		Connection			cn 		= null;
 		PreparedStatement	stmt	= null;
@@ -160,7 +160,7 @@ public class DaoMemo {
 	}
 
 
-	public List<Memo> listerTout() {
+	public List<Competition> listerTout() {
 
 		Connection			cn 		= null;
 		PreparedStatement	stmt 	= null;
@@ -173,7 +173,7 @@ public class DaoMemo {
 			stmt = cn.prepareStatement( sql );
 			rs = stmt.executeQuery();
 
-			List<Memo> memos = new LinkedList<>();
+			List<Competition> memos = new LinkedList<>();
 			while (rs.next()) {
 				memos.add( construireMemo( rs, false ) );
 			}
@@ -213,8 +213,8 @@ public class DaoMemo {
 	
 	// Méthodes auxiliaires
 	
-	private Memo construireMemo( ResultSet rs, boolean flagComplet ) throws SQLException {
-		Memo memo = new Memo();
+	private Competition construireMemo( ResultSet rs, boolean flagComplet ) throws SQLException {
+		Competition memo = new Competition();
 		memo.setId( rs.getObject( "idmemo", Integer.class ) );
 		memo.setTitre( rs.getObject( "titre", String.class ) );
 		memo.setDescription( rs.getObject( "description", String.class ) );
@@ -257,7 +257,7 @@ public class DaoMemo {
 	}
 
 	
-	private void insererConcerner( Memo memo ) {
+	private void insererConcerner( Competition memo ) {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -268,7 +268,7 @@ public class DaoMemo {
 			sql = "INSERT INTO concerner ( idmemo, idpersonne ) VALUES( ?, ? ) ";
 			stmt = cn.prepareStatement( sql );
 			
-			for ( Personne personne : memo.getPersonnes() ) {
+			for ( AdminAppli personne : memo.getPersonnes() ) {
 				stmt.setObject( 1, memo.getId() );
 				stmt.setObject( 2, personne.getId() );
 				stmt.executeUpdate();

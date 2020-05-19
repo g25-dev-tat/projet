@@ -10,7 +10,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 
-public class Service {
+public class Equipe {
 	
 	
 	// Champs
@@ -100,7 +100,7 @@ public class Service {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Service other = (Service) obj;
+		Equipe other = (Equipe) obj;
 		return Objects.equals(id.getValue(), other.id.getValue());
 	}
 

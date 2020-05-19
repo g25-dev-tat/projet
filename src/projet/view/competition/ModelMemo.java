@@ -1,4 +1,4 @@
-package projet.view.memo;
+package projet.view.competition;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,10 +19,10 @@ import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
 import projet.dao.DaoMemo;
 import projet.dao.DaoPersonne;
-import projet.data.Categorie;
-import projet.data.Memo;
-import projet.data.Personne;
-import projet.view.personne.ModelCategorie;
+import projet.data.Benevole;
+import projet.data.Competition;
+import projet.data.AdminAppli;
+import projet.view.participant.ModelCategorie;
 import projet.view.systeme.ModelConfig;
 
 
@@ -31,11 +31,11 @@ public class ModelMemo  {
 	
 	// Données observables 
 	
-	private final ObservableList<Memo> liste = FXCollections.observableArrayList(); 
+	private final ObservableList<Competition> liste = FXCollections.observableArrayList(); 
 	
-	private final Memo	courant = new Memo();
+	private final Competition	courant = new Competition();
 	
-	private final ObservableList<Personne> personnesPourDialogAjout = FXCollections.observableArrayList();
+	private final ObservableList<AdminAppli> personnesPourDialogAjout = FXCollections.observableArrayList();
 	
 	private final Property<Image>	schema = new SimpleObjectProperty<>();
 	
@@ -65,19 +65,19 @@ public class ModelMemo  {
 	
 	// Getters 
 	
-	public ObservableList<Memo> getListe() {
+	public ObservableList<Competition> getListe() {
 		return liste;
 	}
 	
-	public Memo getCourant() {
+	public Competition getCourant() {
 		return courant;
 	}
 	
-	public ObservableList<Categorie> getCategories() {
+	public ObservableList<Benevole> getCategories() {
 		return modelCategorie.getListe();
 	}
 	
-	public ObservableList<Personne> getPersonnesPourDialogAjout() {
+	public ObservableList<AdminAppli> getPersonnesPourDialogAjout() {
 		return personnesPourDialogAjout;
 	} 
 	
@@ -102,12 +102,12 @@ public class ModelMemo  {
 	
 	public void preparerAjouter() {
 		modelCategorie.actualiserListe();
-		mapper.update( courant, new Memo() );
+		mapper.update( courant, new Competition() );
 		schema.setValue(null);
 		flagModifSchema = false;
 	}
 	
-	public void preparerModifier( Memo item ) {
+	public void preparerModifier( Competition item ) {
 		modelCategorie.actualiserListe();
 		mapper.update( courant, daoMemo.retrouver( item.getId() ) );
 		File fichier = getFichierSchemaCourant();
@@ -184,7 +184,7 @@ public class ModelMemo  {
 	}
 	
 	
-	public void supprimer( Memo item ) {
+	public void supprimer( Competition item ) {
 		
 		daoMemo.supprimer( item.getId() );
 		mapper.update( courant, UtilFX.findNext( liste, item ) );
@@ -193,11 +193,11 @@ public class ModelMemo  {
 	}
 
 	
-	public void supprimerPersonne( Personne item ) {
+	public void supprimerPersonne( AdminAppli item ) {
 		courant.getPersonnes().remove(item);
 	}
 	
-	public void ajouterPersonne( Personne item ) {
+	public void ajouterPersonne( AdminAppli item ) {
 		courant.getPersonnes().add(item);
 	}
 	

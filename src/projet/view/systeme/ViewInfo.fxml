@@ -135,21 +135,21 @@
                         <Insets left="5.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField prefHeight="26.0" prefWidth="157.0">
+                  <TextField prefHeight="26.0" prefWidth="202.0">
                      <HBox.margin>
                         <Insets left="5.0" top="10.0" />
                      </HBox.margin>
                   </TextField>
-                  <ImageView fitHeight="33.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../fond/Image5.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets left="5.0" top="10.0" />
-                     </HBox.margin>
-                  </ImageView>
                </children>
             </HBox>
+            <ImageView fitHeight="75.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+               <image>
+                  <Image url="@../../fond/Image5.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="10.0" top="-102.0" />
+               </GridPane.margin>
+            </ImageView>
          </children>
       </GridPane>
    </children>

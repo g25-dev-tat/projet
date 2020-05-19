@@ -12,8 +12,8 @@ import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import jfox.dao.jdbc.UtilJdbc;
-import projet.data.Personne;
-import projet.data.Telephone;
+import projet.data.AdminAppli;
+import projet.data.Course;
 
 
 public class DaoTelephone {
@@ -27,7 +27,7 @@ public class DaoTelephone {
 	
 	// Actions
 
-	public void insererPourPersonne( Personne personne ) {
+	public void insererPourPersonne( AdminAppli personne ) {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -38,7 +38,7 @@ public class DaoTelephone {
 			cn = dataSource.getConnection();
 			sql = "INSERT INTO telephone ( idpersonne, libelle, numero ) VALUES (?,?,?)";
 			stmt = cn.prepareStatement( sql, Statement.RETURN_GENERATED_KEYS );
-			for( Telephone telephone : personne.getTelephones() ) {
+			for( Course telephone : personne.getTelephones() ) {
 				stmt.setObject( 1, personne.getId() );
 				stmt.setObject( 2, telephone.getLibelle() );
 				stmt.setObject( 3, telephone.getNumero() );
@@ -57,7 +57,7 @@ public class DaoTelephone {
 	}
 
 
-	public void modifierPourPersonne( Personne personne ) {
+	public void modifierPourPersonne( AdminAppli personne ) {
 
 		Connection			cn			= null;
 		PreparedStatement	stmtDelete	= null;
@@ -71,7 +71,7 @@ public class DaoTelephone {
 
 			sql = "DELETE FROM telephone WHERE idtelephone = ?";
 			stmtDelete = cn.prepareStatement( sql );
-			for ( Telephone telephone : listerPourPersonne(personne) ) {
+			for ( Course telephone : listerPourPersonne(personne) ) {
 				if ( ! personne.getTelephones().contains( telephone ) ) {
 					stmtDelete.setObject( 1, telephone.getId() );
 					stmtDelete.executeUpdate();
@@ -82,7 +82,7 @@ public class DaoTelephone {
 			stmtInsert = cn.prepareStatement( sql, Statement.RETURN_GENERATED_KEYS );
 			sql = "UPDATE telephone SET idpersonne = ?, libelle = ?, numero = ? WHERE idtelephone = ?";
 			stmtUpdate = cn.prepareStatement( sql );
-			for( Telephone telephone : personne.getTelephones() ) {
+			for( Course telephone : personne.getTelephones() ) {
 				if ( telephone.getId() == null || telephone.getId() == 0 ) {
 					stmtInsert.setObject( 1, personne.getId());
 					stmtInsert.setObject( 2, telephone.getLibelle() );
@@ -131,7 +131,7 @@ public class DaoTelephone {
 	}
 
 
-	public List<Telephone> listerPourPersonne( Personne personne ) {
+	public List<Course> listerPourPersonne( AdminAppli personne ) {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -146,7 +146,7 @@ public class DaoTelephone {
 			stmt.setObject( 1, personne.getId() );
 			rs = stmt.executeQuery();
 
-			List<Telephone> telephones = new ArrayList<>();
+			List<Course> telephones = new ArrayList<>();
 			while (rs.next()) {
 				telephones.add( construireTelephone( rs, personne ) );
 			}
@@ -162,8 +162,8 @@ public class DaoTelephone {
 	
 	// Méthodes auxiliaires
 	
-	private Telephone construireTelephone( ResultSet rs, Personne personne ) throws SQLException {
-		Telephone telephone = new Telephone();
+	private Course construireTelephone( ResultSet rs, AdminAppli personne ) throws SQLException {
+		Course telephone = new Course();
 		telephone.setId(rs.getObject( "idtelephone", Integer.class ));
 		telephone.setLibelle(rs.getObject( "libelle", String.class ));
 		telephone.setNumero(rs.getObject( "numero", String.class ));

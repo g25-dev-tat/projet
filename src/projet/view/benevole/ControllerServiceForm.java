@@ -1,4 +1,4 @@
-package projet.view.service;
+package projet.view.benevole;
 
 import javax.inject.Inject;
 
@@ -9,7 +9,7 @@ import javafx.util.converter.IntegerStringConverter;
 import jfox.javafx.util.ConverterStringInteger;
 import jfox.javafx.util.ListenerFocusValidation;
 import jfox.javafx.view.IManagerGui;
-import projet.data.Service;
+import projet.data.Equipe;
 import projet.view.EnumView;
 
 
@@ -43,7 +43,7 @@ public class ControllerServiceForm {
 
 		// Data binding
 		
-		Service courant = modelService.getCourant();
+		Equipe courant = modelService.getCourant();
 
 		textFieldId.textProperty().bindBidirectional( courant.idProperty(), new IntegerStringConverter()  );
 

@@ -1,4 +1,4 @@
-package projet.view.memo;
+package projet.view.competition;
 
 import java.awt.Desktop;
 import java.io.File;
@@ -29,9 +29,9 @@ import jfox.javafx.util.ConverterStringInteger;
 import jfox.javafx.util.ConverterStringLocalDate;
 import jfox.javafx.util.UtilFX;
 import jfox.javafx.view.IManagerGui;
-import projet.data.Categorie;
-import projet.data.Memo;
-import projet.data.Personne;
+import projet.data.Benevole;
+import projet.data.Competition;
+import projet.data.AdminAppli;
 import projet.view.EnumView;
 
 
@@ -59,9 +59,9 @@ public class ControllerMemoForm {
 	private DatePicker		datePicherEcheance;
 	
 	@FXML
-	private ComboBox<Categorie>	comboBoxCategorie;
+	private ComboBox<Benevole>	comboBoxCategorie;
 	@FXML
-	private ListView<Personne>	listViewPersonnes;
+	private ListView<AdminAppli>	listViewPersonnes;
 	
 	@FXML
 	private ImageView		imageViewSchema;
@@ -88,7 +88,7 @@ public class ControllerMemoForm {
 
 		// Data binding
 		
-		Memo courant = modelMemo.getCourant();
+		Competition courant = modelMemo.getCourant();
 		
 		// id
 		textFieldId.textProperty().bindBidirectional( courant.idProperty(), new ConverterStringInteger()  );
@@ -155,7 +155,7 @@ public class ControllerMemoForm {
 	
 	@FXML
 	private void doSupprimerPersonnes() {
-		ObservableList<Personne> selectedItems = listViewPersonnes.getSelectionModel().getSelectedItems();
+		ObservableList<AdminAppli> selectedItems = listViewPersonnes.getSelectionModel().getSelectedItems();
 		for ( int i = selectedItems.size() - 1; i >= 0; --i ) {
 			modelMemo.supprimerPersonne( selectedItems.get(i) );
 		}
@@ -237,7 +237,7 @@ public class ControllerMemoForm {
 	
 	
 	private void verifierValiditeSaisie() {
-		Memo courant = modelMemo.getCourant();
+		Competition courant = modelMemo.getCourant();
 		UtilFX.checkParseError( textFieldEffectif, courant.effectifProperty() );
 		UtilFX.checkParseError( textFieldBudget, courant.budgetProperty() );
 		UtilFX.checkParseError( datePicherEcheance.getEditor(), courant.echeanceProperty() );

@@ -1,4 +1,4 @@
-package projet.view.personne;
+package projet.view.participant;
 
 import javax.inject.Inject;
 
@@ -10,9 +10,9 @@ import javafx.scene.control.TextField;
 import jfox.javafx.control.EditingCell;
 import jfox.javafx.util.ConverterStringInteger;
 import jfox.javafx.view.IManagerGui;
-import projet.data.Categorie;
-import projet.data.Personne;
-import projet.data.Telephone;
+import projet.data.Benevole;
+import projet.data.AdminAppli;
+import projet.data.Course;
 import projet.view.EnumView;
 
 
@@ -28,15 +28,15 @@ public class ControllerPersonneForm  {
 	@FXML	
 	private TextField			textFieldPrenom;
     @FXML
-    private ComboBox<Categorie>	comboBoxCategorie;
+    private ComboBox<Benevole>	comboBoxCategorie;
 	@FXML
-	private TableView<Telephone>	tableViewTelphones;
+	private TableView<Course>	tableViewTelphones;
 	@FXML
-	private TableColumn<Telephone, Integer> columnId;
+	private TableColumn<Course, Integer> columnId;
 	@FXML
-	private TableColumn<Telephone, String> columnLibelle;
+	private TableColumn<Course, String> columnLibelle;
 	@FXML
-	private TableColumn<Telephone, String> columnNumero;
+	private TableColumn<Course, String> columnNumero;
 
 	
 	// Autres champs
@@ -50,7 +50,7 @@ public class ControllerPersonneForm  {
 	
 	public void initialize() {
 
-		Personne courant = modelPersonne.getCourant();
+		AdminAppli courant = modelPersonne.getCourant();
 		
 		// Champs simples
 		textFieldId.textProperty().bindBidirectional( courant.idProperty(), new ConverterStringInteger() );
@@ -101,7 +101,7 @@ public class ControllerPersonneForm  {
 	
 	@FXML
 	private void doiSupprimerTelephone() {
-		Telephone telephone = tableViewTelphones.getSelectionModel().getSelectedItem();
+		Course telephone = tableViewTelphones.getSelectionModel().getSelectedItem();
 		modelPersonne.supprimerTelephone(telephone);
 	}
     

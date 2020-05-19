@@ -1,4 +1,4 @@
-package projet.view.personne;
+package projet.view.participant;
 
 import javax.inject.Inject;
 
@@ -9,7 +9,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import jfox.javafx.util.UtilFX;
 import jfox.javafx.view.IManagerGui;
-import projet.data.Categorie;
+import projet.data.Benevole;
 import projet.view.EnumView;
 
 
@@ -19,7 +19,7 @@ public class ControllerCategorieListe {
 	// Composants de la vue
 
 	@FXML
-	private ListView<Categorie>	listView;
+	private ListView<Benevole>	listView;
 	@FXML
 	private Button				buttonModifier;
 	@FXML

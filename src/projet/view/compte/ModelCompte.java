@@ -9,7 +9,7 @@ import jfox.commun.exception.ExceptionValidation;
 import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
 import projet.dao.DaoCompte2;
-import projet.data.Compte;
+import projet.data.Participant;
 
 
 public class ModelCompte {
@@ -17,9 +17,9 @@ public class ModelCompte {
 	
 	// Données observables 
 	
-	private final ObservableList<Compte> liste = FXCollections.observableArrayList(); 
+	private final ObservableList<Participant> liste = FXCollections.observableArrayList(); 
 	
-	private final Compte	courant = new Compte();
+	private final Participant	courant = new Participant();
 	
 	
 	// Autres champs
@@ -31,11 +31,11 @@ public class ModelCompte {
 	
 	// Getters
 	
-	public ObservableList<Compte> getListe() {
+	public ObservableList<Participant> getListe() {
 		return liste;
 	}
 
-	public Compte getCourant() {
+	public Participant getCourant() {
 		return courant;
 	}
 	
@@ -50,11 +50,11 @@ public class ModelCompte {
 	// Actions
 	
 	public void preparerAjouter() {
-		mapper.update( courant, new Compte() );
+		mapper.update( courant, new Participant() );
 	}
 
 	
-	public void preparerModifier( Compte item ) {
+	public void preparerModifier( Participant item ) {
 		mapper.update( courant, daoCompte.retrouver( item.getId() ) );
 	}
 	
@@ -106,7 +106,7 @@ public class ModelCompte {
 	}
 	
 	
-	public void supprimer( Compte item ) {
+	public void supprimer( Participant item ) {
 		daoCompte.supprimer( item.getId() );
 		mapper.update( courant, UtilFX.findNext( liste, item ) );
 	}

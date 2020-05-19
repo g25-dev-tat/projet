@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import jfox.dao.jdbc.UtilJdbc;
-import projet.data.Compte;
+import projet.data.Participant;
 
 
 public class DaoCompte {
@@ -28,7 +28,7 @@ public class DaoCompte {
 	
 	// Actions
 
-	public int inserer( Compte compte )  {
+	public int inserer( Participant compte )  {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -69,7 +69,7 @@ public class DaoCompte {
 	}
 	
 
-	public void modifier( Compte compte )  {
+	public void modifier( Participant compte )  {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -130,7 +130,7 @@ public class DaoCompte {
 	}
 	
 
-	public Compte retrouver( int idCompte )  {
+	public Participant retrouver( int idCompte )  {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -158,7 +158,7 @@ public class DaoCompte {
 	}
 	
 
-	public List<Compte> listerTout()   {
+	public List<Participant> listerTout()   {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -172,7 +172,7 @@ public class DaoCompte {
 			stmt = cn.prepareStatement( sql );
 			rs = stmt.executeQuery();
 
-			List<Compte> comptes = new ArrayList<>();
+			List<Participant> comptes = new ArrayList<>();
 			while ( rs.next() ) {
 				comptes.add( construireCompte(rs) );
 			}
@@ -186,7 +186,7 @@ public class DaoCompte {
 	}
 
 
-	public Compte validerAuthentification( String login, String pass )  {
+	public Participant validerAuthentification( String login, String pass )  {
 		
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -247,8 +247,8 @@ public class DaoCompte {
 	
 	// Méthodes auxiliaires
 	
-	private Compte construireCompte( ResultSet rs ) throws SQLException {
-		Compte compte = new Compte();
+	private Participant construireCompte( ResultSet rs ) throws SQLException {
+		Participant compte = new Participant();
 		compte.setId( rs.getObject( "Id", Integer.class ) );
 		compte.setPrenom( rs.getObject( "Prenom", String.class ) );
 		compte.setTelephone( rs.getObject( "Telephone", Integer.class ) );

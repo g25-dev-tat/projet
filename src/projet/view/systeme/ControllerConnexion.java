@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import jfox.javafx.view.IManagerGui;
-import projet.data.Compte;
+import projet.data.Participant;
 import projet.view.EnumView;
 
 
@@ -38,7 +38,7 @@ public class ControllerConnexion {
 	private void initialize() {
 		
 		// Data binding
-		Compte courant = modelConnexion.getCourant();
+		Participant courant = modelConnexion.getCourant();
 		fieldPseudo.textProperty().bindBidirectional( courant.loginProperty() );
 		fieldMotDePasse.textProperty().bindBidirectional( courant.passProperty() );
 

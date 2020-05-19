@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import jfox.dao.jdbc.UtilJdbc;
-import projet.data.Personne;
+import projet.data.AdminAppli;
 
 
 public class DaoPersonne {
@@ -30,7 +30,7 @@ public class DaoPersonne {
 	
 	// Actions
 
-	public int inserer(Personne personne)  {
+	public int inserer(AdminAppli personne)  {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -67,7 +67,7 @@ public class DaoPersonne {
 	}
 
 	
-	public void modifier(Personne personne)  {
+	public void modifier(AdminAppli personne)  {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -122,7 +122,7 @@ public class DaoPersonne {
 	}
 
 	
-	public Personne retrouver(int idPersonne)  {
+	public AdminAppli retrouver(int idPersonne)  {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -150,7 +150,7 @@ public class DaoPersonne {
 	}
 
 	
-	public List<Personne> listerTout()   {
+	public List<AdminAppli> listerTout()   {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -164,7 +164,7 @@ public class DaoPersonne {
 			stmt = cn.prepareStatement(sql);
 			rs = stmt.executeQuery();
 			
-			List<Personne> personnes = new ArrayList<>();
+			List<AdminAppli> personnes = new ArrayList<>();
 			while (rs.next()) {
 				personnes.add( construirePersonne(rs, false) );
 			}
@@ -178,7 +178,7 @@ public class DaoPersonne {
 	}
 
 	
-	public List<Personne> listerPourMemo( int idMemo )   {
+	public List<AdminAppli> listerPourMemo( int idMemo )   {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -196,7 +196,7 @@ public class DaoPersonne {
 			stmt.setObject( 1, idMemo ); 
 			rs = stmt.executeQuery();
 			
-			List<Personne> personnes = new ArrayList<>();
+			List<AdminAppli> personnes = new ArrayList<>();
 			while (rs.next()) {
 				personnes.add( construirePersonne(rs, false) );
 			}
@@ -236,9 +236,9 @@ public class DaoPersonne {
 	
 	// Méthodes auxiliaires
 	
-	private Personne construirePersonne( ResultSet rs, boolean flagComplet ) throws SQLException {
+	private AdminAppli construirePersonne( ResultSet rs, boolean flagComplet ) throws SQLException {
 
-		Personne personne = new Personne();
+		AdminAppli personne = new AdminAppli();
 		personne.setId(rs.getObject( "idpersonne", Integer.class ));
 		personne.setNom(rs.getObject( "nom", String.class ));
 		personne.setPrenom(rs.getObject( "prenom", String.class ));

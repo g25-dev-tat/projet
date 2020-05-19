@@ -1,32 +1,27 @@
-package projet.view.personne;
-
-import java.util.HashMap;
-import java.util.Map;
+package projet.view.competition;
 
 import javax.inject.Inject;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import jfox.javafx.util.UtilFX;
 import jfox.javafx.view.IManagerGui;
-import projet.data.Categorie;
-import projet.report.EnumReport;
-import projet.report.ManagerReport;
+import projet.data.AdminAppli;
 
 
-public class ControllerEtatPersonnesParCategorie1 {
+public class ControllerMemoAjoutPersonnes {
 	
 	
 	// Composants de la vue
 
 	@FXML
-	private ListView<Categorie>	listView;
+	private ListView<AdminAppli>	listView;
 	@FXML
-	private Button				buttonEtat;
+	private Button				buttonAjouter;
 
 
 	// Autres champs
@@ -34,9 +29,7 @@ public class ControllerEtatPersonnesParCategorie1 {
 	@Inject
 	private IManagerGui			managerGui;
 	@Inject
-	private ManagerReport		managerReport;
-	@Inject
-	private ModelCategorie		modelCategorie;
+	private ModelMemo			modelMemo;
 	
 	
 	// Initialisation du Controller
@@ -45,7 +38,7 @@ public class ControllerEtatPersonnesParCategorie1 {
 	private void initialize() {
 
 		// Data binding
-		listView.setItems( modelCategorie.getListe() );
+		listView.setItems( modelMemo.getPersonnesPourDialogAjout() );
 		
 		// Configuraiton des boutons
 		listView.getSelectionModel().selectedItemProperty().addListener(
@@ -53,12 +46,12 @@ public class ControllerEtatPersonnesParCategorie1 {
 					configurerBoutons();
 		});
 		configurerBoutons();
-		
+
+		listView.getSelectionModel().setSelectionMode( SelectionMode.MULTIPLE );
 	}
 	
 	public void refresh() {
-		modelCategorie.actualiserListe();
-		UtilFX.selectInListView( listView, modelCategorie.getCourant() );
+		modelMemo.actualiserListePersonnesPourDialogAjout();;
 		listView.requestFocus();
 	}
 
@@ -69,12 +62,18 @@ public class ControllerEtatPersonnesParCategorie1 {
 	private void doFermer() {
 		managerGui.closeStage();
 	}
-
+	
 	@FXML
-	private void doEtat() {
-		Map<String, Object> params = new HashMap<>();
-		params.put( "idCategorie", listView.getSelectionModel().getSelectedItem().getId() );
-		managerReport.showViewer( EnumReport.PersonnesParCategorie1, params);
+	private void doAjouter() {
+//	    Personne itemChoisi = listView.getSelectionModel().getSelectedItem();
+//	    if ( itemChoisi != null  ) {
+//	        modelMemo.ajouterPersonne( itemChoisi );
+//	        managerGui.closeStage();
+//	    }
+		for ( AdminAppli item : listView.getSelectionModel().getSelectedItems() ) {
+			modelMemo.ajouterPersonne( item );
+		}
+		managerGui.closeStage();	
 	}
 	
 	
@@ -88,7 +87,7 @@ public class ControllerEtatPersonnesParCategorie1 {
 				if ( listView.getSelectionModel().getSelectedIndex() == -1 ) {
 					managerGui.showDialogError( "Aucun élément n'est sélectionné dans la liste.");
 				} else {
-					doEtat();
+					doAjouter();
 				}
 			}
 		}
@@ -109,9 +108,9 @@ public class ControllerEtatPersonnesParCategorie1 {
 	private void configurerBoutons() {
 		
     	if( listView.getSelectionModel().getSelectedItems().isEmpty() ) {
-			buttonEtat.setDisable(true);
+			buttonAjouter.setDisable(true);
 		} else {
-			buttonEtat.setDisable(false);
+			buttonAjouter.setDisable(false);
 		}
 	}
 

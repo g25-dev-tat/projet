@@ -1,7 +1,8 @@
-package projet.view.memo;
+package projet.view.participant;
 
 import javax.inject.Inject;
 
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -9,87 +10,73 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import jfox.javafx.util.UtilFX;
 import jfox.javafx.view.IManagerGui;
-import projet.data.Memo;
+import projet.data.AdminAppli;
 import projet.view.EnumView;
 
 
-public class ControllerMemoListe {
+public class ControllerPersonneListe  {
 	
 	
 	// Composants de la vue
-
+	
 	@FXML
-	private ListView<Memo>		listView;
+	private ListView<AdminAppli>	listView;
 	@FXML
 	private Button				buttonModifier;
 	@FXML
 	private Button				buttonSupprimer;
-
-
+	
+	
 	// Autres champs
 	
 	@Inject
 	private IManagerGui			managerGui;
 	@Inject
-	private ModelMemo			modelMemo;
+	private ModelPersonne		modelPersonne;
 	
 	
-	// Initialisation du Controller
+	// Initialisation du controller
 
 	@FXML
 	private void initialize() {
-
-		// Data binding
-		listView.setItems( modelMemo.getListe() );
 		
-		listView.setCellFactory(  UtilFX.cellFactory( item -> item.getTitre() ));
+		// Data binding
+		listView.setItems( modelPersonne.getListe() );
 		
 		// Configuraiton des boutons
-		listView.getSelectionModel().selectedItemProperty().addListener(
-				(obs, oldVal, newVal) -> {
-					configurerBoutons();
+		listView.getSelectionModel().getSelectedItems().addListener( 
+		        (ListChangeListener<AdminAppli>) (c) -> {
+		        	configurerBoutons();
 		});
-		configurerBoutons();
-
+    	configurerBoutons();
 	}
 	
 	public void refresh() {
-		modelMemo.actualiserListe();
-		UtilFX.selectInListView( listView, modelMemo.getCourant() );
+		modelPersonne.actualiserListe();
+		UtilFX.selectInListView(listView, modelPersonne.getCourant() );
 		listView.requestFocus();
 	}
-
+	
 	
 	// Actions
 	
 	@FXML
 	private void doAjouter() {
-		modelMemo.preparerAjouter();;
-		managerGui.showView( EnumView.MemoForm );
+		modelPersonne.preparerAjouter();
+		managerGui.showView( EnumView.PersonneForm );
 	}
-
+	
 	@FXML
 	private void doModifier() {
-		Memo item = listView.getSelectionModel().getSelectedItem();
-		if ( item == null ) {
-			managerGui.showDialogError( "Aucun élément n'est sélectionné dans la liste.");
-		} else {
-			modelMemo.preparerModifier(item);
-			managerGui.showView( EnumView.MemoForm );
-		}
+		modelPersonne.preparerModifier( listView.getSelectionModel().getSelectedItem() );
+		managerGui.showView( EnumView.PersonneForm );
 	}
-
+	
 	@FXML
 	private void doSupprimer() {
-		Memo item = listView.getSelectionModel().getSelectedItem();
-		if ( item == null ) {
-			managerGui.showDialogError( "Aucun élément n'est sélectionné dans la liste.");
-		} else {
-			boolean reponse = managerGui.showDialogConfirm( "Confirmez-vous la suppresion ?" );
-			if ( reponse ) {
-				modelMemo.supprimer( item );
-				refresh();
-			}
+		if ( managerGui.showDialogConfirm("Etes-vous sûr de voulir supprimer cette personne ?" ) ) {
+			modelPersonne.supprimer( listView.getSelectionModel().getSelectedItem() );
+			refresh();
 		}
 	}
 	
@@ -114,7 +101,6 @@ public class ControllerMemoListe {
 	// Méthodes auxiliaires
 	
 	private void configurerBoutons() {
-		
     	if( listView.getSelectionModel().getSelectedItems().isEmpty() ) {
 			buttonModifier.setDisable(true);
 			buttonSupprimer.setDisable(true);
@@ -123,5 +109,5 @@ public class ControllerMemoListe {
 			buttonSupprimer.setDisable(false);
 		}
 	}
-
+	
 }

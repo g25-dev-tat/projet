@@ -14,7 +14,7 @@ import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import jfox.dao.jdbc.UtilJdbc;
-import projet.data.Compte;
+import projet.data.Participant;
 
 
 public class DaoCompte2 {
@@ -28,7 +28,7 @@ public class DaoCompte2 {
 	
 	// Actions
 
-	public int inserer( Compte compte )  {
+	public int inserer( Participant compte )  {
 
 		Connection			cn		= null;
 		CallableStatement	stmt	= null;
@@ -65,7 +65,7 @@ public class DaoCompte2 {
 	}
 	
 
-	public void modifier( Compte compte )  {
+	public void modifier( Participant compte )  {
 
 		Connection			cn		= null;
 		CallableStatement	stmt	= null;
@@ -119,7 +119,7 @@ public class DaoCompte2 {
 	}
 	
 
-	public Compte retrouver( int idCompte )  {
+	public Participant retrouver( int idCompte )  {
 
 		Connection			cn		= null;
 		CallableStatement	stmt	= null;
@@ -147,7 +147,7 @@ public class DaoCompte2 {
 	}
 	
 
-	public List<Compte> listerTout()   {
+	public List<Participant> listerTout()   {
 
 		Connection			cn		= null;
 		CallableStatement	stmt	= null;
@@ -161,7 +161,7 @@ public class DaoCompte2 {
 			stmt = cn.prepareCall( sql );
 			rs = stmt.executeQuery();
 
-			List<Compte> comptes = new ArrayList<>();
+			List<Participant> comptes = new ArrayList<>();
 			while ( rs.next() ) {
 				comptes.add( construireCompte(rs) );
 			}
@@ -175,7 +175,7 @@ public class DaoCompte2 {
 	}
 
 
-	public Compte validerAuthentification( String pseudo, String motDePasse )  {
+	public Participant validerAuthentification( String pseudo, String motDePasse )  {
 		
 		Connection			cn		= null;
 		CallableStatement	stmt	= null;
@@ -234,8 +234,8 @@ public class DaoCompte2 {
 	
 	// Méthodes auxiliaires
 	
-	private Compte construireCompte( ResultSet rs ) throws SQLException {
-		Compte compte = new Compte();
+	private Participant construireCompte( ResultSet rs ) throws SQLException {
+		Participant compte = new Participant();
 		compte.setId( rs.getObject( "Id", Integer.class ) );
 		compte.setNom( rs.getObject( "Nom", String.class ) );
 		compte.setPrenom( rs.getObject( "Prenom", String.class ) );

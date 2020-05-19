@@ -1,4 +1,4 @@
-package projet.view.personne;
+package projet.view.participant;
 
 import javax.inject.Inject;
 
@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.util.converter.IntegerStringConverter;
 import jfox.javafx.view.IManagerGui;
-import projet.data.Categorie;
+import projet.data.Benevole;
 import projet.view.EnumView;
 
 
@@ -36,7 +36,7 @@ public class ControllerCategorieForm {
 
 		// Data binding
 		
-		Categorie courant = modelCategorie.getCourant();
+		Benevole courant = modelCategorie.getCourant();
 		textFieldId.textProperty().bindBidirectional( courant.idProperty(), new IntegerStringConverter()  );
 		textFieldLibelle.textProperty().bindBidirectional( courant.libelleProperty()  );
 	}

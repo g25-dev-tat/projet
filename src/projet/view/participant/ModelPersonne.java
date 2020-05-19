@@ -1,4 +1,4 @@
-package projet.view.personne;
+package projet.view.participant;
 
 import javax.inject.Inject;
 
@@ -8,9 +8,9 @@ import jfox.commun.exception.ExceptionValidation;
 import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
 import projet.dao.DaoPersonne;
-import projet.data.Categorie;
-import projet.data.Personne;
-import projet.data.Telephone;
+import projet.data.Benevole;
+import projet.data.AdminAppli;
+import projet.data.Course;
 
 
 public class ModelPersonne {
@@ -18,9 +18,9 @@ public class ModelPersonne {
 	
 	// Données observables 
 	
-	private final ObservableList<Personne> liste = FXCollections.observableArrayList();
+	private final ObservableList<AdminAppli> liste = FXCollections.observableArrayList();
 	
-	private final Personne		courant = new Personne();
+	private final AdminAppli		courant = new AdminAppli();
 	
 	
 	// Autres champs
@@ -35,15 +35,15 @@ public class ModelPersonne {
 	
 	// Getters 
 	
-	public ObservableList<Personne> getListe() {
+	public ObservableList<AdminAppli> getListe() {
 		return liste;
 	}
 	
-	public Personne getCourant() {
+	public AdminAppli getCourant() {
 		return courant;
 	}
 	
-	public ObservableList<Categorie> getCategories() {
+	public ObservableList<Benevole> getCategories() {
 		return modelCategorie.getListe();
 	}
 
@@ -59,11 +59,11 @@ public class ModelPersonne {
 	
 	public void preparerAjouter() {
 		modelCategorie.actualiserListe();
-		mapper.update( courant, new Personne() );
+		mapper.update( courant, new AdminAppli() );
 	}
 	
 
-	public void preparerModifier( Personne item ) {
+	public void preparerModifier( AdminAppli item ) {
 		modelCategorie.actualiserListe();
 		mapper.update( courant, daoPersonne.retrouver( item.getId() ) );
 	}
@@ -108,18 +108,18 @@ public class ModelPersonne {
 	}
 	
 
-	public void supprimer( Personne item ) {
+	public void supprimer( AdminAppli item ) {
 		daoPersonne.supprimer( item.getId() );
 		mapper.update( courant, UtilFX.findNext( liste, item ) );
 	}
 	
 
 	public void ajouterTelephone() {
-		courant.getTelephones().add( new Telephone() );
+		courant.getTelephones().add( new Course() );
 	}
 	
 
-	public void supprimerTelephone( Telephone telephone )  {
+	public void supprimerTelephone( Course telephone )  {
 		courant.getTelephones().remove( telephone );
 	}
 	

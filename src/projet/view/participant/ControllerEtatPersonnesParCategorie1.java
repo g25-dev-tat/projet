@@ -1,27 +1,32 @@
-package projet.view.memo;
+package projet.view.participant;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import jfox.javafx.util.UtilFX;
 import jfox.javafx.view.IManagerGui;
-import projet.data.Personne;
+import projet.data.Benevole;
+import projet.report.EnumReport;
+import projet.report.ManagerReport;
 
 
-public class ControllerMemoAjoutPersonnes {
+public class ControllerEtatPersonnesParCategorie1 {
 	
 	
 	// Composants de la vue
 
 	@FXML
-	private ListView<Personne>	listView;
+	private ListView<Benevole>	listView;
 	@FXML
-	private Button				buttonAjouter;
+	private Button				buttonEtat;
 
 
 	// Autres champs
@@ -29,7 +34,9 @@ public class ControllerMemoAjoutPersonnes {
 	@Inject
 	private IManagerGui			managerGui;
 	@Inject
-	private ModelMemo			modelMemo;
+	private ManagerReport		managerReport;
+	@Inject
+	private ModelCategorie		modelCategorie;
 	
 	
 	// Initialisation du Controller
@@ -38,7 +45,7 @@ public class ControllerMemoAjoutPersonnes {
 	private void initialize() {
 
 		// Data binding
-		listView.setItems( modelMemo.getPersonnesPourDialogAjout() );
+		listView.setItems( modelCategorie.getListe() );
 		
 		// Configuraiton des boutons
 		listView.getSelectionModel().selectedItemProperty().addListener(
@@ -46,12 +53,12 @@ public class ControllerMemoAjoutPersonnes {
 					configurerBoutons();
 		});
 		configurerBoutons();
-
-		listView.getSelectionModel().setSelectionMode( SelectionMode.MULTIPLE );
+		
 	}
 	
 	public void refresh() {
-		modelMemo.actualiserListePersonnesPourDialogAjout();;
+		modelCategorie.actualiserListe();
+		UtilFX.selectInListView( listView, modelCategorie.getCourant() );
 		listView.requestFocus();
 	}
 
@@ -62,18 +69,12 @@ public class ControllerMemoAjoutPersonnes {
 	private void doFermer() {
 		managerGui.closeStage();
 	}
-	
+
 	@FXML
-	private void doAjouter() {
-//	    Personne itemChoisi = listView.getSelectionModel().getSelectedItem();
-//	    if ( itemChoisi != null  ) {
-//	        modelMemo.ajouterPersonne( itemChoisi );
-//	        managerGui.closeStage();
-//	    }
-		for ( Personne item : listView.getSelectionModel().getSelectedItems() ) {
-			modelMemo.ajouterPersonne( item );
-		}
-		managerGui.closeStage();	
+	private void doEtat() {
+		Map<String, Object> params = new HashMap<>();
+		params.put( "idCategorie", listView.getSelectionModel().getSelectedItem().getId() );
+		managerReport.showViewer( EnumReport.PersonnesParCategorie1, params);
 	}
 	
 	
@@ -87,7 +88,7 @@ public class ControllerMemoAjoutPersonnes {
 				if ( listView.getSelectionModel().getSelectedIndex() == -1 ) {
 					managerGui.showDialogError( "Aucun élément n'est sélectionné dans la liste.");
 				} else {
-					doAjouter();
+					doEtat();
 				}
 			}
 		}
@@ -108,9 +109,9 @@ public class ControllerMemoAjoutPersonnes {
 	private void configurerBoutons() {
 		
     	if( listView.getSelectionModel().getSelectedItems().isEmpty() ) {
-			buttonAjouter.setDisable(true);
+			buttonEtat.setDisable(true);
 		} else {
-			buttonAjouter.setDisable(false);
+			buttonEtat.setDisable(false);
 		}
 	}
 

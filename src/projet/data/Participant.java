@@ -12,7 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 
-public class Compte  {
+public class Participant  {
 
 	
 	// Données observables
@@ -30,10 +30,10 @@ public class Compte  {
 	
 	// Constructeurs
 	
-	public Compte() {
+	public Participant() {
 	}
 
-	public Compte(int id, String nom, String prenom, int telephone, String adresse, String email, String login, String pass) {
+	public Participant(int id, String nom, String prenom, int telephone, String adresse, String email, String login, String pass) {
 		setId(id);
 		setNom(nom);
 		setPrenom(prenom);
@@ -199,7 +199,7 @@ public class Compte  {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Compte other = (Compte) obj;
+		Participant other = (Participant) obj;
 		return Objects.equals(id.getValue(), other.id.getValue() );
 	}
 	

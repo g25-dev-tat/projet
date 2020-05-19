@@ -4,26 +4,26 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
-import projet.data.Categorie;
-import projet.data.Compte;
-import projet.data.Memo;
-import projet.data.Personne;
-import projet.data.Service;
+import projet.data.Benevole;
+import projet.data.Participant;
+import projet.data.Competition;
+import projet.data.AdminAppli;
+import projet.data.Equipe;
 
 
 @Mapper
 public interface IMapper {  
 	
-	Compte update( @MappingTarget Compte target, Compte source  );
+	Participant update( @MappingTarget Participant target, Participant source  );
 	
-	Categorie update( @MappingTarget Categorie target, Categorie source );
+	Benevole update( @MappingTarget Benevole target, Benevole source );
 
 	@Mapping( target="categorie", expression="java( source.getCategorie() )" )
-	Personne update( @MappingTarget Personne target, Personne source );
+	AdminAppli update( @MappingTarget AdminAppli target, AdminAppli source );
 
 	@Mapping( target="categorie", expression="java( source.getCategorie() )" )
-	Memo update( @MappingTarget Memo target, Memo source );
+	Competition update( @MappingTarget Competition target, Competition source );
 
-	Service update( @MappingTarget Service target, Service source );
+	Equipe update( @MappingTarget Equipe target, Equipe source );
 	
 }

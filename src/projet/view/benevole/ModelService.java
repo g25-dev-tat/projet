@@ -1,4 +1,4 @@
-package projet.view.service;
+package projet.view.benevole;
 
 import javax.inject.Inject;
 
@@ -8,7 +8,7 @@ import jfox.commun.exception.ExceptionValidation;
 import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
 import projet.dao.DaoService;
-import projet.data.Service;
+import projet.data.Equipe;
 
 
 public class ModelService  {
@@ -16,9 +16,9 @@ public class ModelService  {
 	
 	// Données observables 
 	
-	private final ObservableList<Service> liste = FXCollections.observableArrayList(); 
+	private final ObservableList<Equipe> liste = FXCollections.observableArrayList(); 
 	
-	private final Service	courant = new Service();
+	private final Equipe	courant = new Equipe();
 
 	
 	// Autres champs
@@ -30,11 +30,11 @@ public class ModelService  {
 	
 	// Getters 
 	
-	public ObservableList<Service> getListe() {
+	public ObservableList<Equipe> getListe() {
 		return liste;
 	}
 	
-	public Service getCourant() {
+	public Equipe getCourant() {
 		return courant;
 	}
 	
@@ -49,10 +49,10 @@ public class ModelService  {
 	// Actions
 	
 	public void preparerAjouter() {
-		mapper.update( courant, new Service() );
+		mapper.update( courant, new Equipe() );
 	}
 	
-	public void preparerModifier( Service item ) {
+	public void preparerModifier( Equipe item ) {
 		mapper.update( courant, daoService.retrouver( item.getId() ) );
 	}
 	
@@ -93,7 +93,7 @@ public class ModelService  {
 	}
 	
 	
-	public void supprimer( Service item ) {
+	public void supprimer( Equipe item ) {
 		
 		daoService.supprimer( item.getId() );
 		System.out.println( UtilFX.findNext( liste, item ) );

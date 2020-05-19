@@ -1,4 +1,4 @@
-package projet.view.personne;
+package projet.view.participant;
 
 import javax.inject.Inject;
 
@@ -10,7 +10,7 @@ import projet.commun.IMapper;
 import projet.dao.DaoCategorie;
 import projet.dao.DaoMemo;
 import projet.dao.DaoPersonne;
-import projet.data.Categorie;
+import projet.data.Benevole;
 
 
 public class ModelCategorie  {
@@ -18,9 +18,9 @@ public class ModelCategorie  {
 	
 	// Données observables 
 	
-	private final ObservableList<Categorie> liste = FXCollections.observableArrayList(); 
+	private final ObservableList<Benevole> liste = FXCollections.observableArrayList(); 
 	
-	private final Categorie	courant = new Categorie();
+	private final Benevole	courant = new Benevole();
 
 	
 	// Autres champs
@@ -36,11 +36,11 @@ public class ModelCategorie  {
 	
 	// Getters 
 	
-	public ObservableList<Categorie> getListe() {
+	public ObservableList<Benevole> getListe() {
 		return liste;
 	}
 	
-	public Categorie getCourant() {
+	public Benevole getCourant() {
 		return courant;
 	}
 	
@@ -55,10 +55,10 @@ public class ModelCategorie  {
 	// Actions
 	
 	public void preparerAjouter() {
-		mapper.update( courant, new Categorie() );
+		mapper.update( courant, new Benevole() );
 	}
 	
-	public void preparerModifier( Categorie item ) {
+	public void preparerModifier( Benevole item ) {
 		mapper.update( courant, daoCategorie.retrouver( item.getId() ) );
 	}
 	
@@ -92,7 +92,7 @@ public class ModelCategorie  {
 	}
 	
 	
-	public void supprimer( Categorie item ) {
+	public void supprimer( Benevole item ) {
 		
 		// Vérifie l'abence de personnes rattachées à la catégorie
 		if ( daoPersonne.compterPourCategorie( item.getId() ) != 0 ) {
