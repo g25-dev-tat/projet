@@ -18,10 +18,10 @@ public interface IMapper {
 	
 	Benevole update( @MappingTarget Benevole target, Benevole source );
 
-	@Mapping( target="categorie", expression="java( source.getCategorie() )" )
+	@Mapping( target="login", expression="java( source.getLogin() )" )
 	AdminAppli update( @MappingTarget AdminAppli target, AdminAppli source );
 
-	@Mapping( target="categorie", expression="java( source.getCategorie() )" )
+	@Mapping( target="id", expression="java( source.getId() )" )
 	Competition update( @MappingTarget Competition target, Competition source );
 
 	Equipe update( @MappingTarget Equipe target, Equipe source );

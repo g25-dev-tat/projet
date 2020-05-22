@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import jfox.dao.jdbc.UtilJdbc;
-import projet.data.Participant;
+import projet.data.AdminAppli;
 
 
 public class DaoCompte {
@@ -28,7 +28,7 @@ public class DaoCompte {
 	
 	// Actions
 
-	public int inserer( Participant compte )  {
+	public int inserer(AdminAppli compte )  {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -69,7 +69,7 @@ public class DaoCompte {
 	}
 	
 
-	public void modifier( Participant compte )  {
+	public void modifier( AdminAppli compte )  {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -130,7 +130,7 @@ public class DaoCompte {
 	}
 	
 
-	public Participant retrouver( int idCompte )  {
+	public AdminAppli retrouver( int idCompte )  {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -158,7 +158,7 @@ public class DaoCompte {
 	}
 	
 
-	public List<Participant> listerTout()   {
+	public List<AdminAppli> listerTout()   {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -172,7 +172,7 @@ public class DaoCompte {
 			stmt = cn.prepareStatement( sql );
 			rs = stmt.executeQuery();
 
-			List<Participant> comptes = new ArrayList<>();
+			List<AdminAppli> comptes = new ArrayList<>();
 			while ( rs.next() ) {
 				comptes.add( construireCompte(rs) );
 			}
@@ -186,7 +186,7 @@ public class DaoCompte {
 	}
 
 
-	public Participant validerAuthentification( String login, String pass )  {
+	public AdminAppli validerAuthentification( String login, String pass )  {
 		
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -247,8 +247,8 @@ public class DaoCompte {
 	
 	// Méthodes auxiliaires
 	
-	private Participant construireCompte( ResultSet rs ) throws SQLException {
-		Participant compte = new Participant();
+	private AdminAppli construireCompte( ResultSet rs ) throws SQLException {
+		AdminAppli compte = new AdminAppli();
 		compte.setId( rs.getObject( "Id", Integer.class ) );
 		compte.setPrenom( rs.getObject( "Prenom", String.class ) );
 		compte.setTelephone( rs.getObject( "Telephone", Integer.class ) );

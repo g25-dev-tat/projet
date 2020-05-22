@@ -17,12 +17,12 @@ import javafx.scene.image.Image;
 import jfox.commun.exception.ExceptionValidation;
 import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
-import projet.dao.DaoMemo;
-import projet.dao.DaoPersonne;
+import projet.dao.DaoCompetition;
+import projet.dao.DaoEquipe;
 import projet.data.Benevole;
 import projet.data.Competition;
 import projet.data.AdminAppli;
-import projet.view.participant.ModelCategorie;
+import projet.view.participant.ModelEquipe;
 import projet.view.systeme.ModelConfig;
 
 
@@ -46,11 +46,11 @@ public class ModelMemo  {
     @Inject
 	private IMapper			mapper;
     @Inject
-	private DaoMemo			daoMemo;
+	private DaoCompetition			daoMemo;
     @Inject
-    private ModelCategorie	modelCategorie;
+    private ModelEquipe	modelCategorie;
     @Inject
-	private DaoPersonne		daoPersonne;
+	private DaoEquipe		daoPersonne;
     @Inject
     private ModelConfig		modelConfig;
 	

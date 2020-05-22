@@ -12,11 +12,11 @@ import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import jfox.dao.jdbc.UtilJdbc;
-import projet.data.AdminAppli;
+import projet.data.Benevole;
 import projet.data.Course;
 
 
-public class DaoTelephone {
+public class DaoBenevole {
 
 	
 	// Champs
@@ -27,7 +27,7 @@ public class DaoTelephone {
 	
 	// Actions
 
-	public void insererPourPersonne( AdminAppli personne ) {
+	public void insererUnBenevole(Benevole benevol) {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -36,19 +36,26 @@ public class DaoTelephone {
 
 		try {
 			cn = dataSource.getConnection();
-			sql = "INSERT INTO telephone ( idpersonne, libelle, numero ) VALUES (?,?,?)";
-			stmt = cn.prepareStatement( sql, Statement.RETURN_GENERATED_KEYS );
-			for( Course telephone : personne.getTelephones() ) {
-				stmt.setObject( 1, personne.getId() );
-				stmt.setObject( 2, telephone.getLibelle() );
-				stmt.setObject( 3, telephone.getNumero() );
+			sql = "INSERT INTO benevole (id, nom, prenom, telephone, email, adresse, commentaire, permisC, dateNaiss) VALUES (?,?,?,?,?,?,?,?,?)";
+			stmt = cn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS );
+			
+				stmt.setObject(1, benevol.getNom());
+				stmt.setObject(2, benevol.getPrenom());
+				stmt.setObject(3, benevol.getTelephone());
+				stmt.setObject(4, benevol.getEmail());
+				stmt.setObject(5, benevol.getAdresse());
+				stmt.setObject(6, benevol.getCommentaire());
+				stmt.setObject(7, benevol.isPermisC());
+				stmt.setObject(8, benevol.getDateNaiss());
 				stmt.executeUpdate();
 
 				// Récupère l'identifiant généré par le SGBD
 				rs = stmt.getGeneratedKeys();
 				rs.next();
-				telephone.setId( rs.getObject( 1, Integer.class) );
-			}
+				benevol.setId( rs.getObject( 1, Integer.class) );
+				
+			//for( Course telephone : benevole.getTelephone() ) {
+			//}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} finally {
@@ -57,7 +64,7 @@ public class DaoTelephone {
 	}
 
 
-	public void modifierPourPersonne( AdminAppli personne ) {
+	public void modifierUnBenevole(Benevole benevol) {
 
 		Connection			cn			= null;
 		PreparedStatement	stmtDelete	= null;
@@ -69,11 +76,11 @@ public class DaoTelephone {
 		try {
 			cn = dataSource.getConnection();
 
-			sql = "DELETE FROM telephone WHERE idtelephone = ?";
+			sql = "DELETE FROM benevole WHERE id = ?";
 			stmtDelete = cn.prepareStatement( sql );
-			for ( Course telephone : listerPourPersonne(personne) ) {
-				if ( ! personne.getTelephones().contains( telephone ) ) {
-					stmtDelete.setObject( 1, telephone.getId() );
+			for ( Benevole ben : listerPourPersonne(personne) ) {
+				if ( ! personne.getTelephones().contains( ben ) ) {
+					stmtDelete.setObject( 1, ben.getId() );
 					stmtDelete.executeUpdate();
 				}
 			}
@@ -131,7 +138,7 @@ public class DaoTelephone {
 	}
 
 
-	public List<Course> listerPourPersonne( AdminAppli personne ) {
+	public List<Benevole> listerBenevole(Benevole benevol) {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -168,6 +175,36 @@ public class DaoTelephone {
 		telephone.setLibelle(rs.getObject( "libelle", String.class ));
 		telephone.setNumero(rs.getObject( "numero", String.class ));
 		return telephone;
+	}
+
+
+	public Benevole listerTout() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public Benevole retrouver(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public void supprimer(Integer id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public Integer inserer(Benevole courant) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public void modifier(Benevole courant) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

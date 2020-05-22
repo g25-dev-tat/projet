@@ -10,6 +10,7 @@ import javafx.beans.property.Property;
 import javafx.beans.property.SimpleObjectProperty;
 import jfox.commun.exception.ExceptionValidation;
 import projet.dao.DaoCompte2;
+import projet.data.AdminAppli;
 import projet.data.Participant;
 
 
@@ -22,10 +23,10 @@ public class ModelConnexion {
 	// Données observables 
 	
 	// Vue connexion
-	private final Participant courant = new Participant();
+	private final AdminAppli courant = new AdminAppli();
 
 	// Compte connecté
-	private final Property<Participant>	compteActif = new SimpleObjectProperty<>();
+	private final Property<AdminAppli>	compteActif = new SimpleObjectProperty<>();
 
 	
 	// Autres champs
@@ -35,15 +36,15 @@ public class ModelConnexion {
 
 	// Getters 
 	
-	public Participant getCourant() {
+	public AdminAppli getCourant() {
 		return courant;
 	}
 	
-	public Property<Participant> compteActifProperty() {
+	public Property<AdminAppli> compteActifProperty() {
 		return compteActif;
 	}
 	
-	public Participant getCompteActif() {
+	public AdminAppli getCompteActif() {
 		return compteActif.getValue();
 	}
 	
@@ -54,6 +55,9 @@ public class ModelConnexion {
 	public void init() {
 		courant.setLogin( "Whitley" );
 		courant.setPass( "Rogan54321" );
+		
+		//courant.setLogin( "Rivers" );
+		//courant.setPass( "Reed654321" );
 	}
 	
 	
@@ -62,13 +66,13 @@ public class ModelConnexion {
 
 	public void ouvrirSessionUtilisateur() {
 
-		Participant compte = daoCompte.validerAuthentification(
+		AdminAppli compte = daoCompte.validerAuthentification(
 					courant.loginProperty().getValue(), courant.passProperty().getValue() );
 		
 		if( compte == null ) {
 			throw new ExceptionValidation( "Pseudo ou mot de passe invalide." );
 		} else {
-			Platform.runLater( () -> compteActif.setValue( compte ) );
+			Platform.runLater( () -> compteActif.setValue(compte) );
 		}
 	}
 	

@@ -15,7 +15,7 @@ import jfox.dao.jdbc.UtilJdbc;
 import projet.data.Equipe;
 
 
-public class DaoService {
+public class DaoCourse {
 
 	
 	// Champs

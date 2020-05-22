@@ -5,7 +5,7 @@ import javax.inject.Inject;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import jfox.javafx.util.UtilFX;
-import projet.dao.DaoService;
+import projet.dao.DaoCourse;
 
 
 public class ControllerTestDaoService {
@@ -20,7 +20,7 @@ public class ControllerTestDaoService {
 	// Autres champs
 	
 	@Inject
-	private DaoService			dao;
+	private DaoCourse			dao;
 	
 	private final int		id = 1;	
 	

@@ -15,7 +15,7 @@ import jfox.dao.jdbc.UtilJdbc;
 import projet.data.Benevole;
 
 
-public class DaoCategorie {
+public class DaoParticipant {
 
 	
 	// Champs

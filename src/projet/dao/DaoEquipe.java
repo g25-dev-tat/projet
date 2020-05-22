@@ -15,7 +15,7 @@ import jfox.dao.jdbc.UtilJdbc;
 import projet.data.AdminAppli;
 
 
-public class DaoPersonne {
+public class DaoEquipe {
 
 	
 	// Champs
@@ -23,9 +23,9 @@ public class DaoPersonne {
 	@Inject
 	private DataSource		dataSource;
 	@Inject
-	private DaoTelephone	daoTelephone;
+	private DaoBenevole	daoTelephone;
 	@Inject
-	private DaoCategorie	daoCategorie;
+	private DaoParticipant	daoCategorie;
 
 	
 	// Actions

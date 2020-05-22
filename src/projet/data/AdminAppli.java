@@ -2,7 +2,6 @@ package projet.data;
 
 import java.util.Objects;
 
-import javafx.beans.Observable;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -23,6 +22,7 @@ public class AdminAppli {
 	private final StringProperty		adresse		= new SimpleStringProperty();
 	private final StringProperty		login		= new SimpleStringProperty();
 	private final StringProperty		pass		= new SimpleStringProperty();
+	private final ObservableList<String> roles = FXCollections.observableArrayList();
 	
 	
 	// Constructeurs
@@ -44,6 +44,23 @@ public class AdminAppli {
 	
 	
 	// Getters & setters
+	
+	public final ObservableList<String> getRoles() {
+		return this.roles;
+	}
+
+	
+	public boolean isInRole( String role ) {
+		
+		if ( role != null ) {
+			for ( String r : roles ) {
+				if ( role.equals( r ) ) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
 	public final Property<Integer> idProperty() {
 		return this.id;

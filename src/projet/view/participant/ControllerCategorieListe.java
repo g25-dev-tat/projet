@@ -31,7 +31,7 @@ public class ControllerCategorieListe {
 	@Inject
 	private IManagerGui			managerGui;
 	@Inject
-	private ModelCategorie		modelCategorie;
+	private ModelEquipe		modelCategorie;
 	
 	
 	// Initialisation du Controller

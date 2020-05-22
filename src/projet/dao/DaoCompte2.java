@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import jfox.dao.jdbc.UtilJdbc;
+import projet.data.AdminAppli;
 import projet.data.Participant;
 
 
@@ -28,7 +29,7 @@ public class DaoCompte2 {
 	
 	// Actions
 
-	public int inserer( Participant compte )  {
+	public int inserer( AdminAppli compte )  {
 
 		Connection			cn		= null;
 		CallableStatement	stmt	= null;
@@ -65,7 +66,7 @@ public class DaoCompte2 {
 	}
 	
 
-	public void modifier( Participant compte )  {
+	public void modifier( AdminAppli compte )  {
 
 		Connection			cn		= null;
 		CallableStatement	stmt	= null;
@@ -119,7 +120,7 @@ public class DaoCompte2 {
 	}
 	
 
-	public Participant retrouver( int idCompte )  {
+	public AdminAppli retrouver( int idCompte )  {
 
 		Connection			cn		= null;
 		CallableStatement	stmt	= null;
@@ -147,7 +148,7 @@ public class DaoCompte2 {
 	}
 	
 
-	public List<Participant> listerTout()   {
+	public List<AdminAppli> listerTout()   {
 
 		Connection			cn		= null;
 		CallableStatement	stmt	= null;
@@ -161,7 +162,7 @@ public class DaoCompte2 {
 			stmt = cn.prepareCall( sql );
 			rs = stmt.executeQuery();
 
-			List<Participant> comptes = new ArrayList<>();
+			List<AdminAppli> comptes = new ArrayList<>();
 			while ( rs.next() ) {
 				comptes.add( construireCompte(rs) );
 			}
@@ -175,7 +176,7 @@ public class DaoCompte2 {
 	}
 
 
-	public Participant validerAuthentification( String pseudo, String motDePasse )  {
+	public AdminAppli validerAuthentification( String pseudo, String motDePasse )  {
 		
 		Connection			cn		= null;
 		CallableStatement	stmt	= null;
@@ -234,8 +235,8 @@ public class DaoCompte2 {
 	
 	// Méthodes auxiliaires
 	
-	private Participant construireCompte( ResultSet rs ) throws SQLException {
-		Participant compte = new Participant();
+	private AdminAppli construireCompte( ResultSet rs ) throws SQLException {
+		AdminAppli compte = new AdminAppli();
 		compte.setId( rs.getObject( "Id", Integer.class ) );
 		compte.setNom( rs.getObject( "Nom", String.class ) );
 		compte.setPrenom( rs.getObject( "Prenom", String.class ) );

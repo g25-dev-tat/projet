@@ -7,34 +7,34 @@ import javafx.collections.ObservableList;
 import jfox.commun.exception.ExceptionValidation;
 import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
-import projet.dao.DaoService;
-import projet.data.Equipe;
+import projet.dao.DaoBenevole;
+import projet.data.Benevole;
 
 
-public class ModelService  {
+public class ModelBenevole  {
 	
 	
 	// Données observables 
 	
-	private final ObservableList<Equipe> liste = FXCollections.observableArrayList(); 
+	private final ObservableList<Benevole> liste = FXCollections.observableArrayList(); 
 	
-	private final Equipe	courant = new Equipe();
+	private final Benevole courant = new Benevole();
 
 	
 	// Autres champs
     @Inject
 	private IMapper			mapper;
     @Inject
-	private DaoService		daoService;
+	private DaoBenevole		daoBenevole;
 	
 	
 	// Getters 
 	
-	public ObservableList<Equipe> getListe() {
+	public ObservableList<Benevole> getListe() {
 		return liste;
 	}
 	
-	public Equipe getCourant() {
+	public Benevole getCourant() {
 		return courant;
 	}
 	
@@ -42,18 +42,18 @@ public class ModelService  {
 	// Actualisations
 	
 	public void actualiserListe() {
-		liste.setAll( daoService.listerTout() );
+		liste.setAll( daoBenevole.listerTout() );
  	}
 
 
 	// Actions
 	
 	public void preparerAjouter() {
-		mapper.update( courant, new Equipe() );
+		mapper.update( courant, new Benevole() );
 	}
 	
-	public void preparerModifier( Equipe item ) {
-		mapper.update( courant, daoService.retrouver( item.getId() ) );
+	public void preparerModifier( Benevole item ) {
+		mapper.update( courant, daoBenevole.retrouver( item.getId() ) );
 	}
 	
 	
@@ -69,12 +69,12 @@ public class ModelService  {
 			message.append( "\nLe nom est trop long : 50 maxi." );
 		}
 
-		if( courant.getAnneeCreation() != null ) {
-			if ( courant.getAnneeCreation() < 1900  
-					|| courant.getAnneeCreation() > 2100 ) {
-				message.append( "\nValeur incorrecte pour l'année de création." );
-			}
-		}
+//		if( courant.getAnneeCreation() != null ) {
+//			if ( courant.getAnneeCreation() < 1900  
+//					|| courant.getAnneeCreation() > 2100 ) {
+//				message.append( "\nValeur incorrecte pour l'année de création." );
+//			}
+//		}
 		
 		if ( message.length() > 0 ) {
 			throw new ExceptionValidation( message.toString().substring(1) );
@@ -85,17 +85,17 @@ public class ModelService  {
 		
 		if ( courant.getId() == null ) {
 			// Insertion
-			courant.setId( daoService.inserer( courant ) );
+			courant.setId( daoBenevole.inserer( courant ) );
 		} else {
 			// modficiation
-			daoService.modifier( courant );
+			daoBenevole.modifier( courant );
 		}
 	}
 	
 	
-	public void supprimer( Equipe item ) {
+	public void supprimer(Benevole item ) {
 		
-		daoService.supprimer( item.getId() );
+		daoBenevole.supprimer( item.getId() );
 		System.out.println( UtilFX.findNext( liste, item ) );
 		mapper.update( courant, UtilFX.findNext( liste, item ) );
 	}

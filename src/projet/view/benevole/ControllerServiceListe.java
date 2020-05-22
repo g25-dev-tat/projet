@@ -31,7 +31,7 @@ public class ControllerServiceListe {
 	@Inject
 	private IManagerGui			managerGui;
 	@Inject
-	private ModelService		modelService;
+	private ModelBenevole		modelService;
 	
 	
 	// Initialisation du Controller

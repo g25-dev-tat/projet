@@ -2,9 +2,7 @@ package projet.data;
 
 import java.util.Objects;
 
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.Property;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -25,7 +23,6 @@ public class Participant  {
 	private final StringProperty	email 		= new SimpleStringProperty();
 	private final StringProperty	login 		= new SimpleStringProperty();
 	private final StringProperty	pass 		= new SimpleStringProperty();
-	private final ObservableList<String> roles = FXCollections.observableArrayList();
 	
 	
 	// Constructeurs
@@ -156,23 +153,6 @@ public class Participant  {
 
 	public final void setEmail(final String email) {
 		this.emailProperty().setValue(email);
-	}
-
-	public final ObservableList<String> getRoles() {
-		return this.roles;
-	}
-
-	
-	public boolean isInRole( String role ) {
-		
-		if ( role != null ) {
-			for ( String r : roles ) {
-				if ( role.equals( r ) ) {
-					return true;
-				}
-			}
-		}
-		return false;
 	}
 
 	

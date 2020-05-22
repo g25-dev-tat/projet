@@ -43,7 +43,7 @@ public class ControllerPersonneForm  {
 	@Inject
 	private IManagerGui			managerGui;
 	@Inject
-	private ModelPersonne		modelPersonne;
+	private ModelParticipant		modelPersonne;
     
 	
 	// Initialisation du controller

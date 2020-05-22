@@ -18,7 +18,7 @@ public final class Roles {
 			UTILISATEUR
 	) );
 
-	private static final String[]	 	libellés = new String[] {
+	private static final String[] libellés = new String[] {
 			"Administrateur",
 			"Utilisateur",
 	};

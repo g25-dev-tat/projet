@@ -17,7 +17,7 @@ import projet.data.Competition;
 import projet.data.AdminAppli;
 
 
-public class DaoMemo {
+public class DaoCompetition {
 
 	
 	// Champs
@@ -25,9 +25,9 @@ public class DaoMemo {
 	@Inject
 	private DataSource		dataSource;
 	@Inject
-	private DaoCategorie	daoCategorie;
+	private DaoParticipant	daoCategorie;
 	@Inject
-	private DaoPersonne		daoPersonne;
+	private DaoEquipe		daoPersonne;
 
 	
 	// Actions

@@ -7,13 +7,13 @@ import javafx.collections.ObservableList;
 import jfox.commun.exception.ExceptionValidation;
 import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
-import projet.dao.DaoCategorie;
-import projet.dao.DaoMemo;
-import projet.dao.DaoPersonne;
+import projet.dao.DaoParticipant;
+import projet.dao.DaoCompetition;
+import projet.dao.DaoEquipe;
 import projet.data.Benevole;
 
 
-public class ModelCategorie  {
+public class ModelEquipe  {
 	
 	
 	// Données observables 
@@ -27,11 +27,11 @@ public class ModelCategorie  {
     @Inject
 	private IMapper			mapper;
     @Inject
-	private DaoCategorie	daoCategorie;
+	private DaoParticipant	daoCategorie;
     @Inject
-    private DaoPersonne		daoPersonne;
+    private DaoEquipe		daoPersonne;
     @Inject
-    private DaoMemo			daoMemo;
+    private DaoCompetition			daoMemo;
 	
 	
 	// Getters 

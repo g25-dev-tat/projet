@@ -32,7 +32,7 @@ public class ControllerPersonneListe  {
 	@Inject
 	private IManagerGui			managerGui;
 	@Inject
-	private ModelPersonne		modelPersonne;
+	private ModelParticipant		modelPersonne;
 	
 	
 	// Initialisation du controller

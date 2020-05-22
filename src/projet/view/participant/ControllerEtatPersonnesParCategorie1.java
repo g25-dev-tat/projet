@@ -36,7 +36,7 @@ public class ControllerEtatPersonnesParCategorie1 {
 	@Inject
 	private ManagerReport		managerReport;
 	@Inject
-	private ModelCategorie		modelCategorie;
+	private ModelEquipe		modelCategorie;
 	
 	
 	// Initialisation du Controller

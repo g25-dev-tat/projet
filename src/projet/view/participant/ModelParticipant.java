@@ -7,13 +7,13 @@ import javafx.collections.ObservableList;
 import jfox.commun.exception.ExceptionValidation;
 import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
-import projet.dao.DaoPersonne;
+import projet.dao.DaoEquipe;
 import projet.data.Benevole;
 import projet.data.AdminAppli;
 import projet.data.Course;
 
 
-public class ModelPersonne {
+public class ModelParticipant {
 	
 	
 	// Données observables 
@@ -28,9 +28,9 @@ public class ModelPersonne {
     @Inject
 	private IMapper		        mapper;
     @Inject
-	private DaoPersonne			daoPersonne;
+	private DaoEquipe			daoPersonne;
 	@Inject
-    private ModelCategorie 		modelCategorie;
+    private ModelEquipe 		modelCategorie;
 	
 	
 	// Getters 

@@ -9,6 +9,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import jfox.javafx.view.IManagerGui;
 import projet.commun.Roles;
+import projet.data.AdminAppli;
 import projet.data.Participant;
 import projet.report.EnumReport;
 import projet.report.ManagerReport;
@@ -20,9 +21,12 @@ public class MenuBarAppli extends MenuBar {
 	
 	// Champs
 	
-	private Menu	menuDonnees;
-	private Menu	menuEtats;
-	private Menu	menuTests;
+	private Menu	menuBenevole;
+	private Menu	menuParticipant;
+	private Menu	menuCompet;
+	private Menu	menuSystem;
+	private Menu	menuHelp;
+	private Menu	menuUser;
 	
 	private MenuItem itemDeconnecter;
 
@@ -52,10 +56,11 @@ public class MenuBarAppli extends MenuBar {
 		
 		menu =  new Menu( "Système" );;
 		this.getMenus().add(menu);
+		menuSystem = menu;
 		
 		item = new MenuItem( "Se déconnecter" );
-		item.setOnAction(  (e) -> managerGui.showView( EnumView.Connexion )  );
-		menu.getItems().add( item );
+		item.setOnAction(  (e) -> managerGui.showView(EnumView.Connexion)  );
+		menu.getItems().add(item);
 		itemDeconnecter = item;
 		
 		item = new MenuItem( "Quitter" );
@@ -63,30 +68,42 @@ public class MenuBarAppli extends MenuBar {
 		menu.getItems().add( item );
 
 		
+		menu =  new Menu( "Gestion des Utilisateurs" );;
+		this.getMenus().add(menu);
+		menuUser = menu;
+		
+		
 		// Manu Données
 		
-		menu =  new Menu( "Données" );;
+		menu =  new Menu( "Benevoles" );;
 		this.getMenus().add(menu);
-		menuDonnees = menu;
+		menuBenevole = menu;
 		
-		item = new MenuItem( "Mémos" );
+		item = new MenuItem( "Enregistrer" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.MemoListe )  );
 		menu.getItems().add( item );
 		
-		item = new MenuItem( "Services" );
+		item = new MenuItem( "Supprimer" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.ServiceListe )  );
 		menu.getItems().add( item );
 		
-		item = new MenuItem( "Personnes" );
-		item.setOnAction(  (e) -> managerGui.showView( EnumView.PersonneListe )  );
+		item = new MenuItem( "Liste des Benevoles, Taches & Poste (PDF)" );
+		item.setOnAction(  (e) ->  
+				managerReport.openFilePdf( EnumReport.PersonnesListeSimple, null ) );
 		menu.getItems().add( item );
 		
-		item = new MenuItem( "Catégories" );
+		item = new MenuItem( "Annuaire téléphonique" );
+		item.setOnAction(  (e) ->  
+//				managerReport.print( EnumReport.AnnuaireTelephone, null ) );
+				managerReport.showViewer( EnumReport.AnnuaireTelephone, null ) );
+		menu.getItems().add( item );
+		
+		item = new MenuItem( "Modifier une affectation" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.CategorieListe )  );
 		menu.getItems().add( item );
 		itemCategories = item;
 		
-		item = new MenuItem( "Comptes" );
+		item = new MenuItem( "Supprimer une affectation" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.CompteListe )  );
 		menu.getItems().add( item );
 		itemComptes = item;
@@ -94,26 +111,16 @@ public class MenuBarAppli extends MenuBar {
 		
 		// Manu Etats
 		
-		menu =  new Menu( "Etats" );;
+		menu =  new Menu( "Participants" );;
 		this.getMenus().add(menu);
-		menuEtats = menu;
+		menuParticipant = menu;
 		
-		item = new MenuItem( "Personnes par catégorie v1" );
-		item.setOnAction(  (e) ->  
-				managerGui.showDialog( EnumView.EtatPersonnesParCateogire1 ) );
-		menu.getItems().add( item );
-		
-		item = new MenuItem( "Personnes par catégorie v2" );
-		item.setOnAction(  (e) ->  
-				managerGui.showDialog( EnumView.EtatPersonnesParCateogire2 ) );
-		menu.getItems().add( item );
-		
-		item = new MenuItem( "Liste des personnes (PDF)" );
+		item = new MenuItem( "Liste des participants (PDF)" );
 		item.setOnAction(  (e) ->  
 				managerReport.openFilePdf( EnumReport.PersonnesListeSimple, null ) );
 		menu.getItems().add( item );
 		
-		item = new MenuItem( "Liste des personnes (viewer)" );
+		item = new MenuItem( "Liste des participants et justificatifs" );
 		item.setOnAction(  (e) ->  
 				managerReport.showViewer( EnumReport.PersonnesListeSimple, null ) );
 		menu.getItems().add( item );
@@ -123,25 +130,56 @@ public class MenuBarAppli extends MenuBar {
 //				managerReport.print( EnumReport.AnnuaireTelephone, null ) );
 				managerReport.showViewer( EnumReport.AnnuaireTelephone, null ) );
 		menu.getItems().add( item );
+		
+		
+		
+		menu =  new Menu( "Equipes" );;
+		this.getMenus().add(menu);
+		menuParticipant = menu;
+		
+		item = new MenuItem( "Liste des capitaines" );
+		item.setOnAction(  (e) ->  
+				managerGui.showDialog( EnumView.EtatPersonnesParCateogire1 ) );
+		menu.getItems().add( item );
+		
+		item = new MenuItem( "Liste des equipiers" );
+		item.setOnAction(  (e) ->  
+				managerGui.showDialog( EnumView.EtatPersonnesParCateogire2 ) );
+		menu.getItems().add( item );
+		
+		item = new MenuItem( "Liste des equipes" );
+		item.setOnAction(  (e) ->  
+//				managerReport.print( EnumReport.AnnuaireTelephone, null ) );
+				managerReport.showViewer( EnumReport.AnnuaireTelephone, null ) );
+		menu.getItems().add( item );
 
 		
 		// Manu Tests
 		
-		menu =  new Menu( "Tests" );;
+		menu =  new Menu( "Competition" );;
 		this.getMenus().add(menu);
-		menuTests = menu;
+		menuCompet= menu;
 		
-		item = new MenuItem( "DaoCategorie" );
+		item = new MenuItem( "Creer une nouvelle competition" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.TestDaoCategorie )  );
 		menu.getItems().add( item );
 		
-		item = new MenuItem( "DaoMemo" );
+		item = new MenuItem( "Voir les compétition precedentes" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.TestDaoMemo )  );
 		menu.getItems().add( item );
 		
-		item = new MenuItem( "DaoService" );
+		item = new MenuItem( "Resultats des compétitions precedentes" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.TestDaoService )  );
 		menu.getItems().add( item );
+		
+		menu =  new Menu( "Help" );;
+		this.getMenus().add(menu);
+		menuHelp = menu;
+		
+		item = new MenuItem( "Contacter l'administrateur" );
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.TestDaoService )  );
+		menu.getItems().add( item );
+		
 
 
 		// Configuration initiale du menu
@@ -158,28 +196,39 @@ public class MenuBarAppli extends MenuBar {
 	
 	// Méthodes auxiliaires
 	
-	private void configurerMenu( Participant compteActif  ) {
+	private void configurerMenu(AdminAppli compteActif) {
 
 		itemDeconnecter.setDisable(true);
 		
-		menuDonnees.setVisible(false);
+		menuBenevole.setVisible(false);
 		itemCategories.setVisible(false);
 		itemComptes.setVisible(false);
-		menuEtats.setVisible(false);
-		menuTests.setVisible(false);
-		menuEtats.setVisible(false);
+		menuParticipant.setVisible(false);
+		menuCompet.setVisible(false);
+		menuHelp.setVisible(true);
+		menuSystem.setVisible(true);
+		menuUser.setVisible(false);
 		
 		if( compteActif != null ) {
 			itemDeconnecter.setDisable(false);
 			if( compteActif.isInRole( Roles.UTILISATEUR) ) {
-				menuDonnees.setVisible(true);
-				menuEtats.setVisible(true);
+				menuSystem.setVisible(true);
+				menuParticipant.setVisible(true);
+				menuBenevole.setVisible(true);
+				menuCompet.setVisible(true);
+				menuHelp.setVisible(true);
+				menuUser.setVisible(false);
 			}
 			if( compteActif.isInRole( Roles.ADMINISTRATEUR ) ) {
-				menuDonnees.setVisible(true);
+				menuUser.setVisible(true);
+				menuSystem.setVisible(true);
+				menuBenevole.setVisible(true);
 				itemCategories.setVisible(true);
 				itemComptes.setVisible(true);
-				menuTests.setVisible(true);
+				menuHelp.setVisible(true);
+				menuParticipant.setVisible(true);
+				menuCompet.setVisible(true);
+				menuUser.setVisible(true);
 			}
 		}
 	}
