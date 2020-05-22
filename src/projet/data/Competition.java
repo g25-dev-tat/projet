@@ -7,8 +7,6 @@ import javafx.beans.property.Property;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 
 public class Competition {
@@ -18,7 +16,8 @@ public class Competition {
 	
 	private final Property<Integer>		id			= new SimpleObjectProperty<>();
 	private final StringProperty   	 	cricuit       = new SimpleStringProperty();
-	private final Property<LocalDate>	echeance	= new SimpleObjectProperty<>();
+	private final Property<LocalDate>	echeanceDeb	= new SimpleObjectProperty<>();
+	private final Property<LocalDate>	echeanceFin	= new SimpleObjectProperty<>();
 	
 
 	
@@ -36,16 +35,16 @@ public class Competition {
 		this.idProperty().setValue(id);
 	}
 
-	public final Property<LocalDate> echeanceProperty() {
-		return this.echeance;
+	public final Property<LocalDate> echeanceDebProperty() {
+		return this.echeanceDeb;
 	}
 
-	public final LocalDate getEcheance() {
-		return this.echeanceProperty().getValue();
+	public final LocalDate getEcheanceDeb() {
+		return this.echeanceDebProperty().getValue();
 	}
 
-	public final void setEcheance(final LocalDate echeance) {
-		this.echeanceProperty().setValue(echeance);
+	public final void setEcheanceDeb(final LocalDate echeanceDeb) {
+		this.echeanceDebProperty().setValue(echeanceDeb);
 	}
 
 	
@@ -81,6 +80,21 @@ public class Competition {
 	public final void setCricuit(final String cricuit) {
 		this.cricuitProperty().set(cricuit);
 	}
+
+	public final Property<LocalDate> echeanceFinProperty() {
+		return this.echeanceFin;
+	}
+	
+
+	public final LocalDate getEcheanceFin() {
+		return this.echeanceFinProperty().getValue();
+	}
+	
+
+	public final void setEcheanceFin(final LocalDate echeanceFin) {
+		this.echeanceFinProperty().setValue(echeanceFin);
+	}
+	
 	
 
 }

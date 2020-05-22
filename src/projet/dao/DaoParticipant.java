@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import jfox.dao.jdbc.UtilJdbc;
-import projet.data.Benevole;
+import projet.data.Participant;
 
 
 public class DaoParticipant {
@@ -26,57 +26,57 @@ public class DaoParticipant {
 	
 	// Actions
 
-	public int inserer( Benevole categorie ) {
-
-		Connection			cn		= null;
-		PreparedStatement	stmt	= null;
-		ResultSet 			rs		= null;
-		String				sql;
-
-		try {
-			cn = dataSource.getConnection();
-			sql = "INSERT INTO categorie ( libelle ) VALUES( ? ) ";
-			stmt = cn.prepareStatement( sql, Statement.RETURN_GENERATED_KEYS );
-			stmt.setObject( 1, categorie.getLibelle() );
-			stmt.executeUpdate();
-
-			// Récupère l'identifiant généré par le SGBD
-			rs = stmt.getGeneratedKeys();
-			rs.next();
-			categorie.setId( rs.getObject( 1, Integer.class) );
-			return categorie.getId();
-	
-		} catch ( SQLException e ) {
-			throw new RuntimeException(e);
-		} finally {
-			UtilJdbc.close( rs, stmt, cn );
-		}
-	}
-
-
-	public void modifier( Benevole categorie ) {
-
-		Connection			cn		= null;
-		PreparedStatement	stmt	= null;
-		String				sql;
-
-		try {
-			cn = dataSource.getConnection();
-			sql = "UPDATE categorie SET libelle = ? WHERE idcategorie =  ?";
-			stmt = cn.prepareStatement( sql );
-			stmt.setObject( 1, categorie.getLibelle() );
-			stmt.setObject( 2, categorie.getId() );
-			stmt.executeUpdate();
-
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} finally {
-			UtilJdbc.close( stmt, cn );
-		}
-	}
+//	public int inserer( Benevole categorie ) {
+//
+//		Connection			cn		= null;
+//		PreparedStatement	stmt	= null;
+//		ResultSet 			rs		= null;
+//		String				sql;
+//
+//		try {
+//			cn = dataSource.getConnection();
+//			sql = "INSERT INTO categorie ( libelle ) VALUES( ? ) ";
+//			stmt = cn.prepareStatement( sql, Statement.RETURN_GENERATED_KEYS );
+//			stmt.setObject( 1, categorie.getLibelle() );
+//			stmt.executeUpdate();
+//
+//			// Récupère l'identifiant généré par le SGBD
+//			rs = stmt.getGeneratedKeys();
+//			rs.next();
+//			categorie.setId( rs.getObject( 1, Integer.class) );
+//			return categorie.getId();
+//	
+//		} catch ( SQLException e ) {
+//			throw new RuntimeException(e);
+//		} finally {
+//			UtilJdbc.close( rs, stmt, cn );
+//		}
+//	}
 
 
-	public void supprimer( int idCategorie ) {
+//	public void modifier( Benevole categorie ) {
+//
+//		Connection			cn		= null;
+//		PreparedStatement	stmt	= null;
+//		String				sql;
+//
+//		try {
+//			cn = dataSource.getConnection();
+//			sql = "UPDATE categorie SET libelle = ? WHERE idcategorie =  ?";
+//			stmt = cn.prepareStatement( sql );
+//			stmt.setObject( 1, categorie.getLibelle() );
+//			stmt.setObject( 2, categorie.getId() );
+//			stmt.executeUpdate();
+//
+//		} catch (SQLException e) {
+//			throw new RuntimeException(e);
+//		} finally {
+//			UtilJdbc.close( stmt, cn );
+//		}
+//	}
+
+
+	public void supprimer(int id) {
 
 		Connection			cn 		= null;
 		PreparedStatement	stmt 	= null;
@@ -84,9 +84,9 @@ public class DaoParticipant {
 
 		try {
 			cn = dataSource.getConnection();
-			sql = "DELETE FROM categorie WHERE idcategorie = ? ";
+			sql = "DELETE FROM participant WHERE id = ? ";
 			stmt = cn.prepareStatement( sql );
-			stmt.setObject( 1, idCategorie );
+			stmt.setObject(1, id);
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -97,7 +97,7 @@ public class DaoParticipant {
 	}
 
 	
-	public Benevole retrouver( int idCategorie ) {
+	public Participant retrouver(Participant part) {
 
 		Connection			cn 		= null;
 		PreparedStatement	stmt	= null;
@@ -106,13 +106,13 @@ public class DaoParticipant {
 
 		try {
 			cn = dataSource.getConnection();
-			sql = "SELECT * FROM categorie WHERE idcategorie = ?";
+			sql = "SELECT * FROM participant WHERE nom = ?";
 			stmt = cn.prepareStatement( sql );
-			stmt.setObject(1, idCategorie);
+			stmt.setObject(1, part.getNom());
 			rs = stmt.executeQuery();
 
 			if ( rs.next() ) {
-				return construireCategorie( rs );
+				return construireParticipant( rs );
 			} else {
 				return null;
 			}
@@ -124,7 +124,7 @@ public class DaoParticipant {
 	}
 
 
-	public List<Benevole> listerTout() {
+	public List<Participant> listerTout() {
 
 		Connection			cn 		= null;
 		PreparedStatement	stmt 	= null;
@@ -133,15 +133,15 @@ public class DaoParticipant {
 
 		try {
 			cn = dataSource.getConnection();
-			sql = "SELECT * FROM categorie ORDER BY libelle";
+			sql = "SELECT * FROM participant ORDER BY nom";
 			stmt = cn.prepareStatement( sql );
 			rs = stmt.executeQuery();
 
-			List<Benevole> categories = new LinkedList<>();
+			List<Participant> part = new LinkedList<>();
 			while (rs.next()) {
-				categories.add( construireCategorie( rs ) );
+				part.add( construireParticipant( rs ) );
 			}
-			return categories;
+			return part;
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -153,11 +153,19 @@ public class DaoParticipant {
 	
 	// Méthodes auxiliaires
 	
-	private Benevole construireCategorie( ResultSet rs ) throws SQLException {
-		Benevole categorie = new Benevole();
-		categorie.setId( rs.getObject( "idcategorie", Integer.class ) );
-		categorie.setLibelle( rs.getObject( "libelle", String.class ) );
-		return categorie;
+	private Participant construireParticipant( ResultSet rs ) throws SQLException {
+		Participant part = new Participant();
+		part.setId( rs.getObject( "id", Integer.class ) );
+		part.setNom( rs.getObject( "nom", String.class ) );
+		part.setPrenom( rs.getObject( "prenom", String.class ) );
+		part.setTelephone( rs.getObject( "telepphone", Integer.class ) );
+		part.setEmail( rs.getObject( "email", String.class ) );
+		part.setAdresse( rs.getObject( "adresse", String.class ) );
+		part.setJustificatifs( rs.getObject( "justificatifs", String.class ) );
+		part.setCommentaire( rs.getObject( "commentaire", String.class ) );
+		part.setClub( rs.getObject( "club", String.class ) );
+		part.setDateNaiss( rs.getObject( "dateNaiss", LocalDate.class ) );
+		return part;
 	}
 
 }

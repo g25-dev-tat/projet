@@ -32,6 +32,7 @@ public class Course {
 		setIntitule(intitule);
 		setDepart(depart);
 		setArrivee(arrivee);
+		setTarif(tarif);
 	}
 	
 	

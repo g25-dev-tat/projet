@@ -162,7 +162,8 @@ CREATE TABLE Participant(
 ------------------------------------------------------------
 CREATE TABLE Competition(
 	Id         SERIAL NOT NULL ,
-	echeance   DATE  NOT NULL ,
+	echeanceDeb   DATE  NOT NULL ,
+	echeanceFin   DATE  NOT NULL ,
 	circuit    VARCHAR (255) NOT NULL  ,
 	CONSTRAINT Competition_PK PRIMARY KEY (Id)
 );

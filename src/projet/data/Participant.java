@@ -1,13 +1,12 @@
 package projet.data;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 
 public class Participant  {
@@ -21,8 +20,10 @@ public class Participant  {
 	private final Property<Integer>	telephone	= new SimpleObjectProperty<>();
 	private final StringProperty	adresse	= new SimpleStringProperty();
 	private final StringProperty	email 		= new SimpleStringProperty();
-	private final StringProperty	login 		= new SimpleStringProperty();
-	private final StringProperty	pass 		= new SimpleStringProperty();
+	private final StringProperty	justificatifs		= new SimpleStringProperty();
+	private final StringProperty	commentaire 		= new SimpleStringProperty();
+	private final StringProperty	club				= new SimpleStringProperty();
+	private final Property<LocalDate>	dateNaiss		= new SimpleObjectProperty<>();
 	
 	
 	// Constructeurs
@@ -30,15 +31,17 @@ public class Participant  {
 	public Participant() {
 	}
 
-	public Participant(int id, String nom, String prenom, int telephone, String adresse, String email, String login, String pass) {
+	public Participant(int id, String nom, String prenom, int telephone, String adresse, String email, String club, String justificatifs, String commentaire, LocalDate dateNaiss) {
 		setId(id);
 		setNom(nom);
 		setPrenom(prenom);
 		setTelephone(telephone);
 		setAdresse(adresse);
 		setEmail(email);
-		setLogin(login);
-		setPass(pass);
+		setClub(club);
+		setJustificatifs(justificatifs);
+		setCommentaire(commentaire);
+		setDateNaiss(dateNaiss);
 	}
 	
 	
@@ -113,33 +116,33 @@ public class Participant  {
 	}
 	
 
-	public final StringProperty loginProperty() {
-		return this.login;
+	public final StringProperty clubProperty() {
+		return this.club;
 	}
 	
 
-	public final String getLogin() {
-		return this.loginProperty().get();
+	public final String getClub() {
+		return this.clubProperty().get();
 	}
 	
 
-	public final void setLogin(final String login) {
-		this.loginProperty().set(login);
+	public final void setClub(final String login) {
+		this.clubProperty().set(login);
 	}
 	
 
-	public final StringProperty passProperty() {
-		return this.pass;
+	public final StringProperty justificatifsProperty() {
+		return this.justificatifs;
 	}
 	
 
-	public final String getPass() {
-		return this.passProperty().get();
+	public final String getJustificatifs() {
+		return this.justificatifsProperty().get();
 	}
 	
 
-	public final void setPass(final String pass) {
-		this.passProperty().set(pass);
+	public final void setJustificatifs(final String pass) {
+		this.justificatifsProperty().set(pass);
 	}
 
 
@@ -182,6 +185,36 @@ public class Participant  {
 		Participant other = (Participant) obj;
 		return Objects.equals(id.getValue(), other.id.getValue() );
 	}
+
+	public final StringProperty commentaireProperty() {
+		return this.commentaire;
+	}
+	
+
+	public final String getCommentaire() {
+		return this.commentaireProperty().get();
+	}
+	
+
+	public final void setCommentaire(final String commentaire) {
+		this.commentaireProperty().set(commentaire);
+	}
+	
+
+	public final Property<LocalDate> dateNaissProperty() {
+		return this.dateNaiss;
+	}
+	
+
+	public final LocalDate getDateNaiss() {
+		return this.dateNaissProperty().getValue();
+	}
+	
+
+	public final void setDateNaiss(final LocalDate dateNaiss) {
+		this.dateNaissProperty().setValue(dateNaiss);
+	}
+	
 	
 	
 }

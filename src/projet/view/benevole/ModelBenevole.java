@@ -85,7 +85,7 @@ public class ModelBenevole  {
 		
 		if ( courant.getId() == null ) {
 			// Insertion
-			courant.setId( daoBenevole.inserer( courant ) );
+			courant.setId( daoBenevole.insererUnBenevole(courant) );
 		} else {
 			// modficiation
 			daoBenevole.modifier( courant );

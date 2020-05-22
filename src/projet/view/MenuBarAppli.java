@@ -10,7 +10,6 @@ import javafx.scene.control.MenuItem;
 import jfox.javafx.view.IManagerGui;
 import projet.commun.Roles;
 import projet.data.AdminAppli;
-import projet.data.Participant;
 import projet.report.EnumReport;
 import projet.report.ManagerReport;
 import projet.view.systeme.ModelConnexion;

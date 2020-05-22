@@ -14,7 +14,6 @@ import javax.sql.DataSource;
 
 import jfox.dao.jdbc.UtilJdbc;
 import projet.data.Competition;
-import projet.data.AdminAppli;
 
 
 public class DaoCompetition {
@@ -24,15 +23,11 @@ public class DaoCompetition {
 
 	@Inject
 	private DataSource		dataSource;
-	@Inject
-	private DaoParticipant	daoCategorie;
-	@Inject
-	private DaoEquipe		daoPersonne;
 
 	
 	// Actions
 
-	public int inserer( Competition memo ) {
+	public int CreerCompetition( Competition compet ) {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -41,30 +36,20 @@ public class DaoCompetition {
 		
 		try {
 			cn = dataSource.getConnection();
-			sql = "INSERT INTO memo ( titre, description, flagurgent, statut, effectif, budget,echeance, idcategorie ) VALUES( ?, ?, ?, ?, ?, ?, ?, ? ) ";
+			sql = "INSERT INTO competition (id, circuit, echeancedeb, echeancefin) VALUES( ?, ?, ?, ?) ";
 			stmt = cn.prepareStatement( sql, Statement.RETURN_GENERATED_KEYS );
-			stmt.setObject( 1, memo.getTitre() );
-			stmt.setObject( 2, memo.getDescription() );
-			stmt.setObject( 3, memo.getFlagUrgent() );
-			stmt.setObject( 4, memo.getStatut() );
-			stmt.setObject( 5, memo.getEffectif() );
-			stmt.setObject( 6, memo.getBudget() );
-			stmt.setObject( 7, memo.getEcheance() );
-			if ( memo.getCategorie() == null ) {
-				stmt.setObject( 8, null );
-			} else {
-				stmt.setObject( 8, memo.getCategorie().getId() );
-			}
+			stmt.setObject( 1, compet.getCricuit() );
+			stmt.setObject( 2, compet.getEcheanceDeb() );
+			stmt.setObject( 3, compet.getEcheanceFin() );
+			
 			stmt.executeUpdate();
 
 			// Récupère l'identifiant généré par le SGBD
 			rs = stmt.getGeneratedKeys();
 			rs.next();
-			memo.setId( rs.getObject( 1, Integer.class) );
+			compet.setId( rs.getObject( 1, Integer.class) );
 			
-			insererConcerner( memo );
-			
-			return memo.getId();
+			return compet.getId();
 	
 		} catch ( SQLException e ) {
 			throw new RuntimeException(e);
@@ -74,7 +59,7 @@ public class DaoCompetition {
 	}
 
 
-	public void modifier( Competition memo ) {
+	public void modifier( Competition compet ) {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -82,25 +67,14 @@ public class DaoCompetition {
 
 		try {
 			cn = dataSource.getConnection();
-			sql = "UPDATE memo SET titre = ?, description = ?, flagurgent = ?, statut = ?, effectif = ?, budget = ?, echeance = ?, idcategorie = ? WHERE idmemo =  ?";
+			sql = "UPDATE competition SET circuit = ?, echeancedeb = ?, echeancefin = ? WHERE id =  ?";
 			stmt = cn.prepareStatement( sql );
-			stmt.setObject( 1, memo.getTitre() );
-			stmt.setObject( 2, memo.getDescription() );
-			stmt.setObject( 3, memo.getFlagUrgent() );
-			stmt.setObject( 4, memo.getStatut() );
-			stmt.setObject( 5, memo.getEffectif() );
-			stmt.setObject( 6, memo.getBudget() );
-			stmt.setObject( 7, memo.getEcheance() );
-			if ( memo.getCategorie() == null ) {
-				stmt.setObject( 8, null );
-			} else {
-				stmt.setObject( 8, memo.getCategorie().getId() );
-			}
-			stmt.setObject( 9, memo.getId() );
-			stmt.executeUpdate();
+			stmt.setObject( 1, compet.getCricuit() );
+			stmt.setObject( 2, compet.getEcheanceDeb() );
+			stmt.setObject( 3, compet.getEcheanceFin() );
 			
-			supprimerConcerner( memo.getId() );
-			insererConcerner( memo );
+			stmt.setObject( 4, compet.getId() );
+			stmt.executeUpdate();
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -110,19 +84,18 @@ public class DaoCompetition {
 	}
 
 
-	public void supprimer( int idMemo ) {
+	public void supprimer( int id) {
 
 		Connection			cn 		= null;
 		PreparedStatement	stmt 	= null;
 		String				sql;
 
 		try {
-			supprimerConcerner(idMemo);
 			
 			cn = dataSource.getConnection();
-			sql = "DELETE FROM memo WHERE idmemo = ? ";
+			sql = "DELETE FROM competition WHERE id = ? ";
 			stmt = cn.prepareStatement( sql );
-			stmt.setInt( 1, idMemo );
+			stmt.setInt( 1, id );
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -133,7 +106,7 @@ public class DaoCompetition {
 	}
 
 	
-	public Competition retrouver( int idMemo ) {
+	public Competition retrouver( int id ) {
 
 		Connection			cn 		= null;
 		PreparedStatement	stmt	= null;
@@ -142,13 +115,13 @@ public class DaoCompetition {
 
 		try {
 			cn = dataSource.getConnection();
-			sql = "SELECT * FROM memo WHERE idmemo = ?";
+			sql = "SELECT * FROM competition WHERE echeancedeb = ?";
 			stmt = cn.prepareStatement( sql );
-			stmt.setInt(1, idMemo);
+			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
 
 			if ( rs.next() ) {
-				return construireMemo( rs, true );
+				return construireCompetition(rs);
 			} else {
 				return null;
 			}
@@ -169,15 +142,15 @@ public class DaoCompetition {
 
 		try {
 			cn = dataSource.getConnection();
-			sql = "SELECT * FROM memo ORDER BY titre";
+			sql = "SELECT * FROM competition ORDER BY echeancedeb";
 			stmt = cn.prepareStatement( sql );
 			rs = stmt.executeQuery();
 
-			List<Competition> memos = new LinkedList<>();
+			List<Competition> compet= new LinkedList<>();
 			while (rs.next()) {
-				memos.add( construireMemo( rs, false ) );
+				compet.add( construireCompetition( rs) );
 			}
-			return memos;
+			return compet;
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -186,7 +159,7 @@ public class DaoCompetition {
 		}
 	}
 	
-    public int compterPourCategorie(int idCategorie) {
+    public int compterPourCompetition(int id) {
     	
 		Connection			cn		= null;
 		PreparedStatement	stmt 	= null;
@@ -194,9 +167,9 @@ public class DaoCompetition {
 
 		try {
 			cn = dataSource.getConnection();
-            String sql = "SELECT COUNT(*) FROM memo WHERE idcategorie = ?";
+            String sql = "SELECT COUNT(*) FROM memo WHERE id = ?";
             stmt = cn.prepareStatement( sql );
-            stmt.setObject( 1, idCategorie );
+            stmt.setObject( 1, id);
             rs = stmt.executeQuery();
 
             rs.next();
@@ -213,72 +186,14 @@ public class DaoCompetition {
 	
 	// Méthodes auxiliaires
 	
-	private Competition construireMemo( ResultSet rs, boolean flagComplet ) throws SQLException {
-		Competition memo = new Competition();
-		memo.setId( rs.getObject( "idmemo", Integer.class ) );
-		memo.setTitre( rs.getObject( "titre", String.class ) );
-		memo.setDescription( rs.getObject( "description", String.class ) );
-		memo.setFlagUrgent( rs.getObject( "flagurgent", Boolean.class ) );
-		memo.setStatut( rs.getObject( "statut", Integer.class ) );
-		memo.setEffectif( rs.getObject( "effectif", Integer.class ) );
-		memo.setBudget( rs.getObject( "budget", Double.class ) );
-		memo.setEcheance( rs.getObject( "Echeance", LocalDate.class ) );
+	private Competition construireCompetition( ResultSet rs) throws SQLException {
+		Competition compet = new Competition();
+		compet.setId( rs.getObject( "id", Integer.class ) );
+		compet.setCricuit( rs.getObject( "circuit", String.class ) );
+		compet.setEcheanceDeb( rs.getObject( "echeancedeb", LocalDate.class ) );
+		compet.setEcheanceFin( rs.getObject( "echeancefin", LocalDate.class ) );
 		
-		if ( flagComplet ) {
-			Integer idCategorie = rs.getObject( "idcategorie", Integer.class  );
-			if ( idCategorie != null ) {
-				memo.setCategorie( daoCategorie.retrouver(idCategorie) );
-			}
-			memo.getPersonnes().setAll( daoPersonne.listerPourMemo( memo.getId() ) );
-		}
-		
-		return memo;
-	}
-
-
-	private void supprimerConcerner( int idMemo ) {
-
-		Connection			cn 		= null;
-		PreparedStatement	stmt 	= null;
-		String				sql;
-
-		try {
-			cn = dataSource.getConnection();
-			sql = "DELETE FROM concerner WHERE idmemo = ? ";
-			stmt = cn.prepareStatement( sql );
-			stmt.setInt( 1, idMemo );
-			stmt.executeUpdate();
-
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} finally {
-			UtilJdbc.close( stmt, cn );
-		}
-	}
-
-	
-	private void insererConcerner( Competition memo ) {
-
-		Connection			cn		= null;
-		PreparedStatement	stmt	= null;
-		String				sql;
-		
-		try {
-			cn = dataSource.getConnection();
-			sql = "INSERT INTO concerner ( idmemo, idpersonne ) VALUES( ?, ? ) ";
-			stmt = cn.prepareStatement( sql );
-			
-			for ( AdminAppli personne : memo.getPersonnes() ) {
-				stmt.setObject( 1, memo.getId() );
-				stmt.setObject( 2, personne.getId() );
-				stmt.executeUpdate();
-			}
-	
-		} catch ( SQLException e ) {
-			throw new RuntimeException(e);
-		} finally {
-			UtilJdbc.close( stmt, cn );
-		}
+		return compet;
 	}
 
 }

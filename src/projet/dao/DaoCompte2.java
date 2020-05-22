@@ -15,7 +15,6 @@ import javax.sql.DataSource;
 
 import jfox.dao.jdbc.UtilJdbc;
 import projet.data.AdminAppli;
-import projet.data.Participant;
 
 
 public class DaoCompte2 {

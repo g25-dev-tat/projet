@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import jfox.dao.jdbc.UtilJdbc;
-import projet.data.Equipe;
+import projet.data.Course;
 
 
 public class DaoCourse {
@@ -26,7 +27,7 @@ public class DaoCourse {
 	
 	// Actions
 
-	public int inserer( Equipe service ) {
+	public int CreerCourse(Course course) {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -35,18 +36,20 @@ public class DaoCourse {
 		
 		try {
 			cn = dataSource.getConnection();
-			sql = "INSERT INTO service ( nom, anneecreation, flagSiege ) VALUES( ?, ?, ? ) ";
+			sql = "INSERT INTO course ( id, date, intitule, depart, arrivee, tarif) VALUES( ?, ?, ?, ?, ?, ?) ";
 			stmt = cn.prepareStatement( sql, Statement.RETURN_GENERATED_KEYS );
-			stmt.setObject( 1, service.getNom() );
-			stmt.setObject( 2, service.getAnneeCreation() );
-			stmt.setObject( 3, service.getFlagSiege() );
+			stmt.setObject( 1, course.getDate() );
+			stmt.setObject( 2, course.getIntitule() );
+			stmt.setObject( 3, course.getDepart() );
+			stmt.setObject( 3, course.getArrivee() );
+			stmt.setObject( 3, course.getTarif() );
 			stmt.executeUpdate();
 
 			// Récupère l'identifiant généré par le SGBD
 			rs = stmt.getGeneratedKeys();
 			rs.next();
-			service.setId( rs.getObject( 1, Integer.class) );
-			return service.getId();
+			course.setId( rs.getObject( 1, Integer.class) );
+			return course.getId();
 	
 		} catch ( SQLException e ) {
 			throw new RuntimeException(e);
@@ -56,7 +59,7 @@ public class DaoCourse {
 	}
 
 
-	public void modifier( Equipe service ) {
+	public void modifier(Course course) {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -64,12 +67,14 @@ public class DaoCourse {
 
 		try {
 			cn = dataSource.getConnection();
-			sql = "UPDATE service SET nom = ?, anneecreation = ?, flagsiege = ? WHERE idservice =  ?";
+			sql = "UPDATE course SET date = ?, intitule = ?, depart = ?, arrivee = ?, tarif = ? WHERE id =  ?";
 			stmt = cn.prepareStatement( sql );
-			stmt.setObject( 1, service.getNom() );
-			stmt.setObject( 2, service.getAnneeCreation() );
-			stmt.setObject( 3, service.getFlagSiege() );
-			stmt.setObject( 4, service.getId() );
+			stmt.setObject( 1, course.getDate() );
+			stmt.setObject( 2, course.getIntitule() );
+			stmt.setObject( 3, course.getDepart() );
+			stmt.setObject( 4, course.getArrivee() );
+			stmt.setObject( 5, course.getTarif() );
+			stmt.setObject( 6, course.getId() );
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -80,7 +85,7 @@ public class DaoCourse {
 	}
 
 
-	public void supprimer( int idService ) {
+	public void supprimer( int id ) {
 
 		Connection			cn 		= null;
 		PreparedStatement	stmt 	= null;
@@ -88,9 +93,9 @@ public class DaoCourse {
 
 		try {
 			cn = dataSource.getConnection();
-			sql = "DELETE FROM service WHERE idservice = ? ";
+			sql = "DELETE FROM course WHERE id = ? ";
 			stmt = cn.prepareStatement( sql );
-			stmt.setInt( 1, idService );
+			stmt.setInt( 1, id);
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -101,7 +106,7 @@ public class DaoCourse {
 	}
 
 	
-	public Equipe retrouver( int idService ) {
+	public Course retrouver(String intitule) {
 
 		Connection			cn 		= null;
 		PreparedStatement	stmt	= null;
@@ -110,13 +115,13 @@ public class DaoCourse {
 
 		try {
 			cn = dataSource.getConnection();
-			sql = "SELECT * FROM service WHERE idservice = ?";
+			sql = "SELECT * FROM course WHERE intitule = ?";
 			stmt = cn.prepareStatement( sql );
-			stmt.setInt(1, idService);
+			stmt.setString(1, intitule);
 			rs = stmt.executeQuery();
 
 			if ( rs.next() ) {
-				return construireService( rs );
+				return construireCourse( rs );
 			} else {
 				return null;
 			}
@@ -128,7 +133,7 @@ public class DaoCourse {
 	}
 
 
-	public List<Equipe> listerTout() {
+	public List<Course> listerTout() {
 
 		Connection			cn 		= null;
 		PreparedStatement	stmt 	= null;
@@ -137,15 +142,15 @@ public class DaoCourse {
 
 		try {
 			cn = dataSource.getConnection();
-			sql = "SELECT * FROM service ORDER BY nom";
+			sql = "SELECT * FROM course ORDER BY intitule";
 			stmt = cn.prepareStatement( sql );
 			rs = stmt.executeQuery();
 
-			List<Equipe> services = new LinkedList<>();
+			List<Course> course = new LinkedList<>();
 			while (rs.next()) {
-				services.add( construireService( rs ) );
+				course.add( construireCourse( rs ) );
 			}
-			return services;
+			return course;
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -157,13 +162,15 @@ public class DaoCourse {
 	
 	// Méthodes auxiliaires
 	
-	private Equipe construireService( ResultSet rs ) throws SQLException {
-		Equipe service = new Equipe();
-		service.setId( rs.getObject( "idservice", Integer.class ) );
-		service.setNom( rs.getObject( "nom", String.class ) );
-		service.setAnneeCreation( rs.getObject( "anneeCreation", Integer.class ) );
-		service.setFlagSiege( rs.getObject( "flagsiege", Boolean.class ) );
-		return service;
+	private Course construireCourse( ResultSet rs ) throws SQLException {
+		Course course = new Course();
+		course.setId( rs.getObject( "id", Integer.class ) );
+		course.setDate( rs.getObject( "date", LocalDate.class ) );
+		course.setIntitule( rs.getObject( "intitule", String.class ) );
+		course.setDepart( rs.getObject( "depart", String.class ) );
+		course.setArrivee( rs.getObject( "arrivee", String.class ) );
+		course.setTarif( rs.getObject( "tarif", Double.class ) );
+		return course;
 	}
 
 }
