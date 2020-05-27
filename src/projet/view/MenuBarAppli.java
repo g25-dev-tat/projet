@@ -22,6 +22,7 @@ public class MenuBarAppli extends MenuBar {
 	
 	private Menu	menuBenevole;
 	private Menu	menuParticipant;
+	private Menu	menuEq;
 	private Menu	menuCompet;
 	private Menu	menuSystem;
 	private Menu	menuHelp;
@@ -78,17 +79,17 @@ public class MenuBarAppli extends MenuBar {
 		this.getMenus().add(menu);
 		menuBenevole = menu;
 		
-		item = new MenuItem( "Enregistrer" );
-		item.setOnAction(  (e) -> managerGui.showView( EnumView.MemoListe )  );
+		item = new MenuItem( "Attribuer une tache" );
+		item.setOnAction(  (e) -> managerGui.showView(EnumView.AffectationTacheForm)  );
 		menu.getItems().add( item );
 		
-		item = new MenuItem( "Supprimer" );
-		item.setOnAction(  (e) -> managerGui.showView( EnumView.ServiceListe )  );
+		item = new MenuItem( "Supprimer un bénévole" );
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.BenevoleListe )  );
 		menu.getItems().add( item );
 		
 		item = new MenuItem( "Liste des Benevoles, Taches & Poste (PDF)" );
 		item.setOnAction(  (e) ->  
-				managerReport.openFilePdf( EnumReport.PersonnesListeSimple, null ) );
+				managerReport.openFilePdf( EnumReport.BenevoleListe, null ) );
 		menu.getItems().add( item );
 		
 		item = new MenuItem( "Annuaire téléphonique" );
@@ -134,7 +135,7 @@ public class MenuBarAppli extends MenuBar {
 		
 		menu =  new Menu( "Equipes" );;
 		this.getMenus().add(menu);
-		menuParticipant = menu;
+		menuEq = menu;
 		
 		item = new MenuItem( "Liste des capitaines" );
 		item.setOnAction(  (e) ->  
@@ -179,6 +180,10 @@ public class MenuBarAppli extends MenuBar {
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.TestDaoService )  );
 		menu.getItems().add( item );
 		
+		item = new MenuItem( "Consulter la FAQ" );
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.TestDaoService )  );
+		menu.getItems().add( item );
+		
 
 
 		// Configuration initiale du menu
@@ -207,6 +212,7 @@ public class MenuBarAppli extends MenuBar {
 		menuHelp.setVisible(true);
 		menuSystem.setVisible(true);
 		menuUser.setVisible(false);
+		menuEq.setVisible(false);
 		
 		if( compteActif != null ) {
 			itemDeconnecter.setDisable(false);
@@ -217,6 +223,7 @@ public class MenuBarAppli extends MenuBar {
 				menuCompet.setVisible(true);
 				menuHelp.setVisible(true);
 				menuUser.setVisible(false);
+				menuEq.setVisible(true);
 			}
 			if( compteActif.isInRole( Roles.ADMINISTRATEUR ) ) {
 				menuUser.setVisible(true);
@@ -228,6 +235,7 @@ public class MenuBarAppli extends MenuBar {
 				menuParticipant.setVisible(true);
 				menuCompet.setVisible(true);
 				menuUser.setVisible(true);
+				menuEq.setVisible(true);
 			}
 		}
 	}

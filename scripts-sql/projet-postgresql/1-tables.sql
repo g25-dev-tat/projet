@@ -22,7 +22,7 @@ CREATE TABLE AdminAppli(
 	Prenom      VARCHAR (30) NOT NULL ,
 	Telephone   INT  NOT NULL ,
 	email       VARCHAR (50) NOT NULL ,
-	adresse     VARCHAR (50) NOT NULL ,
+	adresse     VARCHAR (100) NOT NULL ,
 	login       VARCHAR (20) NOT NULL ,
 	pass        CHAR (10)  NOT NULL  ,
 	CONSTRAINT AdminAppli_PK PRIMARY KEY (Id)
@@ -49,11 +49,11 @@ CREATE TABLE Benevole(
 	Prenom          VARCHAR (20) NOT NULL ,
 	Telephone       INT  NOT NULL ,
 	email           VARCHAR (20) NOT NULL ,
-	adresse         VARCHAR (30) NOT NULL ,
+	adresse         VARCHAR (100) NOT NULL ,
 	Commentaire     VARCHAR (255) NOT NULL ,
 	dateNaiss       DATE  NOT NULL ,
 	PermisConduire 	BOOLEAN NOT NULL,
-	Id_AdminAppli   INT  NOT NULL  ,
+	Id_AdminAppli   INT    ,
 	CONSTRAINT Benevole_PK PRIMARY KEY (Id)
 
 	,CONSTRAINT Benevole_AdminAppli_FK FOREIGN KEY (Id_AdminAppli) REFERENCES AdminAppli(Id)
@@ -145,7 +145,7 @@ CREATE TABLE Participant(
 	Prenom          VARCHAR (20) NOT NULL ,
 	Telephone       INT  NOT NULL ,
 	email           VARCHAR (20) NOT NULL ,
-	adresse         VARCHAR (30) NOT NULL ,
+	adresse         VARCHAR (100) NOT NULL ,
 	justificatifs   VARCHAR (255) NOT NULL ,
 	Commentaire     VARCHAR (255) NOT NULL ,
 	dateNaiss       DATE  NOT NULL ,

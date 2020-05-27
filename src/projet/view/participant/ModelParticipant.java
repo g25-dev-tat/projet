@@ -11,6 +11,7 @@ import projet.dao.DaoEquipe;
 import projet.data.Benevole;
 import projet.data.AdminAppli;
 import projet.data.Course;
+import projet.data.Participant;
 
 
 public class ModelParticipant {
@@ -20,7 +21,7 @@ public class ModelParticipant {
 	
 	private final ObservableList<AdminAppli> liste = FXCollections.observableArrayList();
 	
-	private final AdminAppli		courant = new AdminAppli();
+	private final Participant		courant = new Participant();
 	
 	
 	// Autres champs

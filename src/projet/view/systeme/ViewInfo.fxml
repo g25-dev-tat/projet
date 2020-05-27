@@ -39,7 +39,7 @@
                         <Insets left="55.0" />
                      </VBox.margin>
                   </ImageView>
-                  <Button mnemonicParsing="false" text="BENEVOLES">
+                  <Button fx:id="Benevole" mnemonicParsing="false" onAction="#Benevole" text="BENEVOLES">
                      <VBox.margin>
                         <Insets left="115.0" />
                      </VBox.margin>
@@ -56,7 +56,7 @@
                         <Insets left="80.0" />
                      </VBox.margin>
                   </ImageView>
-                  <Button mnemonicParsing="false" text="PARTICIPANTS">
+                  <Button fx:id="Participant" mnemonicParsing="false" onAction="#Participant" text="PARTICIPANTS">
                      <VBox.margin>
                         <Insets left="89.0" />
                      </VBox.margin>
@@ -73,7 +73,7 @@
                         <Insets left="65.0" top="10.0" />
                      </VBox.margin>
                   </ImageView>
-                  <Button mnemonicParsing="false" text="COMPETITION">
+                  <Button fx:id="Competition" mnemonicParsing="false" onAction="#Competition" text="COMPETITION">
                      <VBox.margin>
                         <Insets left="95.0" top="-10.0" />
                      </VBox.margin>
@@ -90,7 +90,7 @@
                         <Insets top="40.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Button mnemonicParsing="false" text="Contacter l'administrateur ?">
+                  <Button fx:id="ContactAdmin" mnemonicParsing="false" onAction="#contacterAdmin" text="Contacter l'administrateur ?">
                      <HBox.margin>
                         <Insets top="50.0" />
                      </HBox.margin>
@@ -99,7 +99,7 @@
             </HBox>
             <VBox GridPane.columnIndex="2">
                <children>
-                  <ImageView fitHeight="118.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="Deconnect" fitHeight="118.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../fond/Image4.png" />
                      </image>
@@ -107,14 +107,14 @@
                         <Insets left="155.0" />
                      </VBox.margin>
                   </ImageView>
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="85.0" text="Mon profil">
+                  <Button fx:id="profil" mnemonicParsing="false" onAction="#Profil" prefHeight="26.0" prefWidth="85.0" text="Mon profil">
                      <VBox.margin>
                         <Insets left="160.0" />
                      </VBox.margin>
                   </Button>
                </children>
             </VBox>
-            <ImageView fitHeight="57.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <ImageView fx:id="Help" fitHeight="57.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <image>
                   <Image url="@../../fond/Image7.png" />
                </image>
@@ -135,14 +135,14 @@
                         <Insets left="5.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField prefHeight="26.0" prefWidth="202.0">
+                  <TextField fx:id="tfSearch" onAction="#search" prefHeight="26.0" prefWidth="202.0">
                      <HBox.margin>
                         <Insets left="5.0" top="10.0" />
                      </HBox.margin>
                   </TextField>
                </children>
             </HBox>
-            <ImageView fitHeight="75.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+            <ImageView fx:id="Search" fitHeight="75.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                <image>
                   <Image url="@../../fond/Image5.png" />
                </image>

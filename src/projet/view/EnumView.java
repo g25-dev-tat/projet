@@ -10,6 +10,9 @@ public enum EnumView implements IEnumView {
 	// Valeurs
 	
 	Info				( "systeme/ViewInfo.fxml" ),
+	BenevoleListe		( "benevole/ViewBenevoleListe.fxml" ),
+	AffectationTacheForm	( "benevole/ViewAffectationTacheForm.fxml" ),
+	
 	Connexion			( "systeme/ViewConnexion.fxml" ),
 	CompteListe			( "compte/ViewCompteListe.fxml" ),
 	CompteForm			( "compte/ViewCompteForm.fxml" ),
@@ -20,8 +23,6 @@ public enum EnumView implements IEnumView {
 	MemoListe			( "memo/ViewMemoListe.fxml" ),
 	MemoForm			( "memo/ViewMemoForm.fxml" ),
 	MemoAjoutPersonnes	( "memo/ViewMemoAjoutPersonnes.fxml" ),
-	ServiceListe		( "service/ViewServiceListe.fxml" ),
-	ServiceForm			( "service/ViewServiceForm.fxml" ),
 	TestDaoCategorie	( "test/ViewTestDaoCategorie.fxml" ),
 	TestDaoMemo			( "test/ViewTestDaoMemo.fxml" ),
 	TestDaoService		( "test/ViewTestDaoService.fxml" ),

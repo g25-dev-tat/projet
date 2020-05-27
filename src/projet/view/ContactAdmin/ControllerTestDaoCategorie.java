@@ -1,4 +1,4 @@
-package projet.view.test;
+package projet.view.ContactAdmin;
 
 import javax.inject.Inject;
 

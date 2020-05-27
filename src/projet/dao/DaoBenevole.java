@@ -22,7 +22,7 @@ public class DaoBenevole {
 	// Champs
 
 	@Inject
-	private DataSource		dataSource;
+	private static DataSource		dataSource;
 
 	
 	// Actions
@@ -45,7 +45,7 @@ public class DaoBenevole {
 				stmt.setObject(4, benevol.getEmail());
 				stmt.setObject(5, benevol.getAdresse());
 				stmt.setObject(6, benevol.getCommentaire());
-				stmt.setObject(7, benevol.isPermisC());
+				stmt.setObject(7, benevol.isPermisConduire());
 				stmt.setObject(8, benevol.getDateNaiss());
 				stmt.executeUpdate();
 
@@ -137,7 +137,7 @@ public class DaoBenevole {
 //	}
 
 
-	public List<Benevole> listerBenevole(Benevole benevol) {
+	public List<Benevole> listerBenevole() {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -147,9 +147,9 @@ public class DaoBenevole {
 		try {
 			cn = dataSource.getConnection();
 
-			sql = "SELECT * FROM benevole WHERE id = ? ORDER BY nom";
+			sql = "SELECT * FROM benevole ORDER BY nom";
 			stmt = cn.prepareStatement(sql);
-			stmt.setObject( 1, benevol.getId() );
+			//stmt.setObject( 1, benevol.getId() );
 			rs = stmt.executeQuery();
 
 			List<Benevole> ben = new ArrayList<>();
@@ -177,7 +177,7 @@ public class DaoBenevole {
 		benevol.setEmail(rs.getObject( "email", String.class ));
 		benevol.setAdresse(rs.getObject( "adresse", String.class ));
 		benevol.setCommentaire(rs.getObject( "commentaire", String.class ));
-		benevol.setPermisC(rs.getObject( "permisc", Boolean.class ));
+		benevol.setPermisConduire(rs.getBoolean( "permisconduire"));
 		benevol.setDateNaiss(rs.getObject( "dateNaiss", LocalDate.class ));
 		return benevol;
 	}
@@ -229,7 +229,7 @@ public class DaoBenevole {
 			stmt.setObject(4, benevol.getEmail());
 			stmt.setObject(5, benevol.getAdresse());
 			stmt.setObject(6, benevol.getCommentaire());
-			stmt.setObject(7, benevol.isPermisC());
+			stmt.setObject(7, benevol.isPermisConduire());
 			stmt.setObject(8, benevol.getDateNaiss());
 			
 			stmt.setObject( 9, benevol.getId() );
@@ -238,6 +238,31 @@ public class DaoBenevole {
 			throw new RuntimeException(e);
 		} finally {
 			UtilJdbc.close( stmt, cn );
+		}
+		
+	}
+
+
+	public static Benevole affich(Benevole ben) {
+		Connection			cn		= null;
+		PreparedStatement	stmt	= null;
+		ResultSet 			rs 		= null;
+		String				sql;
+
+		try {
+			cn = dataSource.getConnection();
+
+			sql = "SELECT * FROM benevole WHERE id= ?";
+			stmt = cn.prepareStatement(sql);
+			stmt.setObject( 1, ben.getId());
+			rs = stmt.executeQuery();
+
+			return ben;
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close( rs, stmt, cn );
 		}
 		
 	}

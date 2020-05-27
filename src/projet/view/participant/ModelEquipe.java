@@ -11,6 +11,7 @@ import projet.dao.DaoParticipant;
 import projet.dao.DaoCompetition;
 import projet.dao.DaoEquipe;
 import projet.data.Benevole;
+import projet.data.Equipe;
 
 
 public class ModelEquipe  {
@@ -20,7 +21,7 @@ public class ModelEquipe  {
 	
 	private final ObservableList<Benevole> liste = FXCollections.observableArrayList(); 
 	
-	private final Benevole	courant = new Benevole();
+	private final Equipe	courant = new Equipe();
 
 	
 	// Autres champs

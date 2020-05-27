@@ -3,29 +3,57 @@ package projet.view.benevole;
 import javax.inject.Inject;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.util.converter.IntegerStringConverter;
 import jfox.javafx.util.ConverterStringInteger;
 import jfox.javafx.util.ListenerFocusValidation;
 import jfox.javafx.view.IManagerGui;
+import projet.data.Benevole;
 import projet.data.Equipe;
 import projet.view.EnumView;
 
 
-public class ControllerServiceForm {
+public class ControllerAffectationTacheForm {
 
 	
 	// Composants de la vue
 	
 	@FXML
-	private TextField		textFieldId;
+	private ComboBox<Postes>	Poste;
 	@FXML
-	private TextField		textFieldNom;
+	private DatePicker	Date;
 	@FXML
-	private TextField		textFieldAnneeCreation;
+	private CheckBox Tache1; 
 	@FXML
-	private CheckBox		checkBoxSiege;
+	private CheckBox Tache2;
+	@FXML
+	private CheckBox Tache3; 
+	@FXML
+	private CheckBox Tache4; 
+	@FXML
+	private CheckBox Tache5; 
+	@FXML
+	private CheckBox Tache6; 
+	@FXML
+	private CheckBox Tache7; 
+	@FXML
+	private CheckBox Tache8; 
+	@FXML
+	private CheckBox Tache9; 
+	@FXML
+	private CheckBox Tache10; 
+	@FXML
+	private CheckBox Tache11;
+	@FXML
+	private CheckBox Tache12;
+	@FXML
+	private Button buttonOK;
+	@FXML
+	private Button buttonAnnuler;
 
 	
 	// Autres champs
@@ -33,7 +61,7 @@ public class ControllerServiceForm {
 	@Inject
 	private IManagerGui		managerGui;
 	@Inject
-	private ModelBenevole	modelService;
+	private ModelBenevole	modelBenevole;
 
 
 	// Initialisation du Controller
@@ -43,9 +71,9 @@ public class ControllerServiceForm {
 
 		// Data binding
 		
-		Equipe courant = modelService.getCourant();
+		Benevole courant = modelBenevole.getCourant();
 
-		textFieldId.textProperty().bindBidirectional( courant.idProperty(), new IntegerStringConverter()  );
+		Poste.textProperty().bindBidirectional( courant.PosteProperty(), new ConverterStringInteger()  );
 
 		textFieldNom.textProperty().bindBidirectional( courant.nomProperty() );
 		
@@ -61,13 +89,13 @@ public class ControllerServiceForm {
 	
 	@FXML
 	private void doAnnuler() {
-		managerGui.showView( EnumView.ServiceListe );
+		managerGui.showView( EnumView.BenevoleListe );
 	}
 	
 	@FXML
 	private void doValider() {
-		modelService.validerMiseAJour();
-		managerGui.showView( EnumView.ServiceListe );
+		modelBenevole.validerMiseAJour();
+		managerGui.showView( EnumView.BenevoleListe );
 	}
 	
 }

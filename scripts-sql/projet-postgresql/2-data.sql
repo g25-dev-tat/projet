@@ -40,3 +40,15 @@ INSERT INTO role (idadmin, role) VALUES
   ( 3, 'UTILISATEUR' ),
   ( 4, 'UTILISATEUR' ),
   ( 5, 'UTILISATEUR' );
+  
+  
+ --Benevole
+  INSERT INTO "benevole" (Id, Nom, Prenom, Telephone, email, adresse, commentaire, datenaiss, permisconduire) 
+VALUES (1,'Samson','NZUMGUENG',0642279765,'nzumgues@3il.fr','9 rue deverrine, 87000, limoges','souhait poste : signaleur, photographe, ravi eau','12-12-2020',false),
+(2,'Daniel','NZUMGUENG',0642279765,'nzumgued@3il.fr','9 rue deverrine, 87000, limoges','parking velo, parking voiture, ravitaillement, chrono','12-12-2020',true),
+(3,'Fabrice','NZUMGUENG',0642279765,'nzumguef@3il.fr','9 rue deverrine, 87000, limoges','recuperer dossards/puces, moto (ouverture, fermeture), photographe','12-12-2020',true),
+(4,'Frances','NZUMGUENG',0642279765,'nzumguefr@3il.fr','9 rue deverrine, 87000, limoges','buvette, repas, photographe','12-12-2020',true),
+(5,'Joel','NZUMGUENG',0642279765,'nzumguej@3il.fr','9 rue deverrine, 87000, limoges','ravitaillement, secu eau, remise dossards','12-12-2020',true),
+(6,'Danielle','NZUMGUENG',0642279765,'nzumgueda@3il.fr','9 rue deverrine, 87000, limoges','signaleur, ravi eau, Chrono, remise dossards','12-12-2020',true);
+
+

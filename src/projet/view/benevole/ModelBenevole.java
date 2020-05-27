@@ -42,17 +42,17 @@ public class ModelBenevole  {
 	// Actualisations
 	
 	public void actualiserListe() {
-		liste.setAll( daoBenevole.listerTout() );
+		liste.setAll( daoBenevole.listerBenevole() );
  	}
 
 
 	// Actions
 	
-	public void preparerAjouter() {
+	public void preparerAttribution() {
 		mapper.update( courant, new Benevole() );
 	}
 	
-	public void preparerModifier( Benevole item ) {
+	public void preparerImpression( Benevole item ) {
 		mapper.update( courant, daoBenevole.retrouver( item.getId() ) );
 	}
 	
@@ -98,6 +98,15 @@ public class ModelBenevole  {
 		daoBenevole.supprimer( item.getId() );
 		System.out.println( UtilFX.findNext( liste, item ) );
 		mapper.update( courant, UtilFX.findNext( liste, item ) );
+	}
+
+	public Benevole afficher(Benevole item) {
+		Benevole b;
+		b=DaoBenevole.affich(item);
+		System.out.println(item);
+		mapper.update( courant, item );
+		return b;
+		
 	}
 	
 }

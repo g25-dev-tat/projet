@@ -22,7 +22,7 @@ public class Benevole  {
 	private final StringProperty		email		= new SimpleStringProperty();
 	private final StringProperty		adresse		= new SimpleStringProperty();
 	private final StringProperty		commentaire		= new SimpleStringProperty();
-	private final Property<Boolean>		permisC		= new SimpleObjectProperty<>();
+	private final Property<Boolean>		permisConduire		= new SimpleObjectProperty<>();
 	private final Property<LocalDate> dateNaiss		= new SimpleObjectProperty<>();
 	
 	
@@ -31,7 +31,7 @@ public class Benevole  {
 	public Benevole() {
 	}
 
-	public Benevole(int id, String nom, String prenom, int telephone, String email, String adresse, String commentaire, Boolean permisC, LocalDate dateNaiss) {
+	public Benevole(int id, String nom, String prenom, int telephone, String email, String adresse, String commentaire, Boolean permisConduire, LocalDate dateNaiss) {
 		setId(id);
 		setNom(nom);
 		setPrenom(prenom);
@@ -39,7 +39,7 @@ public class Benevole  {
 		setEmail(email);
 		setAdresse(adresse);
 		setCommentaire(commentaire);
-		setPermisC(permisC);
+		setPermisConduire(permisConduire);
 		setDateNaiss(dateNaiss);
 	}
 	
@@ -176,18 +176,18 @@ public class Benevole  {
 	}
 	
 
-	public final Property<Boolean> permisCProperty() {
-		return this.permisC;
+	public final Property<Boolean> permisConduireProperty() {
+		return this.permisConduire;
 	}
 	
 
-	public final boolean isPermisC() {
-		return ((WritableBooleanValue) this.permisCProperty()).get();
+	public final Boolean isPermisConduire() {
+		return this.permisConduireProperty().getValue();
 	}
 	
 
-	public final void setPermisC(final boolean permisC) {
-		((WritableBooleanValue) this.permisCProperty()).set(permisC);
+	public final void setPermisConduire(final Boolean permisConduire) {
+		this.permisConduireProperty().setValue(permisConduire);
 	}
 
 	public final Property<LocalDate> dateNaissProperty() {
@@ -202,6 +202,11 @@ public class Benevole  {
 
 	public final void setDateNaiss(final LocalDate dateNaiss) {
 		this.dateNaissProperty().setValue(dateNaiss);
+	}
+
+	public Property<Boolean> PosteProperty() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

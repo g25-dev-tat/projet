@@ -1,14 +1,14 @@
-package projet.view.test;
+package projet.view.ContactAdmin;
 
 import javax.inject.Inject;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import jfox.javafx.util.UtilFX;
-import projet.dao.DaoCompetition;
+import projet.dao.DaoCourse;
 
 
-public class ControllerTestDaoMemo {
+public class ControllerTestDaoService {
 	
 	
 	// Composants visuales
@@ -20,7 +20,7 @@ public class ControllerTestDaoMemo {
 	// Autres champs
 	
 	@Inject
-	private DaoCompetition			dao;
+	private DaoCourse			dao;
 	
 	private final int		id = 1;	
 	
