@@ -4,13 +4,11 @@ import javax.inject.Inject;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import jfox.commun.exception.ExceptionValidation;
 import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
 import projet.dao.DaoEquipe;
-import projet.data.Benevole;
-import projet.data.AdminAppli;
-import projet.data.Course;
+import projet.dao.DaoParticipant;
+import projet.data.Equipe;
 import projet.data.Participant;
 
 
@@ -19,9 +17,9 @@ public class ModelParticipant {
 	
 	// Données observables 
 	
-	private final ObservableList<AdminAppli> liste = FXCollections.observableArrayList();
+	private final ObservableList<Participant> liste = FXCollections.observableArrayList();
 	
-	private final Participant		courant = new Participant();
+	private final Participant	courant = new Participant();
 	
 	
 	// Autres champs
@@ -29,99 +27,48 @@ public class ModelParticipant {
     @Inject
 	private IMapper		        mapper;
     @Inject
-	private DaoEquipe			daoPersonne;
+	private DaoEquipe			daoEquipe;
 	@Inject
-    private ModelEquipe 		modelCategorie;
+    private ModelEquipe 		modelEquipe;
 	
 	
 	// Getters 
 	
-	public ObservableList<AdminAppli> getListe() {
+	public ObservableList<Participant> getListe() {
 		return liste;
 	}
 	
-	public AdminAppli getCourant() {
+	public Participant getCourant() {
 		return courant;
 	}
 	
-	public ObservableList<Benevole> getCategories() {
-		return modelCategorie.getListe();
+	public ObservableList<Equipe> getEquipe() {
+		return modelEquipe.getListe();
 	}
 
 	
 	// Actualisations
 	
 	public void actualiserListe() {
-		liste.setAll( daoPersonne.listerTout() );
+		liste.setAll( DaoParticipant.listerTout() );
 	}
 
 	
 	// Actions
 	
-	public void preparerAjouter() {
-		modelCategorie.actualiserListe();
-		mapper.update( courant, new AdminAppli() );
-	}
-	
 
-	public void preparerModifier( AdminAppli item ) {
-		modelCategorie.actualiserListe();
-		mapper.update( courant, daoPersonne.retrouver( item.getId() ) );
-	}
-	
-
-	public void validerMiseAJour() {
-
-		// Vérifie la validité des données
-		
-		StringBuilder message = new StringBuilder();
-		
-		if( courant.getNom() == null || courant.getNom().isEmpty() ) {
-			message.append( "\nLe nom ne doit pas être vide." );
-		} else  if ( courant.getNom().length()> 25 ) {
-			message.append( "\nLe nom est trop long." );
-		}
-
-		if( courant.getPrenom() == null || courant.getPrenom().isEmpty() ) {
-			message.append( "\nLe prénom ne doit pas être vide." );
-		} else if ( courant.getPrenom().length()> 25 ) {
-			message.append( "\nLe prénom est trop long." );
-		}
-
-		if( courant.getCategorie() == null ) {
-			message.append( "\nLe catégorie doit être indiquée." );
-		}
-		
-		if ( message.length() > 0 ) {
-			throw new ExceptionValidation( message.toString().substring(1) );
-		}
-
-		
-		// Effectue la mise à jour
-		
-		if ( courant.getId() == null ) {
-			// Insertion
-			courant.setId( daoPersonne.inserer( courant ) );
-		} else {
-			// modficiation
-			daoPersonne.modifier( courant );
-		}
-	}
-	
-
-	public void supprimer( AdminAppli item ) {
-		daoPersonne.supprimer( item.getId() );
+	public void supprimer( Participant item ) {
+		DaoParticipant.supprimer( item.getId() );
 		mapper.update( courant, UtilFX.findNext( liste, item ) );
 	}
 	
-
-	public void ajouterTelephone() {
-		courant.getTelephones().add( new Course() );
-	}
-	
-
-	public void supprimerTelephone( Course telephone )  {
-		courant.getTelephones().remove( telephone );
+	public Participant afficher(Participant item) {
+		Participant p;
+		p=DaoParticipant.affich(item);
+		System.out.println(item);
+		mapper.update( courant, item );
+		return p;
+		
 	}
 	
 }

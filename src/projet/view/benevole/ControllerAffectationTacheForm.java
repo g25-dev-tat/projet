@@ -70,17 +70,18 @@ public class ControllerAffectationTacheForm {
 	private void initialize() {
 
 		// Data binding
+		System.out.println("Initilisation de l'affectation des taches");
 		
 		Benevole courant = modelBenevole.getCourant();
-
-		Poste.textProperty().bindBidirectional( courant.PosteProperty(), new ConverterStringInteger()  );
-
-		textFieldNom.textProperty().bindBidirectional( courant.nomProperty() );
-		
-		textFieldAnneeCreation.textProperty().bindBidirectional( courant.anneeCreationProperty(), new ConverterStringInteger( "###0" ) );
-		textFieldAnneeCreation.focusedProperty().addListener( new ListenerFocusValidation( courant.anneeCreationProperty()  ));
-		
-		checkBoxSiege.selectedProperty().bindBidirectional( courant.flagSiegeProperty() );
+//
+//		Poste.textProperty().bindBidirectional( courant.PosteProperty(), new ConverterStringInteger()  );
+//
+//		textFieldNom.textProperty().bindBidirectional( courant.nomProperty() );
+//		
+//		textFieldAnneeCreation.textProperty().bindBidirectional( courant.anneeCreationProperty(), new ConverterStringInteger( "###0" ) );
+//		textFieldAnneeCreation.focusedProperty().addListener( new ListenerFocusValidation( courant.anneeCreationProperty()  ));
+//		
+//		checkBoxSiege.selectedProperty().bindBidirectional( courant.flagSiegeProperty() );
 		
 	}
 	

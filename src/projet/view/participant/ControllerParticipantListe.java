@@ -1,4 +1,4 @@
-package projet.view.benevole;
+package projet.view.participant;
 
 import javax.inject.Inject;
 
@@ -10,30 +10,31 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import jfox.javafx.util.UtilFX;
 import jfox.javafx.view.IManagerGui;
-import projet.dao.DaoBenevole;
-import projet.data.Benevole;
-import projet.view.EnumView;
+import projet.dao.DaoEquipe;
+import projet.dao.DaoParticipant;
+import projet.data.Equipe;
+import projet.data.Participant;
 
 
-public class ControllerBenevoleListe {
+public class ControllerParticipantListe {
 	
 	
 	// Composants de la vue
 
 	@FXML
-	private ListView<Benevole>	listView;
+	private ListView<Participant>	listView;
 	@FXML
-	private Button	buttonAttribuerUneTache;
+	private Button	buttonjustif;
 	@FXML
 	private Button	buttonSupprimer;
 	@FXML
 	private Button	buttonImprimer;
 	@FXML
-	private Button	buttonVoirBenevole;
+	private Button	buttonVoirParticipant;
 	@FXML
 	private TextArea affichInfo;
 	@FXML
-	private TextArea affichTache;
+	private TextArea affichEq;
 
 
 	// Autres champs
@@ -41,7 +42,7 @@ public class ControllerBenevoleListe {
 	@Inject
 	private IManagerGui			managerGui;
 	@Inject
-	private ModelBenevole		modelBenevole;
+	private ModelParticipant		modelParticipant;
 	
 	
 	// Initialisation du Controller
@@ -50,7 +51,7 @@ public class ControllerBenevoleListe {
 	private void initialize() {
 
 		// Data binding
-		listView.setItems( modelBenevole.getListe() );
+		listView.setItems( modelParticipant.getListe() );
 		
 		listView.setCellFactory(  UtilFX.cellFactory( item -> item.getNom() ));
 		
@@ -64,8 +65,8 @@ public class ControllerBenevoleListe {
 	}
 	
 	public void refresh() {
-		modelBenevole.actualiserListe();
-		UtilFX.selectInListView( listView, modelBenevole.getCourant() );
+		modelParticipant.actualiserListe();
+		UtilFX.selectInListView( listView, modelParticipant.getCourant() );
 		listView.requestFocus();
 	}
 
@@ -73,53 +74,64 @@ public class ControllerBenevoleListe {
 	// Actions
 	
 	@FXML
-	private void doAttribuerUneTache() {
-		modelBenevole.preparerAttribution();;
-		managerGui.showView( EnumView.AffectationTacheForm );
+	private void doJustif() {
+		//modelParticipant.preparerAttribution();;
+		//managerGui.showView( EnumView.AffectationTacheForm );
 	}
 
 	@FXML
 	private void doImprimer() {
-		System.out.println("ici impression de la liste des bénévoles");
-		//List<Benevole> item = listView.getSelectionModel().getSelectedItem();
+		System.out.println("ici impression de la liste des participants");
+		//List<Participant> item = listView.getSelectionModel().getSelectedItem();
 //		if ( item == null ) {
 //			managerGui.showDialogError( "Aucun élément n'est sélectionné dans la liste.");
 //		} else {
-//			modelBenevole.preparerImpression(item);
+//			modelParticipant.preparerImpression(item);
 //			managerGui.showView( EnumView.AffectationTacheForm );
 //		}
 	}
 
 	@FXML
 	private void doSupprimer() {
-		Benevole item = listView.getSelectionModel().getSelectedItem();
+		Participant item = listView.getSelectionModel().getSelectedItem();
 		if ( item == null ) {
 			managerGui.showDialogError( "Aucun élément n'est sélectionné dans la liste.");
 		} else {
 			boolean reponse = managerGui.showDialogConfirm( "Confirmez-vous la suppresion ?" );
 			if ( reponse ) {
-				modelBenevole.supprimer( item );
+				modelParticipant.supprimer( item );
 				refresh();
 			}
 		}
 	}
 	
 	@FXML
-	private void doVoirBenevole() {
-		Benevole item = listView.getSelectionModel().getSelectedItem();
-		Boolean permis=DaoBenevole.affich(item).isPermisConduire();
-		String p="oui";
-		if(permis)
-			p="oui";
+	private void doVoirParticipant() {
+		Participant item = listView.getSelectionModel().getSelectedItem();
+		Equipe eq=new Equipe();
+		Equipe eq1=new Equipe();
+		//boolean p=true;
+		eq=DaoEquipe.affich(item, eq1);
+		
+		String paye="oui";
+		if(eq.isPaye())
+			paye="Oui";
 		else
-			p="non";
+			paye="Non";
+		
+		//boolean v=DaoEquipe.affich(item,eq).equals(eq.getValide());
+		String valide="oui";
+		if(eq.getValide())
+			valide="Oui";
+		else
+			valide="Non";
 		
 		if ( item == null ) {
 			managerGui.showDialogError( "Aucun élément n'est sélectionné dans la liste.");
 		} else {
-				modelBenevole.afficher( item );
-				affichInfo.setText("\t\tInformations personnelles\n\nNom :\t "+DaoBenevole.affich(item).getPrenom()+"\nPrenom :\t "+DaoBenevole.affich(item).getNom()+"\nDate de naissance :  "+DaoBenevole.affich(item).getDateNaiss()+"\nAdresse : "+DaoBenevole.affich(item).getAdresse()+"\nTel : "+DaoBenevole.affich(item).getTelephone()+"\nEmail :  "+DaoBenevole.affich(item).getEmail()+"\nPermis de conduire :  "+p+"\nCommentaires & souhaits du benevole : \n\t\t"+DaoBenevole.affich(item).getCommentaire());
-				affichTache.setText("Poste :\t"+"\nTaches : \t");
+				modelParticipant.afficher( item );
+				affichInfo.setText("\t\tInformations personnelles\n\nNom :\t "+DaoParticipant.affich(item).getNom()+"\nPrenom :\t "+DaoParticipant.affich(item).getPrenom()+"\nDate de naissance :  "+DaoParticipant.affich(item).getDateNaiss()+"\nAdresse : "+DaoParticipant.affich(item).getAdresse()+"\nTel : "+DaoParticipant.affich(item).getTelephone()+"\nEmail :  "+DaoParticipant.affich(item).getEmail()+"\nClub :  "+DaoParticipant.affich(item).getClub()+"\nJustificatifs : "+DaoParticipant.affich(item).getJustificatifs()+"\nCommentaires : \n\t\t"+DaoParticipant.affich(item).getCommentaire());
+				affichEq.setText("Nom Equipe :\t"+DaoEquipe.affich(item,eq).getNomEq()+"\nEtat : \n\tPayé : "+paye+"\n\tValide : "+valide+"\n\tNombre repas : "+DaoEquipe.affich(item,eq).getNbr_Repas());
 				refresh();
 		}
 	}
@@ -135,8 +147,8 @@ public class ControllerBenevoleListe {
 				if ( listView.getSelectionModel().getSelectedIndex() == -1 ) {
 					managerGui.showDialogError( "Aucun élément n'est sélectionné dans la liste.");
 				} else {
-					if(event.getButton().equals(buttonAttribuerUneTache))
-						doAttribuerUneTache();
+					if(event.getButton().equals(buttonjustif))
+						doJustif();
 					if(event.getButton().equals(buttonSupprimer))
 						doSupprimer();
 				}
@@ -150,13 +162,13 @@ public class ControllerBenevoleListe {
 	private void configurerBoutons() {
 		
     	if( listView.getSelectionModel().getSelectedItems().isEmpty() ) {
-			buttonAttribuerUneTache.setDisable(true);
+			buttonjustif.setDisable(true);
 			buttonSupprimer.setDisable(true);
-			buttonVoirBenevole.setDisable(true);
+			buttonVoirParticipant.setDisable(true);
 		} else {
-			buttonAttribuerUneTache.setDisable(false);
+			buttonjustif.setDisable(false);
 			buttonSupprimer.setDisable(false);
-			buttonVoirBenevole.setDisable(false);
+			buttonVoirParticipant.setDisable(false);
 		}
 	}
 

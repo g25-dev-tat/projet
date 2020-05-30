@@ -75,6 +75,7 @@ public class ControllerInfo {
 	@FXML
 	private void Participant(ActionEvent ev) {
 		System.out.println("Participant");
+		managerGui.showView(EnumView.ParticipantListe);
 	}
 	
 	@FXML

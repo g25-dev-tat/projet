@@ -123,13 +123,13 @@ CREATE TABLE Course(
 ------------------------------------------------------------
 CREATE TABLE Equipe(
 	Id              SERIAL NOT NULL ,
-	NomEq           VARCHAR (20) NOT NULL ,
+	NomEq           VARCHAR (50) NOT NULL ,
 	Paye            BOOL  NOT NULL ,
 	Valide          BOOL  NOT NULL ,
 	Commentaire     VARCHAR (255) NOT NULL ,
 	NbreRepas       INT  NOT NULL ,
-	temps_mis       TIMETZ  NOT NULL ,
-	Id_Course       INT  NOT NULL  ,
+	temps_mis       TIMETZ,
+	Id_Course       INT,
 	CONSTRAINT Equipe_PK PRIMARY KEY (Id)
 
 	,CONSTRAINT Equipe_Course_FK FOREIGN KEY (Id_Course) REFERENCES Course(Id)

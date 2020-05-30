@@ -82,6 +82,13 @@ public class Equipe {
 		return this.paye;
 	}
 	
+	public final Boolean isPaye() {
+		return this.payeProperty().getValue();
+	}
+	
+	public final Boolean isValide() {
+		return this.valideProperty().getValue();
+	}
 
 	public final Boolean getPaye() {
 		return this.payeProperty().getValue();

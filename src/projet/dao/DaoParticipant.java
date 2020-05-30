@@ -21,7 +21,7 @@ public class DaoParticipant {
 	// Champs
 
 	@Inject
-	private DataSource		dataSource;
+	private static DataSource		dataSource;
 
 	
 	// Actions
@@ -76,7 +76,7 @@ public class DaoParticipant {
 //	}
 
 
-	public void supprimer(int id) {
+	public static void supprimer(int id) {
 
 		Connection			cn 		= null;
 		PreparedStatement	stmt 	= null;
@@ -124,7 +124,7 @@ public class DaoParticipant {
 	}
 
 
-	public List<Participant> listerTout() {
+	public static List<Participant> listerTout() {
 
 		Connection			cn 		= null;
 		PreparedStatement	stmt 	= null;
@@ -153,12 +153,12 @@ public class DaoParticipant {
 	
 	// Méthodes auxiliaires
 	
-	private Participant construireParticipant( ResultSet rs ) throws SQLException {
+	private static Participant construireParticipant( ResultSet rs ) throws SQLException {
 		Participant part = new Participant();
 		part.setId( rs.getObject( "id", Integer.class ) );
 		part.setNom( rs.getObject( "nom", String.class ) );
 		part.setPrenom( rs.getObject( "prenom", String.class ) );
-		part.setTelephone( rs.getObject( "telepphone", Integer.class ) );
+		part.setTelephone( rs.getObject( "telephone", Integer.class ) );
 		part.setEmail( rs.getObject( "email", String.class ) );
 		part.setAdresse( rs.getObject( "adresse", String.class ) );
 		part.setJustificatifs( rs.getObject( "justificatifs", String.class ) );
@@ -166,6 +166,30 @@ public class DaoParticipant {
 		part.setClub( rs.getObject( "club", String.class ) );
 		part.setDateNaiss( rs.getObject( "dateNaiss", LocalDate.class ) );
 		return part;
+	}
+
+
+	public static Participant affich(Participant item) {
+		Connection			cn		= null;
+		PreparedStatement	stmt	= null;
+		ResultSet 			rs 		= null;
+		String				sql;
+
+		try {
+			cn = dataSource.getConnection();
+
+			sql = "SELECT * FROM participant WHERE id= ?";
+			stmt = cn.prepareStatement(sql);
+			stmt.setObject( 1, item.getId());
+			rs = stmt.executeQuery();
+
+			return item;
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close( rs, stmt, cn );
+		}
 	}
 
 }

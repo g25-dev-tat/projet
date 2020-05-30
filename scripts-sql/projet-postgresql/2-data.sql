@@ -52,3 +52,13 @@ VALUES (1,'Samson','NZUMGUENG',0642279765,'nzumgues@3il.fr','9 rue deverrine, 87
 (6,'Danielle','NZUMGUENG',0642279765,'nzumgueda@3il.fr','9 rue deverrine, 87000, limoges','signaleur, ravi eau, Chrono, remise dossards','12-12-2020',true);
 
 
+--Equipe
+INSERT INTO "equipe"(Id, nomeq, paye, valide, commentaire, nbrerepas)
+VALUES (1, 'NZUMGUENG.TCHEA',true,true,'Ok',2);
+
+
+--Participant
+  INSERT INTO "participant" (Id, Nom, Prenom, telephone, email, adresse, justificatifs, commentaire, datenaiss, club, id_equipe) 
+VALUES (1, 'NZUMGUENG', 'Samson', 0642279765, 'nzumges@3il.fr', 'rue deverrine, 87000, limoges', 'justificatif-capitaine.pdf', 'Capitaine', '12-12-2020','3iL',1),
+(2, 'TCHEA', 'Jordan', 0642279765, 'tcheaj@3il.fr', 'avenue albert thomas, 87000, limoges', 'justificatif-equipier.pdf', 'Equipier', '12-12-2020','3iL',1);
+

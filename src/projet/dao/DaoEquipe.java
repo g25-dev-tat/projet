@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 
 import jfox.dao.jdbc.UtilJdbc;
 import projet.data.Equipe;
+import projet.data.Participant;
 
 
 public class DaoEquipe {
@@ -21,7 +22,7 @@ public class DaoEquipe {
 	// Champs
 
 	@Inject
-	private DataSource		dataSource;
+	private static DataSource		dataSource;
 	@Inject
 	private DaoParticipant	daopart;
 
@@ -94,7 +95,7 @@ public class DaoEquipe {
 //	}
 
 	
-	public void supprimer(int id)  {
+	public static void supprimer(int id)  {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -145,7 +146,7 @@ public class DaoEquipe {
 	}
 
 	
-	public List<Equipe> listerTout()   {
+	public static List<Equipe> listerTout()   {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -230,7 +231,7 @@ public class DaoEquipe {
 	
 	// Méthodes auxiliaires
 	
-	private Equipe construireEquipe(ResultSet rs) throws SQLException {
+	private static Equipe construireEquipe(ResultSet rs) throws SQLException {
 
 		Equipe eq= new Equipe();
 		eq.setId(rs.getObject( "id", Integer.class ));
@@ -252,6 +253,57 @@ public class DaoEquipe {
 
 	public void setDaopart(DaoParticipant daopart) {
 		this.daopart = daopart;
+	}
+
+	public static Equipe affich(Participant item, Equipe eq) {
+		Connection			cn		= null;
+		PreparedStatement	stmt=null;
+		ResultSet 			rs = null;
+		String				sql;
+		
+		int id=affch(item);
+
+		try {
+			cn = dataSource.getConnection();
+
+			sql = "SELECT * FROM equipe WHERE id= ?";
+			stmt = cn.prepareStatement(sql);
+			stmt.setObject( 1, id);
+			rs = stmt.executeQuery();
+
+			return eq;
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close( rs, stmt, cn );
+		}
+	}
+	
+	public static int affch(Participant item) {
+		
+		Connection			cn		= null;
+		PreparedStatement	stmt=null ;
+		ResultSet 			rs = null;
+		String				sql;
+		int e = 0;
+
+		try {
+			cn = dataSource.getConnection();
+			
+			sql = "SELECT id_equipe FROM participant WHERE id= ?";
+			stmt = cn.prepareStatement(sql);
+			stmt.setObject( 1, item.getId());
+			rs = stmt.executeQuery();
+
+			return e;
+
+		} catch (SQLException err) {
+			throw new RuntimeException(err);
+		} finally {
+			UtilJdbc.close( rs, stmt, cn );
+		}
+		
 	}
 	
 }

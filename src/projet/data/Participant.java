@@ -64,7 +64,7 @@ public class Participant  {
 	}
 
 	public final Integer getTelephone() {
-		return this.idProperty().getValue();
+		return this.telephoneProperty().getValue();
 	}
 
 	public final void setTelephone(final Integer telephone) {

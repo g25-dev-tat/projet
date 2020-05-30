@@ -12,6 +12,8 @@ public enum EnumView implements IEnumView {
 	Info				( "systeme/ViewInfo.fxml" ),
 	BenevoleListe		( "benevole/ViewBenevoleListe.fxml" ),
 	AffectationTacheForm	( "benevole/ViewAffectationTacheForm.fxml" ),
+	ParticipantListe		( "participant/ViewParticipantListe.fxml" ),
+	
 	
 	Connexion			( "systeme/ViewConnexion.fxml" ),
 	CompteListe			( "compte/ViewCompteListe.fxml" ),
