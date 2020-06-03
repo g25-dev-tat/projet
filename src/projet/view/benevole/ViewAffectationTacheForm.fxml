@@ -40,7 +40,7 @@
                      <children>
                         <VBox prefHeight="129.0" prefWidth="114.0" spacing="5.0">
                            <children>
-                              <CheckBox fx:id="Tache1" mnemonicParsing="false" text="CheckBox" />
+                              <CheckBox fx:id="Tache1" mnemonicParsing="false" text="Dossards" textFill="#0be3f2" />
                               <CheckBox fx:id="Tache2" mnemonicParsing="false" text="CheckBox" />
                               <CheckBox fx:id="Tache3" mnemonicParsing="false" text="CheckBox" />
                               <CheckBox fx:id="Tache4" mnemonicParsing="false" text="CheckBox" />

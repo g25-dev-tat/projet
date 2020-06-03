@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -26,55 +27,64 @@
             <Image url="@../../images/Image4.png" />
          </image>
       </ImageView>
-      <VBox id="root" alignment="CENTER" fillWidth="false" layoutX="164.0" layoutY="210.0" prefHeight="222.0" prefWidth="364.0" spacing="17.0" stylesheets="@../../fond/style1.css">
+      <Group layoutX="164.0" layoutY="210.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="21.0" prefWidth="337.0">
+            <VBox id="root" accessibleRole="BUTTON" alignment="CENTER" fillWidth="false" focusTraversable="true" nodeOrientation="LEFT_TO_RIGHT" onSwipeDown="#refresh" onSwipeLeft="#refresh" onSwipeRight="#refresh" onSwipeUp="#initialize" prefHeight="222.0" prefWidth="364.0" spacing="17.0" stylesheets="@../../fond/style1.css">
                <children>
-                  <Text fill="WHITE" stroke="#0cb54a" strokeType="OUTSIDE" strokeWidth="0.0" text="Connectez-vous pour entrer" textAlignment="JUSTIFY">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets right="30.0" />
-                     </HBox.margin>
-                  </Text>
+                  <HBox alignment="CENTER" prefHeight="21.0" prefWidth="337.0">
+                     <children>
+                        <Text fill="WHITE" stroke="#0cb54a" strokeType="OUTSIDE" strokeWidth="0.0" text="Connectez-vous pour entrer" textAlignment="JUSTIFY">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="30.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <GridPane alignment="CENTER" prefHeight="74.0" prefWidth="250.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="86.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="114.0" minWidth="10.0" prefWidth="114.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Login : " textFill="#0bb3db">
+                           <font>
+                              <Font name="Arial Narrow" size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="fieldPseudo" prefHeight="26.0" prefWidth="133.0" GridPane.columnIndex="1" />
+                        <Label prefHeight="20.0" prefWidth="126.0" text="Mot de passe :" textFill="#0bb4de" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="14.7" />
+                           </font>
+                        </Label>
+                        <PasswordField fx:id="fieldMotDePasse" prefHeight="25.0" prefWidth="117.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <FlowPane alignment="CENTER" opacity="0.38" prefHeight="289.0" prefWidth="384.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                     </children>
+                  </GridPane>
+                  <HBox alignment="CENTER" prefHeight="28.0" prefWidth="337.0">
+                     <children>
+                        <Button defaultButton="true" mnemonicParsing="false" onAction="#doConnexion" text="Connexion" />
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
-            <GridPane alignment="CENTER" prefHeight="74.0" prefWidth="250.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="86.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="114.0" minWidth="10.0" prefWidth="114.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Label text="Login : " textFill="#09dd09">
-                     <font>
-                        <Font name="Arial Narrow" size="20.0" />
-                     </font></Label>
-                  <TextField fx:id="fieldPseudo" prefHeight="26.0" prefWidth="133.0" GridPane.columnIndex="1" />
-                  <Label prefHeight="20.0" prefWidth="126.0" text="Mot de passe :" textFill="#36e20b" GridPane.rowIndex="1">
-                     <font>
-                        <Font size="14.7" />
-                     </font></Label>
-                  <PasswordField fx:id="fieldMotDePasse" prefHeight="25.0" prefWidth="117.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <FlowPane alignment="CENTER" opacity="0.38" prefHeight="289.0" prefWidth="384.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-               </children>
-            </GridPane>
-            <HBox alignment="CENTER" prefHeight="28.0" prefWidth="337.0">
-               <children>
-                  <Button defaultButton="true" mnemonicParsing="false" onAction="#doConnexion" text="Connexion" />
-               </children>
-            </HBox>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="55.0" />
+               </padding>
+               <effect>
+                  <Glow level="0.17" />
+               </effect>
+            </VBox>
          </children>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <padding>
-            <Insets left="55.0" />
-         </padding>
-      </VBox>
+      </Group>
    </children>
 </AnchorPane>

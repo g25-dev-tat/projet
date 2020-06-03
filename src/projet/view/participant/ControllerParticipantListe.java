@@ -108,20 +108,19 @@ public class ControllerParticipantListe {
 	@FXML
 	private void doVoirParticipant() {
 		Participant item = listView.getSelectionModel().getSelectedItem();
-		Equipe eq=new Equipe();
 		Equipe eq1=new Equipe();
 		//boolean p=true;
-		eq=DaoEquipe.affich(item, eq1);
+		eq1=DaoEquipe.affich(item, eq1);
 		
 		String paye="oui";
-		if(eq.isPaye())
+		if(eq1.isPaye())
 			paye="Oui";
 		else
 			paye="Non";
 		
 		//boolean v=DaoEquipe.affich(item,eq).equals(eq.getValide());
 		String valide="oui";
-		if(eq.getValide())
+		if(eq1.getValide())
 			valide="Oui";
 		else
 			valide="Non";
@@ -131,7 +130,7 @@ public class ControllerParticipantListe {
 		} else {
 				modelParticipant.afficher( item );
 				affichInfo.setText("\t\tInformations personnelles\n\nNom :\t "+DaoParticipant.affich(item).getNom()+"\nPrenom :\t "+DaoParticipant.affich(item).getPrenom()+"\nDate de naissance :  "+DaoParticipant.affich(item).getDateNaiss()+"\nAdresse : "+DaoParticipant.affich(item).getAdresse()+"\nTel : "+DaoParticipant.affich(item).getTelephone()+"\nEmail :  "+DaoParticipant.affich(item).getEmail()+"\nClub :  "+DaoParticipant.affich(item).getClub()+"\nJustificatifs : "+DaoParticipant.affich(item).getJustificatifs()+"\nCommentaires : \n\t\t"+DaoParticipant.affich(item).getCommentaire());
-				affichEq.setText("Nom Equipe :\t"+DaoEquipe.affich(item,eq).getNomEq()+"\nEtat : \n\tPayé : "+paye+"\n\tValide : "+valide+"\n\tNombre repas : "+DaoEquipe.affich(item,eq).getNbr_Repas());
+				affichEq.setText("Nom Equipe :\t"+eq1.getNomEq()+"\nEtat : \n\tPayé : "+paye+"\n\tValide : "+valide+"\n\tNombre repas : "+DaoEquipe.affich(item,eq1).getNbr_Repas());
 				refresh();
 		}
 	}

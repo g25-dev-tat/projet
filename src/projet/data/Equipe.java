@@ -16,8 +16,8 @@ public class Equipe {
 	
 	private final Property<Integer>		id				= new SimpleObjectProperty<>();
 	private final StringProperty   	 	nomEq     	  	= new SimpleStringProperty();
-	private final Property<Boolean>		paye			= new SimpleObjectProperty<>();
-	private final Property<Boolean>		valide			= new SimpleObjectProperty<>();
+	private final Property<Boolean>		paye			= new SimpleObjectProperty<>(true);
+	private final Property<Boolean>		valide			= new SimpleObjectProperty<>(true);
 	private final StringProperty   	 	commentaire   	  	= new SimpleStringProperty();
 	private final Property<Integer>		nbr_Repas	= new SimpleObjectProperty<>();
 	private final Property<Time>		temps_mis		= new SimpleObjectProperty<>();
