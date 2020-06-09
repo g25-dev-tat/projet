@@ -82,7 +82,7 @@ public class ControllerInfo {
 	@FXML
 	private void Competition(ActionEvent ev) {
 		System.out.println("Compétition");
-		managerGui.showView(EnumView.Creercompetition);
+		managerGui.showView(EnumView.Creercompetition);//VUECOMPETITION
 	}
 	
 	@FXML
