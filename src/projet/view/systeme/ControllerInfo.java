@@ -50,6 +50,7 @@ public class ControllerInfo {
 	@Inject
 	private ModelInfo	modelInfo;
 	
+	
 	@Inject
 	private IManagerGui		managerGui;
 	
@@ -81,6 +82,7 @@ public class ControllerInfo {
 	@FXML
 	private void Competition(ActionEvent ev) {
 		System.out.println("Compétition");
+		managerGui.showView(EnumView.Creercompetition);
 	}
 	
 	@FXML
