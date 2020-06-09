@@ -22,7 +22,7 @@ public class DaoEquipe {
 	// Champs
 
 	@Inject
-	private static DataSource		dataSource;
+	private DataSource		dataSource;
 	@Inject
 	private DaoParticipant	daopart;
 
@@ -95,7 +95,7 @@ public class DaoEquipe {
 //	}
 
 	
-	public static void supprimer(int id)  {
+	public void supprimer(int id)  {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -118,7 +118,7 @@ public class DaoEquipe {
 	}
 
 	
-	public Equipe retrouver(Equipe eq)  {
+	public Equipe retrouver(int id)  {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -128,9 +128,9 @@ public class DaoEquipe {
 		try {
 			cn = dataSource.getConnection();
 
-			sql = "SELECT * FROM equipe WHERE nomeq = ?";
+			sql = "SELECT * FROM equipe WHERE id = ?";
             stmt = cn.prepareStatement(sql);
-            stmt.setObject( 1, eq.getNomEq());
+            stmt.setObject( 1, id);
             rs = stmt.executeQuery();
 
             if ( rs.next() ) {
@@ -146,7 +146,7 @@ public class DaoEquipe {
 	}
 
 	
-	public static List<Equipe> listerTout()   {
+	public List<Equipe> listerTout()   {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -231,7 +231,7 @@ public class DaoEquipe {
 	
 	// Méthodes auxiliaires
 	
-	private static Equipe construireEquipe(ResultSet rs) throws SQLException {
+	private Equipe construireEquipe(ResultSet rs) throws SQLException {
 
 		Equipe eq= new Equipe();
 		eq.setId(rs.getObject( "id", Integer.class ));
@@ -255,38 +255,39 @@ public class DaoEquipe {
 		this.daopart = daopart;
 	}
 
-	public static Equipe affich(Participant item, Equipe eq) {
-		Connection			cn		= null;
-		PreparedStatement	stmt=null;
-		ResultSet 			rs = null;
-		String				sql;
-		
-		int id=affch(item);
-
-		try {
-			cn = dataSource.getConnection();
-
-			sql = "SELECT * FROM equipe WHERE id= ?";
-			stmt = cn.prepareStatement(sql);
-			stmt.setObject( 1, id);
-			rs = stmt.executeQuery();
-
-			return eq;
-
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} finally {
-			UtilJdbc.close( rs, stmt, cn );
-		}
+	public Equipe affich(Participant item, Equipe eq) {
+//		Connection			cn		= null;
+//		PreparedStatement	stmt=null;
+//		ResultSet 			rs = null;
+//		String				sql;
+//		
+//		int id=affch(item);
+//
+//		try {
+//			cn = dataSource.getConnection();
+//
+//			sql = "SELECT * FROM equipe WHERE id= ?";
+//			stmt = cn.prepareStatement(sql);
+//			stmt.setObject( 1, id);
+//			rs = stmt.executeQuery();
+//
+//			return eq;
+//
+//		} catch (SQLException e) {
+//			throw new RuntimeException(e);
+//		} finally {
+//			UtilJdbc.close( rs, stmt, cn );
+//		}
+		return retrouver(affch(item));
 	}
 	
-	public static int affch(Participant item) {
+	public int affch(Participant item) {
 		
 		Connection			cn		= null;
 		PreparedStatement	stmt=null ;
 		ResultSet 			rs = null;
 		String				sql;
-		int e = 0;
+
 
 		try {
 			cn = dataSource.getConnection();
@@ -295,8 +296,12 @@ public class DaoEquipe {
 			stmt = cn.prepareStatement(sql);
 			stmt.setObject( 1, item.getId());
 			rs = stmt.executeQuery();
-
-			return e;
+			if ( rs.next() ) {
+                return rs.getObject("id_equipe", Integer.class);
+            } else {
+            	return 1;
+            }
+			
 
 		} catch (SQLException err) {
 			throw new RuntimeException(err);

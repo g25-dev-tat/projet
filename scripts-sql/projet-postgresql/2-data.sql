@@ -54,11 +54,15 @@ VALUES (1,'Samson','NZUMGUENG',0642279765,'nzumgues@3il.fr','9 rue deverrine, 87
 
 --Equipe
 INSERT INTO "equipe"(Id, nomeq, paye, valide, commentaire, nbrerepas)
-VALUES (1, 'NZUMGUENG.TCHEA',true,true,'Ok',2);
+VALUES (1, 'NZUMGUENG.TCHEA',true,true,'Ok',2),(2, 'TOCHE.KOWA',true,true,'Ok',4),(3, 'THIBAUT.KUATE',false,true,'Ok',5);
 
 
 --Participant
   INSERT INTO "participant" (Id, Nom, Prenom, telephone, email, adresse, justificatifs, commentaire, datenaiss, club, id_equipe) 
 VALUES (1, 'NZUMGUENG', 'Samson', 0642279765, 'nzumges@3il.fr', 'rue deverrine, 87000, limoges', 'justificatif-capitaine.pdf', 'Capitaine', '12-12-2020','3iL',1),
-(2, 'TCHEA', 'Jordan', 0642279765, 'tcheaj@3il.fr', 'avenue albert thomas, 87000, limoges', 'justificatif-equipier.pdf', 'Equipier', '12-12-2020','3iL',1);
+(2, 'TCHEA', 'Jordan', 0642279765, 'tcheaj@3il.fr', 'avenue albert thomas, 87000, limoges', 'justificatif-equipier.pdf', 'Equipier', '12-12-2020','3iL',1),
+(3, 'TOCHE', 'Harry', 0642279765, 'harry@3il.fr', '01 rue gustave nadaud, 87000, limoges', 'justificatif-capitaine.pdf', 'Capitaine', '12-12-2020','3iL',2),
+(4, 'KOWA', 'Daniel', 0642279765, 'kowad@3il.fr', '12 places des faeinciers, 76100, Rouen', 'justificatif-equipier.pdf', 'Equipier', '12-12-2020','3iL',2),
+(5, 'THIBAUT', 'Ron', 0642279765, 'thibaut@3il.fr', '1 place Winston churchill, 87000, limoges', 'justificatif-capitaine.pdf', 'Capitaine', '12-12-2020','3iL',3),
+(6, 'KUATE', 'Fabrice', 0642279765, 'kuatef@3il.fr', '1 boulevard e la republique, 91000, Paris', 'justificatif-equipier.pdf', 'Equipier', '12-12-2020','3iL',3);
 

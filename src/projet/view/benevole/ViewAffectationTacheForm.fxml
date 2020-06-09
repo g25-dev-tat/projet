@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
@@ -40,22 +41,22 @@
                      <children>
                         <VBox prefHeight="129.0" prefWidth="114.0" spacing="5.0">
                            <children>
-                              <CheckBox fx:id="Tache1" mnemonicParsing="false" text="Dossards" textFill="#0be3f2" />
-                              <CheckBox fx:id="Tache2" mnemonicParsing="false" text="CheckBox" />
-                              <CheckBox fx:id="Tache3" mnemonicParsing="false" text="CheckBox" />
-                              <CheckBox fx:id="Tache4" mnemonicParsing="false" text="CheckBox" />
-                              <CheckBox fx:id="Tache5" mnemonicParsing="false" text="CheckBox" />
-                              <CheckBox fx:id="Tache6" mnemonicParsing="false" text="CheckBox" />
+                              <CheckBox fx:id="Tache1" mnemonicParsing="false" text="Dossards" textFill="#0ca6f0" />
+                              <CheckBox fx:id="Tache2" mnemonicParsing="false" text="Canöé" textFill="#09deff" />
+                              <CheckBox fx:id="Tache3" mnemonicParsing="false" text="Ravito eau" textFill="#0ce5ed" />
+                              <CheckBox fx:id="Tache4" mnemonicParsing="false" text="chrono" textFill="#0af5f5" />
+                              <CheckBox fx:id="Tache5" mnemonicParsing="false" text="ouverture" textFill="#15e5f8" />
+                              <CheckBox fx:id="Tache6" mnemonicParsing="false" text="fermeture" textFill="#10d5f0" />
                            </children>
                         </VBox>
-                        <VBox prefHeight="170.0" prefWidth="115.0" spacing="5.0">
+                        <VBox prefHeight="140.0" prefWidth="162.0" spacing="5.0">
                            <children>
-                              <CheckBox fx:id="Tache7" mnemonicParsing="false" text="CheckBox" />
-                              <CheckBox fx:id="Tache8" mnemonicParsing="false" text="CheckBox" />
-                              <CheckBox fx:id="Tache9" mnemonicParsing="false" text="CheckBox" />
-                              <CheckBox fx:id="Tache10" mnemonicParsing="false" text="CheckBox" />
-                              <CheckBox fx:id="Tache11" mnemonicParsing="false" text="CheckBox" />
-                              <CheckBox fx:id="Tache12" mnemonicParsing="false" text="CheckBox" />
+                              <CheckBox fx:id="Tache7" mnemonicParsing="false" text="buvette" textFill="#0bc6f0" />
+                              <CheckBox fx:id="Tache8" mnemonicParsing="false" text="Check equipe au gué" textFill="#0ac8f2" />
+                              <CheckBox fx:id="Tache9" mnemonicParsing="false" text="verif gilet au gué" textFill="#0ac2f5" />
+                              <CheckBox fx:id="Tache10" mnemonicParsing="false" text="rangement gilet" textFill="#11befd" />
+                              <CheckBox fx:id="Tache11" mnemonicParsing="false" text="respo gué de la roche" textFill="#0bc4e3" />
+                              <CheckBox fx:id="Tache12" mnemonicParsing="false" text="Pagais et dingue" textFill="#10dffa" />
                            </children>
                         </VBox>
                      </children>
@@ -67,8 +68,14 @@
       </VBox>
       <HBox alignment="CENTER" prefHeight="60.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Button fx:id="buttonOK" defaultButton="true" mnemonicParsing="false" onAction="#doValider" prefHeight="25.0" prefWidth="60.0" text="OK" />
-            <Button fx:id="buttonAnnuler" cancelButton="true" mnemonicParsing="false" onAction="#doAnnuler" text="Annuler" />
+            <Button fx:id="buttonOK" defaultButton="true" mnemonicParsing="false" onAction="#doValider" prefHeight="25.0" prefWidth="60.0" text="OK">
+               <HBox.margin>
+                  <Insets bottom="35.0" />
+               </HBox.margin></Button>
+            <Button fx:id="buttonAnnuler" cancelButton="true" mnemonicParsing="false" onAction="#doAnnuler" text="Annuler">
+               <HBox.margin>
+                  <Insets bottom="35.0" />
+               </HBox.margin></Button>
          </children>
       </HBox>
    </children>

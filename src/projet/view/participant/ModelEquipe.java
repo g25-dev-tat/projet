@@ -31,6 +31,8 @@ public class ModelEquipe  {
 	private DaoParticipant	daoParticipant;
     @Inject
     private DaoCompetition			daoCompet;
+    @Inject
+    private DaoEquipe daoeq;
 	
 	
 	// Getters 
@@ -47,7 +49,7 @@ public class ModelEquipe  {
 	// Actualisations
 	
 	public void actualiserListe() {
-		liste.setAll( DaoEquipe.listerTout() );
+		liste.setAll( daoeq.listerTout() );
  	}
 
 
@@ -66,14 +68,14 @@ public class ModelEquipe  {
 //			throw new ExceptionValidation( "Cette equipe est rattachée à une ou plusieurs compétitions..." ) ;
 //		}
 		
-		DaoEquipe.supprimer( item.getId() );
+		daoeq.supprimer( item.getId() );
 		mapper.update( courant, UtilFX.findNext( liste, item ) );
 	}
 	
 	
 	public Equipe afficher(Participant item) {
 		Equipe eq = null;
-		eq=DaoEquipe.affich(item,eq);
+		eq=daoeq.affich(item,eq);
 		System.out.println(item);
 		//mapper.update( courant, item );
 		return eq;
