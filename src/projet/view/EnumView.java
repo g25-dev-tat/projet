@@ -13,6 +13,7 @@ public enum EnumView implements IEnumView {
 	BenevoleListe		( "benevole/ViewBenevoleListe.fxml" ),
 	AffectationTacheForm	( "benevole/ViewAffectationTacheForm.fxml" ),
 	ParticipantListe		( "participant/ViewParticipantListe.fxml" ),
+	ViewCompet				( "competition/ViewCreerCompetition.fxml" ),
 	
 	
 	Connexion			( "systeme/ViewConnexion.fxml" ),
