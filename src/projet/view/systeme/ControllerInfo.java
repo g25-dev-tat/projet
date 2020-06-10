@@ -5,7 +5,6 @@ import javax.inject.Inject;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import jfox.javafx.view.IManagerGui;
@@ -82,11 +81,9 @@ public class ControllerInfo {
 	@FXML
 	private void Competition(ActionEvent ev) {
 		System.out.println("Compétition");
-<<<<<<< HEAD
 		managerGui.showView(EnumView.ViewCompet);
-=======
-		managerGui.showView(EnumView.Creercompetition);//VUECOMPETITION
->>>>>>> branch 'master' of https://github.com/g25-dev-tat/projet
+
+
 	}
 	
 	@FXML

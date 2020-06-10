@@ -30,9 +30,7 @@ public enum EnumView implements IEnumView {
 	TestDaoMemo			( "test/ViewTestDaoMemo.fxml" ),
 	TestDaoService		( "test/ViewTestDaoService.fxml" ),
 	EtatPersonnesParCateogire1	( "personne/ViewEtatPersonnesParCategorie1.fxml" ),
-	EtatPersonnesParCateogire2	( "personne/ViewEtatPersonnesParCategorie2.fxml" ), 
-	Creercompetition("competition/ViewCreercompetition.fxml"),
-	;
+	EtatPersonnesParCateogire2	( "personne/ViewEtatPersonnesParCategorie2.fxml" );
 
 	
 	// Champs
