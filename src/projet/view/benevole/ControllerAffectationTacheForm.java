@@ -85,6 +85,7 @@ public class ControllerAffectationTacheForm {
 //		textFieldAnneeCreation.focusedProperty().addListener( new ListenerFocusValidation( courant.anneeCreationProperty()  ));
 //		
 //		checkBoxSiege.selectedProperty().bindBidirectional( courant.flagSiegeProperty() );
+		Taches();
 		
 	}
 	
@@ -94,41 +95,43 @@ public class ControllerAffectationTacheForm {
 	@FXML
 	private void doAnnuler() {
 		managerGui.showView( EnumView.BenevoleListe );
+		//textTache="";
 	}
 	
 	@FXML
 	private void doValider() {
 		//modelBenevole.validerMiseAJour();
-		System.out.println("Poste : "+Poste.getText()+"\nDate : "+Date.getPromptText()+"\nTaches : "+textTache);
+		System.out.println("Poste : "+Poste.getText()+"\nDate : "+Date.getValue()+"\nTaches : "+textTache);
 		managerGui.showView( EnumView.BenevoleListe );
+		//textTache="";
 	}
 	
 	@FXML
 	private String Taches() {
 		if(Tache1.isSelected())
-			textTache+=" ,Dossards";
+			textTache+=", dossards";
 		if(Tache2.isSelected())
-			textTache+=" ,Dossards";
+			textTache+=", Canoe";
 		if(Tache3.isSelected())
-			textTache+=" ,Dossards";
+			textTache+=", ravito eau";
 		if(Tache4.isSelected())
-			textTache+=" ,Dossards";
+			textTache+=", chrono";
 		if(Tache5.isSelected())
-			textTache+=" ,Dossards";
+			textTache+=", ouverture";
 		if(Tache6.isSelected())
-			textTache+=" ,Dossards";
+			textTache+=", fermeture";
 		if(Tache7.isSelected())
-			textTache+=" ,Dossards";
+			textTache+=", Buvette";
 		if(Tache8.isSelected())
-			textTache+=" ,Dossards";
+			textTache+=", check equipe au gué";
 		if(Tache9.isSelected())
-			textTache+=" ,Dossards";
+			textTache+=", verif gilet au gué";
 		if(Tache10.isSelected())
-			textTache+=" ,Dossards";
+			textTache+=", rangement gilet";
 		if(Tache11.isSelected())
-			textTache+=" ,Dossards";
+			textTache+=", respo gué de la roche";
 		if(Tache12.isSelected())
-			textTache+=" ,Dossards";
+			textTache+=", pagais et dingue";
 		
 		return textTache;
 	}
