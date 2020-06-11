@@ -3,9 +3,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -41,27 +41,31 @@
                      <children>
                         <VBox prefHeight="129.0" prefWidth="114.0" spacing="5.0">
                            <children>
-                              <CheckBox fx:id="Tache1" mnemonicParsing="false" text="Dossards" textFill="#0ca6f0" />
-                              <CheckBox fx:id="Tache2" mnemonicParsing="false" text="Canöé" textFill="#09deff" />
-                              <CheckBox fx:id="Tache3" mnemonicParsing="false" text="Ravito eau" textFill="#0ce5ed" />
-                              <CheckBox fx:id="Tache4" mnemonicParsing="false" text="chrono" textFill="#0af5f5" />
-                              <CheckBox fx:id="Tache5" mnemonicParsing="false" text="ouverture" textFill="#15e5f8" />
-                              <CheckBox fx:id="Tache6" mnemonicParsing="false" text="fermeture" textFill="#10d5f0" />
+                              <CheckBox fx:id="Tache1" mnemonicParsing="false" onAction="#Taches" text="Dossards" textFill="#0ca6f0" />
+                              <CheckBox fx:id="Tache2" mnemonicParsing="false" onAction="#Taches" text="Canöé" textFill="#09deff" />
+                              <CheckBox fx:id="Tache3" mnemonicParsing="false" onAction="#Taches" text="Ravito eau" textFill="#0ce5ed" />
+                              <CheckBox fx:id="Tache4" mnemonicParsing="false" onAction="#Taches" text="chrono" textFill="#0af5f5" />
+                              <CheckBox fx:id="Tache5" mnemonicParsing="false" onAction="#Taches" text="ouverture" textFill="#15e5f8" />
+                              <CheckBox fx:id="Tache6" mnemonicParsing="false" onAction="#Taches" text="fermeture" textFill="#10d5f0" />
                            </children>
                         </VBox>
                         <VBox prefHeight="140.0" prefWidth="162.0" spacing="5.0">
                            <children>
-                              <CheckBox fx:id="Tache7" mnemonicParsing="false" text="buvette" textFill="#0bc6f0" />
-                              <CheckBox fx:id="Tache8" mnemonicParsing="false" text="Check equipe au gué" textFill="#0ac8f2" />
-                              <CheckBox fx:id="Tache9" mnemonicParsing="false" text="verif gilet au gué" textFill="#0ac2f5" />
-                              <CheckBox fx:id="Tache10" mnemonicParsing="false" text="rangement gilet" textFill="#11befd" />
-                              <CheckBox fx:id="Tache11" mnemonicParsing="false" text="respo gué de la roche" textFill="#0bc4e3" />
-                              <CheckBox fx:id="Tache12" mnemonicParsing="false" text="Pagais et dingue" textFill="#10dffa" />
+                              <CheckBox fx:id="Tache7" mnemonicParsing="false" onAction="#Taches" text="buvette" textFill="#0bc6f0" />
+                              <CheckBox fx:id="Tache8" mnemonicParsing="false" onAction="#Taches" text="Check equipe au gué" textFill="#0ac8f2" />
+                              <CheckBox fx:id="Tache9" mnemonicParsing="false" onAction="#Taches" text="verif gilet au gué" textFill="#0ac2f5" />
+                              <CheckBox fx:id="Tache10" mnemonicParsing="false" onAction="#Taches" text="rangement gilet" textFill="#11befd" />
+                              <CheckBox fx:id="Tache11" mnemonicParsing="false" onAction="#Taches" text="respo gué de la roche" textFill="#0bc4e3" />
+                              <CheckBox fx:id="Tache12" mnemonicParsing="false" onAction="#Taches" text="Pagais et dingue" textFill="#10dffa" />
                            </children>
                         </VBox>
                      </children>
                   </HBox>
-                  <ComboBox fx:id="Poste" editable="true" prefHeight="26.0" prefWidth="174.0" promptText="Signaleur" GridPane.columnIndex="1" />
+                  <TextField fx:id="Poste" prefHeight="26.0" prefWidth="152.0" promptText="Signaleur" text="Signaleur" GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets right="50.0" />
+                     </GridPane.margin>
+                  </TextField>
                </children>
             </GridPane>
          </children>

@@ -1,12 +1,8 @@
 package projet.view;
 
-import java.io.IOException;
-
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;

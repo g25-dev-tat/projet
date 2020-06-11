@@ -29,6 +29,7 @@ public class MenuBarAppli extends MenuBar {
 	private Menu	menuUser;
 	
 	private MenuItem itemDeconnecter;
+	private MenuItem itemAcc;
 
 	private MenuItem itemCategories;
 	private MenuItem itemComptes;
@@ -58,10 +59,17 @@ public class MenuBarAppli extends MenuBar {
 		this.getMenus().add(menu);
 		menuSystem = menu;
 		
+		item = new MenuItem( "Accueil" );
+		item.setOnAction(  (e) -> managerGui.showView(EnumView.Info)  );
+		menu.getItems().add(item);
+		itemAcc = item;
+		
 		item = new MenuItem( "Se déconnecter" );
 		item.setOnAction(  (e) -> managerGui.showView(EnumView.Connexion)  );
 		menu.getItems().add(item);
 		itemDeconnecter = item;
+		
+		
 		
 		item = new MenuItem( "Quitter" );
 		item.setOnAction(  (e) -> managerGui.exit()  );
@@ -114,6 +122,10 @@ public class MenuBarAppli extends MenuBar {
 		menu =  new Menu( "Participants" );;
 		this.getMenus().add(menu);
 		menuParticipant = menu;
+		
+		item = new MenuItem( "Liste des participants " ); 
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.ParticipantListe )  );
+		menu.getItems().add( item );
 		
 		item = new MenuItem( "Liste des participants (PDF)" );
 		item.setOnAction(  (e) ->  
@@ -203,6 +215,7 @@ public class MenuBarAppli extends MenuBar {
 	private void configurerMenu(AdminAppli compteActif) {
 
 		itemDeconnecter.setDisable(true);
+		itemAcc.setDisable(true);
 		
 		menuBenevole.setVisible(false);
 		itemCategories.setVisible(false);
@@ -216,6 +229,7 @@ public class MenuBarAppli extends MenuBar {
 		
 		if( compteActif != null ) {
 			itemDeconnecter.setDisable(false);
+			itemAcc.setDisable(false);
 			if( compteActif.isInRole( Roles.UTILISATEUR) ) {
 				menuSystem.setVisible(true);
 				menuParticipant.setVisible(true);

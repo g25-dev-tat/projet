@@ -23,7 +23,7 @@ public class ControllerAffectationTacheForm {
 	// Composants de la vue
 	
 	@FXML
-	private ComboBox<Postes>	Poste;
+	private TextField	Poste;
 	@FXML
 	private DatePicker	Date;
 	@FXML
@@ -58,6 +58,7 @@ public class ControllerAffectationTacheForm {
 	
 	// Autres champs
 	
+	private String textTache=" ";
 	@Inject
 	private IManagerGui		managerGui;
 	@Inject
@@ -73,6 +74,8 @@ public class ControllerAffectationTacheForm {
 		System.out.println("Initilisation de l'affectation des taches");
 		
 		Benevole courant = modelBenevole.getCourant();
+		
+	
 //
 //		Poste.textProperty().bindBidirectional( courant.PosteProperty(), new ConverterStringInteger()  );
 //
@@ -95,8 +98,39 @@ public class ControllerAffectationTacheForm {
 	
 	@FXML
 	private void doValider() {
-		modelBenevole.validerMiseAJour();
+		//modelBenevole.validerMiseAJour();
+		System.out.println("Poste : "+Poste.getText()+"\nDate : "+Date.getPromptText()+"\nTaches : "+textTache);
 		managerGui.showView( EnumView.BenevoleListe );
+	}
+	
+	@FXML
+	private String Taches() {
+		if(Tache1.isSelected())
+			textTache+=" ,Dossards";
+		if(Tache2.isSelected())
+			textTache+=" ,Dossards";
+		if(Tache3.isSelected())
+			textTache+=" ,Dossards";
+		if(Tache4.isSelected())
+			textTache+=" ,Dossards";
+		if(Tache5.isSelected())
+			textTache+=" ,Dossards";
+		if(Tache6.isSelected())
+			textTache+=" ,Dossards";
+		if(Tache7.isSelected())
+			textTache+=" ,Dossards";
+		if(Tache8.isSelected())
+			textTache+=" ,Dossards";
+		if(Tache9.isSelected())
+			textTache+=" ,Dossards";
+		if(Tache10.isSelected())
+			textTache+=" ,Dossards";
+		if(Tache11.isSelected())
+			textTache+=" ,Dossards";
+		if(Tache12.isSelected())
+			textTache+=" ,Dossards";
+		
+		return textTache;
 	}
 	
 }

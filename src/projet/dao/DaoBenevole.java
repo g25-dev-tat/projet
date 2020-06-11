@@ -26,7 +26,8 @@ public class DaoBenevole {
 
 	
 	// Actions
-
+	
+	
 	public Integer insererUnBenevole(Benevole benevol) {
 
 		Connection			cn		= null;
@@ -36,7 +37,7 @@ public class DaoBenevole {
 
 		try {
 			cn = dataSource.getConnection();
-			sql = "INSERT INTO benevole (id, nom, prenom, telephone, email, adresse, commentaire, permisC, dateNaiss) VALUES (?,?,?,?,?,?,?,?,?)";
+			sql = "INSERT INTO poste (id, nom, prenom, telephone, email, adresse, commentaire, permisC, dateNaiss) VALUES (?,?,?,?,?,?,?,?,?)";
 			stmt = cn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS );
 			
 				stmt.setObject(1, benevol.getNom());
@@ -61,8 +62,6 @@ public class DaoBenevole {
 			UtilJdbc.close( stmt, cn );
 		}
 	}
-
-
 //	public void modifierUnBenevole(Benevole benevol) {
 //
 //		Connection			cn			= null;
